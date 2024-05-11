@@ -1,12 +1,31 @@
 <!DOCTYPE html>
 <html>
   <head>
+    
     <meta charset="UTF-8">
     <title>Fitlit</title>
   </head>
+  <header>
+    <h1 class="welcome-message">Welcome current user</h1>
+  </header>
   <body>
-    <h1>Activity Tracker</h1>
-    <img src="./images/turing-logo.png" alt="turing logo" height="100px" width="100px">
+    <section class="display-wrapper">
+      <section class="display-user-info">
+        <h3><img class="expander-arrow" src="", alt=""> "Display User Info"</h3>
+        <p class="user-info">Users Info</p>
+      </section>
+    </section>
+    <section class="activities-dashboard-wrapper">
+      <section class="activities-dashboard">
+        <div class="flights-of-stairs">flights of stairs:</div>
+        <div class="minutes-active">Minutes active:</div>
+        <div class="number-of-steps">Number of stairs:</div>
+      </section>
+    <section class="steps-wrapper">
+      <div class="user-step-goal">Step Goal:</div>
+      <div class="average-goal-steps">Average step goal:</div>
+    </section>
+  </section>
 
 <!-- Do not include the scripts.js file here - it is done automatically by the webpack server -->
     <script src="bundle.js"></script>
