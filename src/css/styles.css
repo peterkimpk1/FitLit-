@@ -4,28 +4,29 @@ body, html {
   height: 100%;
 }
 
-.activities-dashboard-wrapper {
+.activities-dashboard-wrapper,.activities-dashboard,.display-user-info {
   border: solid 1pt black;
   width: 80vw;
-  display: flex;
-  flex-direction: column;
-  height: 50vh;
-  justify-content: space-around;
-  margin-left: auto;
-  margin-right: auto;
-}
-.activities-dashboard {
-  border: solid 1pt black;
-  display: flex;
-  width: 80vw;
-  height: 20vh;
-  justify-content: space-around;
   margin-left: auto;
   margin-right: auto;
 }
 
-.flights-of-stairs, .minutes-active, .number-of-steps {
+.activities-dashboard-wrapper {
+  height: 50vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+
+.activities-dashboard {
+  height: 20vh;
+  display: flex;
+  justify-content: space-around;
+}
+
+.flights-of-stairs,.minutes-active,.number-of-steps,.user-step-goal,.average-goal-steps {
   border: solid 3pt black;
+  border-radius: 12px;
   text-align: center;
   width: 10rem;
   line-height: 2.5;
@@ -38,34 +39,31 @@ body, html {
   width: 80vw;
   height: 20vh;
   border: solid 1pt black;
-  margin-left: auto;
-  margin-right: auto;
-}
-
-.user-step-goal, .average-goal-steps {
-  border: solid 3pt black;
-  width: 10rem;
-  text-align: center;
-  line-height: 2.5;
-  margin: 2rem;
 }
 
 .display-user-info {
-  border: solid 1pt black;
-  width: 80vw;
-  height: 10vh;
-  margin-left: auto;
-  margin-right: auto;
+  height: 15vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
+
 .user-info {
   text-align: center;
 }
+
 .user-friends {
   width: 20vw;
 }
 
 p {
-  margin: 0;
+  margin: 0 0 10px 0;
   border: 0;
   padding: 0;
+}
+
+.welcome-message {
+  font-size: 60px;
+  text-align: center;
 }
