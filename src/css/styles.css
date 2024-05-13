@@ -29,6 +29,7 @@ body, html {
   text-align: center;
   width: 10rem;
   line-height: 2.5;
+  margin: 2rem;
 }
 
 .steps-wrapper {
@@ -46,5 +47,25 @@ body, html {
   width: 10rem;
   text-align: center;
   line-height: 2.5;
+  margin: 2rem;
 }
 
+.display-user-info {
+  border: solid 1pt black;
+  width: 80vw;
+  height: 10vh;
+  margin-left: auto;
+  margin-right: auto;
+}
+.user-info {
+  text-align: center;
+}
+.user-friends {
+  width: 20vw;
+}
+
+p {
+  margin: 0;
+  border: 0;
+  padding: 0;
+}
