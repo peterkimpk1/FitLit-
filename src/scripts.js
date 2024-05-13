@@ -1,15 +1,17 @@
 // This is the JavaScript entry file - your code begins here
 // Do not delete or rename this file ********
 
-import usersSampleDataset from '../src/data/users-test-data.js' 
+import sampleUserData from '../src/data/users-test-data.js' 
 
 function returnUserData(userId) {
-    const dataSet = usersSampleDataset.usersSampleDataset
-    const userInfo = dataSet.find(user => {
+    const dataset = sampleUserData.sampleUserData
+    const userInfo = dataset.find(user => {
        return user.id === userId
     }); 
     return userInfo
 }
+
+
 
 function getRandomUser(array) {
     return Math.floor(Math.random() * array.length);
