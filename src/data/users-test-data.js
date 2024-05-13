@@ -1,4 +1,4 @@
-export default { usersSampleDataset: [
+export default { sampleUserData: [
     {
       "id": 1,
       "name": "Peter Kim",
