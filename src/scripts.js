@@ -1,24 +1,30 @@
 // This is the JavaScript entry file - your code begins here
 // Do not delete or rename this file ********
 
-import sampleUserData from '../src/data/users-test-data.js' 
+import sampleUserDataset from './data/sample-users-test-data.js' 
 
 function returnUserData(userId) {
-    const dataset = sampleUserData.sampleUserData
-    const userInfo = dataset.find(user => {
+    const usersData = sampleUserDataset.sampleUserDataset
+    const userInfo = usersData.find(user => {
        return user.id === userId
     }); 
     return userInfo
-}
+};
 
-
+function returnAverageStepGoalAllUsers(usersData) {
+    const avgStepGoalAllUsers = usersData.reduce((accumulator, user) => {
+        return accumulator += (user.dailyStepGoal / usersData.length)
+    }, 0)
+    return avgStepGoalAllUsers
+}; 
 
 function getRandomUser(array) {
     return Math.floor(Math.random() * array.length);
-}
+};
 
 export {
-    returnUserData, 
+    returnUserData,
+    returnAverageStepGoalAllUsers, 
     getRandomUser,
 }
 
