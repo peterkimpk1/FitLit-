@@ -1,18 +1,12 @@
 import { updateUserMessage } from "./domUpdates.js";
 import users from "./data/users.js"
-import sampleUserDataset from './data/sample-users-test-data.js' 
 
 const allUsers = users.users
 
-window.addEventListener('load', () => {
-    updateRandomUserMessage(allUsers);
-  });
 
-function getUserData(allUsers) {
-    const usersData = allUsers
-    const userInfo = usersData.find(user => {
-        console.log("USER ID:", user)
-        return user
+function getUserData(allUsers,userId) {
+    const userInfo = allUsers.find(user => {
+        return user.id === userId
     }); 
     return userInfo
 };
@@ -35,5 +29,7 @@ function updateRandomUserMessage(users) {
 
 export {
     getUserData,
-    getAverageStepGoalAllUsers
+    getAverageStepGoalAllUsers,
+    updateRandomUserMessage
 }
+
