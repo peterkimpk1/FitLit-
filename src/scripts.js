@@ -1,8 +1,7 @@
 // This is the JavaScript entry file - your code begins here
 // Do not delete or rename this file ********
 import sampleUserDataset from './data/sample-users-test-data.js' 
-
-
+import './userFunctions.js'
 
 function returnUserData(userId) {
     const usersData = sampleUserDataset.sampleUserDataset
@@ -20,10 +19,6 @@ function returnAverageStepGoalAllUsers(usersData) {
     return avgStepGoalAllUsers
 }; 
 
-function getRandomUser(usersData) {
-    // console.log("USER DATA:", userData)
-    return Math.floor(Math.random() * usersData.usersData.length);
-};
 
 // function updateRandomUserMessage(users) {
 //     const randomUserId = getRandomUser(users.users);
@@ -36,7 +31,6 @@ function getRandomUser(usersData) {
 export {
     returnUserData,
     returnAverageStepGoalAllUsers, 
-    getRandomUser,
 }
 
 // An example of how you tell webpack to use a CSS file

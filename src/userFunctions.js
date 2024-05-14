@@ -1,5 +1,7 @@
 import { updateUserMessage } from "./domUpdates.js";
 import users from "./data/users.js"
+import sampleUserDataset from './data/sample-users-test-data.js' 
+
 const allUsers = users.users
 
 window.addEventListener('load', () => {
