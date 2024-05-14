@@ -1,5 +1,6 @@
-const displayUserGoal = () => {}
+const users = require('./data/users')
 
+const displayUserGoal = () => {}
 const displayAverageSteps = () => {}
 
 
