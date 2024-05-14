@@ -1,6 +1,7 @@
 import { expect } from 'chai';
-const { returnUserData } = require('../src/scripts.js');
-const { returnAverageStepGoalAllUsers } = require('../src/scripts.js');
+import sampleUserDataset from '../src/data/sample-users-test-data.js' 
+const { getUserData, getAverageStepGoalAllUsers} = require('../src/userFunctions');
+const allSampleUsers = sampleUserDataset.sampleUserDataset
 
 describe('User Repository', () => {
   it('should run tests', function () {
@@ -11,7 +12,7 @@ describe('User Repository', () => {
 describe('Return User Data', () => { 
   it('should return user data based on their id', function () {
     const userId = 1;
-    const user1 = returnUserData(userId)
+    const user1 = getUserData(allSampleUsers,userId)
    
     expect(user1).to.deep.equal({
       "id": 1,
@@ -32,23 +33,23 @@ describe('Return User Data', () => {
 describe('Return Avg Step Goal for All Users', function() {
   it('should return the average step goal for all users', function () {
     const userId = 1;
-    const user1 = returnUserData(userId);
+    const user1 = getUserData(allSampleUsers,userId);
     
     const userId2 = 2;
-    const user2 = returnUserData(userId2);
+    const user2 = getUserData(allSampleUsers,userId2);
     
     const userId3 = 3;
-    const user3 = returnUserData(userId3);
+    const user3 = getUserData(allSampleUsers,userId3);
     
     const userId4 = 4;
-    const user4 = returnUserData(userId4);
+    const user4 = getUserData(allSampleUsers,userId4);
   
     const userId5 = 5; 
-    const user5 = returnUserData(userId5);
+    const user5 = getUserData(allSampleUsers,userId5);
   
     const usersData = [user1, user2, user3, user4, user5];
    
-    const avgStepGoalAllUsers = returnAverageStepGoalAllUsers(usersData);
+    const avgStepGoalAllUsers = getAverageStepGoalAllUsers(usersData);
   
         expect(avgStepGoalAllUsers).to.equal(6600);
   });

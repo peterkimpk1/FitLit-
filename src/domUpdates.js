@@ -1,8 +1,11 @@
 import users from './data/users.js';
-
+import {updateRandomUserMessage} from '../src/userFunctions.js'
+const allUsers = users.users
 const userMessageInfo = document.querySelector('.welcome-message');
 
-// Select a random user for demonstration
+window.addEventListener('load', () => {
+  updateRandomUserMessage(allUsers);
+});
 
 const updateUserMessage = (users) => {
   userMessageInfo.innerHTML = `<header>
