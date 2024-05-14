@@ -1,10 +1,12 @@
 // This is the JavaScript entry file - your code begins here
 // Do not delete or rename this file ********
-
 import sampleUserDataset from './data/sample-users-test-data.js' 
+
+
 
 function returnUserData(userId) {
     const usersData = sampleUserDataset.sampleUserDataset
+    console.log("USER DATA:", usersData)
     const userInfo = usersData.find(user => {
        return user.id === userId
     }); 
@@ -18,9 +20,18 @@ function returnAverageStepGoalAllUsers(usersData) {
     return avgStepGoalAllUsers
 }; 
 
-function getRandomUser(array) {
-    return Math.floor(Math.random() * array.length);
+function getRandomUser(usersData) {
+    // console.log("USER DATA:", userData)
+    return Math.floor(Math.random() * usersData.usersData.length);
 };
+
+// function updateRandomUserMessage(users) {
+//     const randomUserId = getRandomUser(users.users);
+//     const randomUser = returnUserData(randomUserId);
+//     console.log(getRandomUser(users))
+//     console.log(returnUserData(randomUserId))
+//     updateUserMessage(randomUser);
+// }
 
 export {
     returnUserData,
@@ -39,7 +50,3 @@ import userData from './data/users';
 // console.log("User Data:", userData);
 
 // Example of one way to import functions from the domUpdates file.  You will delete these examples.
-import { exampleFunction1, exampleFunction2 } from './domUpdates';
-
-exampleFunction1('Travis');
-exampleFunction2('Travis')
