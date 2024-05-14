@@ -1,4 +1,4 @@
-export default { hydrationData: [
+export default { hydrationSampleData: [
     {
       "userID": 1,
       "date": "2023/03/24",
