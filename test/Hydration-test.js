@@ -4,7 +4,7 @@ const sampleData = hydrationSampleData.hydrationSampleData
 const {consumedWaterForWeek, getConsumedWaterForDay, updatedUserHydration} = require('../src/hydration')
 const hydrationSamples = hydrationSampleData.hydrationSampleData
 
-describe('should return the user/s fluid ounces for a specific day', () => {
+describe('getConsumedWaterForDay', () => {
     it('should return the user/s fluid ounces for a specific day', () => {
         const date = "2023/03/24"
         const user1NumOunces = getConsumedWaterForDay(sampleData,1,date)
@@ -20,7 +20,7 @@ describe('consumedWaterForWeek', () => {
 })
 
 describe('Hydration', ()=> {
-    it('Should return the average fluid ounces drank per day', ()=>{
+    it('should return user/s average fluid ounces consumed per day for all time', ()=>{
       const user = 1
       const hydrationUpdates1 = updatedUserHydration(hydrationSamples, user)
   
