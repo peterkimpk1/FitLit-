@@ -19,8 +19,21 @@ function consumedWaterForWeek(data,userId) {
     },0)
 }
 
+function updatedUserHydration(hydration, user){
+    const userHydrationData = hydration.filter(hydrate => hydrate.userID === user);
+
+    if (userHydrationData.length === 0) {
+        return;
+    }
+
+    const totalFluidOunces = userHydrationData.reduce((total, hydrate) => total + hydrate.numOunces, 0);
+    const averageFluidOuncesPerDay = totalFluidOunces / userHydrationData.length;
+
+    return averageFluidOuncesPerDay;
+}
+
 export {
     consumedWaterForWeek, 
     getConsumedWaterForDay, 
-    // averageWaterConsumedPerDay
+    updatedUserHydration,
 }
