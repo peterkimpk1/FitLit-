@@ -13,7 +13,6 @@ function getUserData(allUsers,userId) {
 };
 
 function getAverageStepGoalAllUsers(usersData) {
-    console.log(usersData)
     const avgStepGoalAllUsers = usersData.reduce((accumulator, user) => {
         return accumulator += (user.dailyStepGoal / usersData.length)
     }, 0)
