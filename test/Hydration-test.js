@@ -1,8 +1,15 @@
 import { expect } from 'chai';
 import hydrationSampleData from "../src/data/hydration-sample-data.js"
 const sampleData = hydrationSampleData.hydrationSampleData
-const {consumedWaterForWeek, consumedWaterForDay, averageWaterConsumedPerDay} = require('../src/hydration')
+const {consumedWaterForWeek, getConsumedWaterForDay, averageWaterConsumedPerDay} = require('../src/hydration')
 
+describe('should return the user/s fluid ounces for a specific day', () => {
+    it('should return the user/s fluid ounces for a specific day', () => {
+        const date = "2023/03/24"
+        const user1NumOunces = getConsumedWaterForDay(sampleData,1,date)
+        expect(user1NumOunces).to.equal(10)
+    });
+});
 
 describe('consumedWaterForWeek', () => {
     it('should return the correct amount of fluid ounces consumed each day over a course of a week', () => {

@@ -1,3 +1,15 @@
+function getConsumedWaterForDay(data,userId,date) {
+    let totalOunces = 0
+    const userDataByUserIdAndDate = data.filter(userData => {
+        return userData.userID === userId && userData.date === date   
+    })
+    userDataByUserIdAndDate.forEach(entry => {
+        totalOunces += entry.numOunces
+    })
+    console.log("totalOunces:", totalOunces)
+    return totalOunces
+}
+
 function consumedWaterForWeek(data,userId) {
     return data.reduce((total,user) => {
         if (user.userID === userId) {
@@ -9,6 +21,6 @@ function consumedWaterForWeek(data,userId) {
 
 export {
     consumedWaterForWeek, 
-    // consumedWaterForDay, 
+    getConsumedWaterForDay, 
     // averageWaterConsumedPerDay
 }
