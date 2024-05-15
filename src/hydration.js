@@ -2,9 +2,12 @@ function getConsumedWaterForDay(data,userId,date) {
     console.log("data:", data)
     console.log("userId:", userId)
     console.log("date:", date)
-    if(data.user.userID === userId && user.date === date) {
-        console.log("hello")
-    }
+    const userDataByUserId = data.filter(userData => {
+        return userData.userID === userId && userData.date === date
+        
+    })
+    console.log(userDataByUserId)
+    return userDataByUserId
 }
 
 function consumedWaterForWeek(data,userId) {
