@@ -1,4 +1,3 @@
-import { updateUserMessage } from "./domUpdates.js";
 import users from "./data/users.js"
 
 const allUsers = users.users
@@ -22,14 +21,11 @@ function getRandomUser(allUsers) {
     return allUsers[randomIndex]
 };
 
-function updateRandomUserMessage(users) {
-    const randomUser = getRandomUser(users);
-    updateUserMessage(randomUser);
-}
+
 
 export {
     getUserData,
     getAverageStepGoalAllUsers,
-    updateRandomUserMessage,
+    getRandomUser
 }
 
