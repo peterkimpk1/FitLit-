@@ -1,7 +1,5 @@
-import hydrationSampleData from "./data/sample-hydration-test-data";
-
-function consumedWaterForWeek(userId) {
-    return hydrationSampleData.hydrationSampleData.reduce((total,user) => {
+function consumedWaterForWeek(data,userId) {
+    return data.reduce((total,user) => {
         if (user.userID === userId) {
             total += user.numOunces
         }
