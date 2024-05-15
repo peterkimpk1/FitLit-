@@ -10,13 +10,10 @@ function getConsumedWaterForDay(data,userId,date) {
     return totalOunces
 }
 
-function consumedWaterForWeek(data,userId) {
-    return data.reduce((total,user) => {
-        if (user.userID === userId) {
-            total += user.numOunces
-        }
-        return total;
-    },0)
+function getConsumedWaterForWeek(data,userId, startingDate) {
+    let singleUserData = data.filter(user => user.userID === userId)
+    let startDateIndex = singleUserData.findIndex(user => user.userID === userId && user.date === startingDate)
+    return singleUserData.splice(startDateIndex,startDateIndex + 7).map(user => user.numOunces)
 }
 
 function updatedUserHydration(hydration, user){
@@ -33,7 +30,7 @@ function updatedUserHydration(hydration, user){
 }
 
 export {
-    consumedWaterForWeek, 
+    getConsumedWaterForWeek, 
     getConsumedWaterForDay, 
     updatedUserHydration,
 }
