@@ -1,9 +1,8 @@
 import { expect } from 'chai';
 import sampleUserDataset from '../src/data/sample-users-test-data.js';
 import hydrationSampleData from '../src/data/hydration-sample-data.js'; 
-const { getUserData, getAverageStepGoalAllUsers, updatedUserHydration} = require('../src/userFunctions');
+const { getUserData, getAverageStepGoalAllUsers} = require('../src/userFunctions');
 const allSampleUsers = sampleUserDataset.sampleUserDataset
-const hydrationSamples = hydrationSampleData.hydrationSampleData
 
 describe('User Repository', () => {
   it('should run tests', function () {
@@ -57,18 +56,3 @@ describe('Return Avg Step Goal for All Users', function() {
   });
  
 })
-
-describe('Hydration', ()=> {
-  it('Should return the average fluid ounces drank per day', ()=>{
-    const user = 1
-    const hydrationUpdates1 = updatedUserHydration(hydrationSamples, user)
-
-    expect(hydrationUpdates1).to.deep.equal(18.125)
-
-    const user2 = 2
-    const hydrationUpdates2 = updatedUserHydration(hydrationSamples, user2)
-  
-    expect(hydrationUpdates2).to.deep.equal(21.875)
-  })
-})
-
