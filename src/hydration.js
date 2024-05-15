@@ -1,13 +1,13 @@
 function getConsumedWaterForDay(data,userId,date) {
-    console.log("data:", data)
-    console.log("userId:", userId)
-    console.log("date:", date)
-    const userDataByUserId = data.filter(userData => {
-        return userData.userID === userId && userData.date === date
-        
+    let totalOunces = 0
+    const userDataByUserIdAndDate = data.filter(userData => {
+        return userData.userID === userId && userData.date === date   
     })
-    console.log(userDataByUserId)
-    return userDataByUserId
+    userDataByUserIdAndDate.forEach(entry => {
+        totalOunces += entry.numOunces
+    })
+    console.log("totalOunces:", totalOunces)
+    return totalOunces
 }
 
 function consumedWaterForWeek(data,userId) {
