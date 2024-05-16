@@ -5,7 +5,6 @@ const welcomeMessage = document.querySelector('.welcome-message');
 const userStepGoalContainer = document.querySelector('.user-step-goal')
 const averageStepContainer = document.querySelector('.average-goal-steps')
 const userStepGoalDisplay = document.querySelector('.display-step-goal')
-// const averageStepDisplay = document.querySelector('#display-average-goal-steps')
 const averageStepDisplay = document.getElementById('display-average-goal-steps')
 const userIdAddressEmail = document.querySelector('.user-id-address-email')
 const userStrideLength = document.querySelector('.user-stride-length')
@@ -38,7 +37,6 @@ function updateRandomUserMessage(users) {
   const user = getUserData(allUsers, randomUser.id)
   updateUserCard(user)
   updateUserMessage(randomUser);
-  // averageStepDisplay.innerText = `20`
 }
 
 function updateUserCard(user) {
