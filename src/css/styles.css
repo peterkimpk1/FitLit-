@@ -12,7 +12,7 @@ body, html {
 }
 
 .activities-dashboard-wrapper {
-  height: 50vh;
+  height: 45vh;
   display: flex;
   flex-direction: column;
   justify-content: space-around;
@@ -24,16 +24,23 @@ body, html {
   justify-content: space-around;
 }
 
-.flights-of-stairs,.minutes-active,.number-of-steps,.user-step-goal,.average-goal-steps {
+.flights-of-stairs,
+.minutes-active,
+.number-of-steps,
+.user-step-goal,
+.average-goal-steps, 
+.user-hydration-day, 
+.user-hydration-week{
   border: solid 3pt black;
   border-radius: 12px;
   text-align: center;
   width: 10rem;
   line-height: 2.5;
   margin: 2rem;
+  height: 6rem;
 }
 
-.steps-wrapper {
+.steps-wrapper, .hydration-wrapper {
   display: flex;
   justify-content: space-evenly;
   width: 80vw;
@@ -66,4 +73,11 @@ p {
 .welcome-message {
   font-size: 60px;
   text-align: center;
+}
+
+.display-activities-dashboard, 
+.display-hydration-dashboard{
+  font-size: 30px;
+  text-align: center;
+  margin: 0;
 }
