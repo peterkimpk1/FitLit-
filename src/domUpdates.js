@@ -16,8 +16,13 @@ window.addEventListener('load', () => {
 });
 
 
-const displayUserGoal = () => {}
-const displayAverageSteps = () => {}
+const updateUserGoal = () => {
+  userStepGoalDisplay.innerText = `${}`
+}
+
+const updateAverageSteps = () => {
+  averageStepDisplay.innerText = `${}`
+}
 
 function updateRandomUserMessage(users) {
   const randomUser = getRandomUser(users);
@@ -38,8 +43,8 @@ const updateUserMessage = (users) => {
 };
 
 export {
-  displayUserGoal,
-  displayAverageSteps,
+  updateUserGoal,
+  updateAverageSteps,
   updateUserMessage
 };
 
