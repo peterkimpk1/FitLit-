@@ -1,5 +1,5 @@
 import users from './data/users.js';
-import {getRandomUser, getUserData} from '../src/userFunctions.js'
+import { getRandomUser, getUserData, getAverageStepGoalAllUsers } from '../src/userFunctions.js'
 const allUsers = users.users
 const welcomeMessage = document.querySelector('.welcome-message');
 const userStepGoalContainer = document.querySelector('.user-step-goal')
@@ -15,13 +15,12 @@ window.addEventListener('load', () => {
   updateRandomUserMessage(allUsers);
 });
 
-
 const updateUserGoal = () => {
-  userStepGoalDisplay.innerText = `${}`
+  userStepGoalDisplay.innerText = ``
 }
 
 const updateAverageSteps = () => {
-  averageStepDisplay.innerText = `${}`
+  averageStepDisplay.innerText = ``
 }
 
 function updateRandomUserMessage(users) {
