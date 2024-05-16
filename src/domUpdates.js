@@ -5,7 +5,8 @@ const welcomeMessage = document.querySelector('.welcome-message');
 const userStepGoalContainer = document.querySelector('.user-step-goal')
 const averageStepContainer = document.querySelector('.average-goal-steps')
 const userStepGoalDisplay = document.querySelector('.display-step-goal')
-const averageStepDisplay = document.querySelector('.display-average-goal-steps')
+// const averageStepDisplay = document.querySelector('#display-average-goal-steps')
+const averageStepDisplay = document.getElementById('display-average-goal-steps')
 const userIdAddressEmail = document.querySelector('.user-id-address-email')
 const userStrideLength = document.querySelector('.user-stride-length')
 const userDailySteps = document.querySelector('.user-daily-step-goal')
@@ -13,6 +14,10 @@ const userDailySteps = document.querySelector('.user-daily-step-goal')
 
 window.addEventListener('load', () => {
   updateRandomUserMessage(allUsers);
+  updateActivityDashboard(allUsers);
+  const user = getUserData(allUsers,randomUser.id)
+  updateUserCard(user);
+  updateUserMessage(randomUser);
 });
 
 const updateUserGoal = () => {
@@ -23,11 +28,17 @@ const updateAverageSteps = (allUsers) => {
   averageStepDisplay.innerText = `${getAverageStepGoalAllUsers(allUsers)}`
 }
 
+const updateActivityDashboard = (allUsers, user) => {
+  updateUserGoal(user)
+  updateAverageSteps(allUsers)
+}
+
 function updateRandomUserMessage(users) {
   const randomUser = getRandomUser(users);
-  const user = getUserData(allUsers,randomUser.id)
+  const user = getUserData(allUsers, randomUser.id)
   updateUserCard(user)
   updateUserMessage(randomUser);
+  // averageStepDisplay.innerText = `20`
 }
 
 function updateUserCard(user) {
