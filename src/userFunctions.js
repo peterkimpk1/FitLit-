@@ -9,9 +9,9 @@ function getUserData(allUsers,userId) {
     return userInfo
 };
 
-function getAverageStepGoalAllUsers(usersData) {
-    const avgStepGoalAllUsers = usersData.reduce((accumulator, user) => {
-        return accumulator += (user.dailyStepGoal / usersData.length)
+function getAverageStepGoalAllUsers(allUsers) {
+    const avgStepGoalAllUsers = allUsers.reduce((accumulator, user) => {
+        return accumulator += (user.dailyStepGoal / allUsers.length)
     }, 0)
     return avgStepGoalAllUsers
 }; 

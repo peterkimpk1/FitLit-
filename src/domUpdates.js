@@ -19,8 +19,8 @@ const updateUserGoal = () => {
   userStepGoalDisplay.innerText = ``
 }
 
-const updateAverageSteps = () => {
-  averageStepDisplay.innerText = ``
+const updateAverageSteps = (allUsers) => {
+  averageStepDisplay.innerText = `${getAverageStepGoalAllUsers(allUsers)}`
 }
 
 function updateRandomUserMessage(users) {
