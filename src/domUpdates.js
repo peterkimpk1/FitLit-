@@ -14,9 +14,9 @@ const userDailySteps = document.querySelector('.user-daily-step-goal')
 window.addEventListener('load', () => {
   updateRandomUserMessage(allUsers);
   updateActivityDashboard(allUsers);
-  const user = getUserData(allUsers, randomUser.id)
+  const user = getUserData(allUsers, user.id)
   updateUserCard(user);
-  updateUserMessage(randomUser);
+  updateUserMessage(user);
 });
 
 const updateUserGoal = () => {
