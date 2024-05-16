@@ -9,6 +9,7 @@
     <h1 class="welcome-message">Welcome current user</h1>
   </header>
   <body>
+    <section class=body-wrapper> 
     <section class="display-wrapper">
       <section class="display-user-info">
         <h3 class="user-info"> Users Info</h3>
@@ -16,24 +17,35 @@
         <p class="user-stride-length">stride length</p>
         <p class="user-daily-step-goal">daily step</p>
       </section>
-    </section>
-    <section class="activities-dashboard-wrapper">
-      <h4 class="display-activities-dashboard">Activities Dashboard</h4>
-      <section class="activities-dashboard">
-        <div class="flights-of-stairs">flights of stairs:<p class="display-flights-of-stairs"></p></div>
-        <div class="minutes-active">Minutes active:<p class="display-minutes-active"></p></div>
-        <div class="number-of-steps">Number of stairs:<p class="display-number-of-steps"></p></div>    
+      <section class="activities-dashboard-wrapper">
+        <h4 class="display-activities-dashboard">Activities Dashboard</h4>
+        <section class="activities-dashboard">
+          <div class="flights-of-stairs">flights of stairs:<p class="display-flights-of-stairs"></p></div>
+          <div class="minutes-active">Minutes active:<p class="display-minutes-active"></p></div>
+          <div class="number-of-steps">Number of stairs:<p class="display-number-of-steps"></p></div>    
+        </section>
+      <section class="steps-wrapper">
+        <div class="user-step-goal">Step Goal:<p class="display-step-goal">steps</p></div>
+        <div class="average-goal-steps">Average step goal:<p id="display-average-goal-steps"></p></div>      
       </section>
-    <section class="steps-wrapper">
-      <div class="user-step-goal">Step Goal:<p class="display-step-goal">steps</p></div>
-      <div class="average-goal-steps">Average step goal:<p id="display-average-goal-steps">not working</p></div>     
-    </section>
-    <h4 class="display-hydration-dashboard">Hydration Dashboard</h4>
-    <section class="hydration-wrapper">
-      <div class="user-hydration-day">Day:<p class="display-user-hydration-day"></p></div>
-      <div class="user-hydration-week">Week:<p class="display-user-hydration-week"></p></div>     
+      <h4 class="display-hydration-dashboard">Hydration Dashboard</h4>
+      <section class="hydration-wrapper">
+        <div class="user-hydration-day">Day:<p class="display-user-hydration-day"></p></div>
+        <div class="user-hydration-week">Week:<p class="display-user-hydration-week"></p></div>     
+      </section>
     </section>
   </section>
+  <section class="friends-section">
+    <h3 class="friends-header">Friends</h3>
+    <section class="friends-wrapper">
+      <div class="user-friend-one">One:<p class="display-user-friend-one">steps</p></div>
+      <div class="user-friend-two">Two:<p class="display-user-friend-two">steps</p></div>
+      <div class="user-friend-three">Three:<p class="display-user-friend-three">steps</p></div>
+    </section>
+  </section>
+</section>
+  
+
 
 <!-- Do not include the scripts.js file here - it is done automatically by the webpack server -->
     <script src="bundle.js"></script>
