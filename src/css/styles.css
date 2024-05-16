@@ -4,11 +4,39 @@ body, html {
   height: 100%;
 }
 
-.activities-dashboard-wrapper,.activities-dashboard,.display-user-info {
+.activities-dashboard-wrapper,.activities-dashboard {
   border: solid 1pt black;
   width: 80vw;
-  margin-left: auto;
-  margin-right: auto;
+  /* margin-left: auto; */
+  /* margin-right: auto; */
+}
+
+.display-user-info {
+  border: solid 1pt black;
+  width: 80vw;
+  margin-left: 10;
+  height: 15vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.body-wrapper {
+  display: flex;
+}
+
+.friends-section {
+  border: 2px solid black;
+  margin-left: 25px;
+  text-align: center;
+}
+
+.friends-wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  height: 780px;
+  width: 150px;
 }
 
 .activities-dashboard-wrapper {
@@ -23,6 +51,17 @@ body, html {
   display: flex;
   justify-content: space-around;
 }
+.user-friend-one,
+.user-friend-two,
+.user-friend-three {
+  border: solid 3pt black;
+  border-radius: 12px;
+  text-align: center;
+  width: 8rem;
+  line-height: 2.5;
+  height: 5rem;
+  margin-left: 8px;
+}
 
 .flights-of-stairs,
 .minutes-active,
@@ -30,7 +69,8 @@ body, html {
 .user-step-goal,
 .average-goal-steps, 
 .user-hydration-day, 
-.user-hydration-week{
+.user-hydration-week
+{
   border: solid 3pt black;
   border-radius: 12px;
   text-align: center;
@@ -46,14 +86,6 @@ body, html {
   width: 80vw;
   height: 20vh;
   border: solid 1pt black;
-}
-
-.display-user-info {
-  height: 15vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
 }
 
 .user-info {
