@@ -1,4 +1,6 @@
 import { fetchUser } from './fetchData/userData.js'
+import { fetchActivities } from './fetchData/activityData.js';
+import { fetchSleep } from './fetchData/sleepData.js'
 import { getRandomUser, getUserData, getAverageStepGoalAllUsers } from '../src/userFunctions.js'
 const welcomeMessage = document.querySelector('.welcome-message');
 const userStepGoalContainer = document.querySelector('.user-step-goal')
@@ -8,10 +10,12 @@ const averageStepDisplay = document.getElementById('display-average-goal-steps')
 const userIdAddressEmail = document.querySelector('.user-id-address-email')
 const userStrideLength = document.querySelector('.user-stride-length')
 const userDailySteps = document.querySelector('.user-daily-step-goal')
-const friendsWrapper = document.querySelector('.friends-wrapper')
+const friendsWrapper = document.querySelector('.friends-wrapper');
+const userInfo = document.querySelector('.user-info');
 
 window.addEventListener('load', () => {
   fetchUserData()
+  fetchSleep()
 });
 
 const updateUserGoal = () => {
@@ -23,7 +27,7 @@ const updateAverageSteps = (steps) => {
 }
 
 function fetchUserData() {
-  Promise.all([fetchUser()]).then(e => {
+  Promise.all([fetchUser(), fetchSleep()]).then(e => {
     const randomUser = getRandomUser(e[0].users)
     const user = getUserData(e[0].users, randomUser.id)
     updateUserCard(user)
@@ -56,10 +60,11 @@ function updateUserCard(user) {
   userStrideLength.innerText = `Stride Length: ${user.strideLength}`
 }
 
-const updateUserMessage = (users) => {  
+const updateUserMessage = (user) => {  
   welcomeMessage.innerHTML = `<header>
-  <h1 class="welcome-message">Welcome ${users.name}</h1>
+  <h1 class="welcome-message">Welcome ${user.name}</h1>
   </header>`;
+  userInfo.innerText = `${user.name}'s Info`
 };
 
 export {
