@@ -6,8 +6,20 @@ function getConsumedWaterForDay(data,userId,date) {
     userDataByUserIdAndDate.forEach(entry => {
         totalOunces += entry.numOunces
     })
-    console.log("totalOunces:", totalOunces)
     return totalOunces
+}
+
+function getCurrentDayWaterConsumption(data,userId) {
+    const waterConsumedBySpecificUser = data.filter(userData => {
+        return userData.userID === userId
+    })
+    waterConsumedBySpecificUser.forEach(specificUserData => {
+        specificUserData.date = new Date(specificUserData.date)
+    })
+    const sortedWaterConsumedBySpecificUser = waterConsumedBySpecificUser.sort((dateA, dateB) => {
+        return dateB.date - dateA.date
+    })
+    return sortedWaterConsumedBySpecificUser[0].numOunces
 }
 
 function getConsumedWaterForWeek(data,userId, startingDate) {
@@ -33,4 +45,5 @@ export {
     getConsumedWaterForWeek, 
     getConsumedWaterForDay, 
     updatedUserHydration,
+    getCurrentDayWaterConsumption,
 }
