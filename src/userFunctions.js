@@ -1,7 +1,3 @@
-import users from "./data/users.js"
-
-const allUsers = users.users
-
 function getUserData(allUsers, userId) {
     const userInfo = allUsers.find(user => {
         return user.id === userId

@@ -24,13 +24,13 @@ const updateAverageSteps = (friendsSteps) => {
 
 function fetchUserData() {
   Promise.all([fetchUser()]).then(e => {
-    const friends = e[0].users
-    const randomUser = getRandomUser(friends)
-    const user = getUserData(friends, randomUser.id)
+    const userList = e[0].users
+    const randomUser = getRandomUser(userList)
+    const user = getUserData(userList, randomUser.id)
     updateUserCard(user)
     updateUserGoal(user)
     updateUserMessage(randomUser);
-    updateAverageSteps(friends)
+    updateAverageSteps(userList)
   })
 }
 
