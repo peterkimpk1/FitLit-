@@ -1,10 +1,9 @@
-import { fetchUser } from './fetchData/userData.js';
-// import { fetchHydration } from './fetchData/hydrationData.js'
-import hydrationData from '../src/data/hydration.js';
-import { getRandomUser, getUserData, getAverageStepGoalAllUsers } from '../src/userFunctions.js';
+import { fetchUser } from './fetchData/userData.js'
+import { fetchActivities } from './fetchData/activityData.js';
+import { fetchSleep } from './fetchData/sleepData.js'
+import { getRandomUser, getUserData, getAverageStepGoalAllUsers } from '../src/userFunctions.js'
 import getCurrentDayWaterConsumption from '../src/hydrationFunctions.js';
-
-const welcomeMessage = document.querySelector('.welcome-message')
+const welcomeMessage = document.querySelector('.welcome-message');
 const userStepGoalContainer = document.querySelector('.user-step-goal')
 const averageStepContainer = document.querySelector('.average-goal-steps')
 const userStepGoalDisplay = document.getElementById('display-step-goal')
@@ -14,6 +13,7 @@ const userStrideLength = document.querySelector('.user-stride-length')
 const userDailySteps = document.querySelector('.user-daily-step-goal')
 const userDailyHydration = document.getElementById('display-user-hydration-day')
 const friendsWrapper = document.querySelector('.friends-wrapper')
+const userInfo = document.querySelector('.user-info');
 
 window.addEventListener('load', () => {
   fetchUserData()
@@ -70,10 +70,11 @@ function updateUserCard(user) {
   userStrideLength.innerText = `Stride Length: ${user.strideLength}`
 }
 
-const updateUserMessage = (users) => {  
+const updateUserMessage = (user) => {  
   welcomeMessage.innerHTML = `<header>
-  <h1 class="welcome-message">Welcome ${users.name}</h1>
-  </header>`
+  <h1 class="welcome-message">Welcome ${user.name}</h1>
+  </header>`;
+  userInfo.innerText = `${user.name}'s Info`
 };
 
 export {
