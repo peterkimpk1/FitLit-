@@ -3,7 +3,7 @@ import { getRandomUser, getUserData, getAverageStepGoalAllUsers } from '../src/u
 const welcomeMessage = document.querySelector('.welcome-message');
 const userStepGoalContainer = document.querySelector('.user-step-goal')
 const averageStepContainer = document.querySelector('.average-goal-steps')
-const userStepGoalDisplay = document.querySelector('.display-step-goal')
+const userStepGoalDisplay = document.getElementById('display-step-goal')
 const averageStepDisplay = document.getElementById('display-average-goal-steps')
 const userIdAddressEmail = document.querySelector('.user-id-address-email')
 const userStrideLength = document.querySelector('.user-stride-length')
@@ -14,9 +14,10 @@ window.addEventListener('load', () => {
   fetchUserData()
 });
 
-const updateUserGoal = () => {
-  userStepGoalDisplay.innerText = ``
+const updateUserGoal = (user) => {
+  userStepGoalDisplay.innerText = `${user.dailyStepGoal} 👟`
 }
+
 
 const updateAverageSteps = (steps) => {
   averageStepDisplay.innerText = `${steps}`
@@ -24,10 +25,11 @@ const updateAverageSteps = (steps) => {
 
 function fetchUserData() {
   Promise.all([fetchUser()]).then(e => {
-    const randomUser = getRandomUser(e[0].users)
-    const user = getUserData(e[0].users, randomUser.id)
+    const userList = e[0].users
+    const randomUser = getRandomUser(userList)
+    const user = getUserData(userList, randomUser.id)
     updateUserCard(user)
-    updateUserGoal()
+    updateUserGoal(user)
     const friendsSteps = updatedUserFriends(user, e[0].users)
     updateUserMessage(randomUser);
     updateAverageSteps(Math.round(friendsSteps))
