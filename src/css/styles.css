@@ -6,9 +6,11 @@ body, html {
 }
 
 .activities-dashboard {
-  border: solid 1pt black;
   width: 80vw;
   border-radius: 12px;
+  height: 15vh;
+  display: flex;
+  justify-content: space-around;
 }
 
 .display-user-info {
@@ -25,6 +27,7 @@ body, html {
 .body-wrapper {
   display: flex;
   margin-left: 70px;
+  border-radius: 12px;
 }
 
 .friends-section {
@@ -32,6 +35,10 @@ body, html {
   margin-left: 25px;
   text-align: center;
   border-radius: 12px;
+  background: url('/src/images/amigos.avif');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
 }
 
 .friends-wrapper {
@@ -42,43 +49,44 @@ body, html {
   width: 150px;
 }
 
-.activities-dashboard {
+.activities-dashboard-wrapper {
   background-image: url('/src/images/working-out.jpeg');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
+  border-radius: 12px;
+  border: 1pt solid black;
 }
 
-/* h4  {
-  display: flex;
-  justify-content: center;
+.display-activities-dashboard {
   background-color: lightcyan;
-  width: 100%;
-  & div {
-    background: white;
-    width: fit-content;
-  }
-} */
+}
 
 .steps-wrapper {
-  /* background-image: url('/src/images/walking.jpeg'); */
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
 }
 
 .hydration-wrapper{
-  background-image: url('/src/images/H2O.jpeg');
+  background-image: url('/src/images/waters.avif');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
+  border-radius: 12px;
+  border: 1pt solid black;
 }
 
-.activities-dashboard {
-  height: 20vh;
-  display: flex;
-  justify-content: space-around;
+.sleep-wrapper {
+  border: 1pt solid black;
+  border-radius: 12px;
+  background-image: url('/src/images/nuhNight.avif');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+
 }
+
 .user-friend {
   border: solid 3pt black;
   border-radius: 12px;
@@ -95,24 +103,70 @@ body, html {
 .user-step-goal,
 .average-goal-steps, 
 .user-hydration-day, 
-.user-hydration-week
+.user-hydration-week,
+.user-sleep-day,
+.user-sleep-week,
+.user-sleep-alltime
 {
   border: solid 3pt black;
   border-radius: 12px;
   text-align: center;
   width: 10rem;
   line-height: 2.5;
-  margin: 2rem;
+  margin: .5rem;
   height: 6rem;
-  background: white;
 }
 
-.steps-wrapper, .hydration-wrapper {
+.flights-of-stairs {
+  background-color: coral;
+}
+
+.minutes-active {
+  background-color: aqua;
+}
+
+.user-hydration-day {
+  background-color: rebeccapurple;
+}
+
+.user-hydration-week {
+  background-color: paleturquoise;
+}
+
+.number-of-steps {
+  background-color: lightgreen;
+}
+
+.user-step-goal {
+  background-color: lightpink;
+}
+
+.average-goal-steps {
+  background-color: blueviolet;
+}
+
+.user-sleep-alltime {
+  background-color: lightgoldenrodyellow;
+}
+
+.user-sleep-day {
+  background-color: palegreen;
+}
+
+.user-sleep-week {
+  background-color: peru;
+}
+
+.user-friend {
+  background-color: powderblue;
+}
+
+.steps-wrapper, .hydration-wrapper, .sleep-wrapper {
   display: flex;
   justify-content: space-evenly;
   width: 80vw;
-  height: 20vh;
-  border: solid 1pt black;
+  height: 13vh;
+  /* border: solid 1pt black; */
   border-radius: 12px;
 }
 
@@ -136,7 +190,8 @@ p {
 }
 
 .display-activities-dashboard, 
-.display-hydration-dashboard{
+.display-hydration-dashboard,
+.display-sleep-dashboard{
   font-size: 30px;
   text-align: center;
   margin: 0;
