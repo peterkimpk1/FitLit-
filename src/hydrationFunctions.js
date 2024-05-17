@@ -6,7 +6,6 @@ function getConsumedWaterForDay(data,userId,date) {
     userDataByUserIdAndDate.forEach(entry => {
         totalOunces += entry.numOunces
     })
-    // console.log("totalOunces:", totalOunces)
     return totalOunces
 }
 
