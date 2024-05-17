@@ -41,9 +41,9 @@ function updatedUserHydration(hydration, user){
     return averageFluidOuncesPerDay;
 }
 
-export {
+export default {
     getConsumedWaterForWeek, 
     getConsumedWaterForDay, 
     updatedUserHydration,
-    getCurrentDayWaterConsumption
+    getCurrentDayWaterConsumption,
 }
