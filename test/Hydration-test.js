@@ -1,13 +1,27 @@
 import { expect } from 'chai';
 import hydrationSampleData from "../src/data/hydration-sample-data.js"
 const sampleData = hydrationSampleData.hydrationSampleData
-const {getConsumedWaterForWeek, getConsumedWaterForDay, updatedUserHydration} = require('../src/hydration')
+const {getConsumedWaterForWeek, getConsumedWaterForDay, updatedUserHydration, getCurrentDayWaterConsumption} = require('../src/hydration')
 
 describe('getConsumedWaterForDay', () => {
     it('should return the user/s fluid ounces for a specific day', () => {
         const date = "2023/03/24"
         const user1NumOunces = getConsumedWaterForDay(sampleData,1,date)
         expect(user1NumOunces).to.equal(10)
+    });
+});
+
+describe('getCurrentDayWaterConsumption', () => {
+    it('should return the user/s fluid ounces for current day', () => {
+        const user1NumOunceCurrentDay = getCurrentDayWaterConsumption(sampleData,1)
+        expect(user1NumOunceCurrentDay).to.equal(20)
+    });
+});
+
+describe('getCurrentDayWaterConsumption', () => {
+    it('should return a different user/s fluid ounces for current day', () => {
+        const user2NumOunceCurrentDay = getCurrentDayWaterConsumption(sampleData,2)
+        expect(user2NumOunceCurrentDay).to.equal(25)
     });
 });
 

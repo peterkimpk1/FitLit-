@@ -2,37 +2,47 @@ import { fetchUser } from './fetchData/userData.js'
 import { fetchActivities } from './fetchData/activityData.js';
 import { fetchSleep } from './fetchData/sleepData.js'
 import { getRandomUser, getUserData, getAverageStepGoalAllUsers } from '../src/userFunctions.js'
+import getCurrentDayWaterConsumption from '../src/hydrationFunctions.js';
 const welcomeMessage = document.querySelector('.welcome-message');
 const userStepGoalContainer = document.querySelector('.user-step-goal')
 const averageStepContainer = document.querySelector('.average-goal-steps')
-const userStepGoalDisplay = document.querySelector('.display-step-goal')
+const userStepGoalDisplay = document.getElementById('display-step-goal')
 const averageStepDisplay = document.getElementById('display-average-goal-steps')
 const userIdAddressEmail = document.querySelector('.user-id-address-email')
 const userStrideLength = document.querySelector('.user-stride-length')
 const userDailySteps = document.querySelector('.user-daily-step-goal')
-const friendsWrapper = document.querySelector('.friends-wrapper');
+const userDailyHydration = document.getElementById('display-user-hydration-day')
+const friendsWrapper = document.querySelector('.friends-wrapper')
 const userInfo = document.querySelector('.user-info');
 
 window.addEventListener('load', () => {
   fetchUserData()
-  fetchSleep()
-});
+  updateUserDailyHydration() 
+})
 
-const updateUserGoal = () => {
-  userStepGoalDisplay.innerText = ``
+const updateUserGoal = (user) => {
+  userStepGoalDisplay.innerText = `${user.dailyStepGoal} 👟`
 }
+
 
 const updateAverageSteps = (steps) => {
   averageStepDisplay.innerText = `${steps}`
 }
 
+const updateUserDailyHydration = (data,userId) => {
+//   userDailyHydration.innerText = `${getCurrentDayWaterConsumption(data,userId)}`
+  userDailyHydration.innerText = 'This works!'
+}
+
+
 function fetchUserData() {
-  Promise.all([fetchUser(), fetchSleep()]).then(e => {
-    const randomUser = getRandomUser(e[0].users)
-    const user = getUserData(e[0].users, randomUser.id)
+  Promise.all([fetchUser()]).then(e => {
+    const userList = e[0].users
+    const randomUser = getRandomUser(userList)
+    const user = getUserData(userList, randomUser.id)
     updateUserCard(user)
-    updateUserGoal()
-    const friendsSteps = updatedUserFriends(user, e[0].users)
+    updateUserGoal(user)
+    const friendsSteps = updatedUserFriends(user, userList)
     updateUserMessage(randomUser);
     updateAverageSteps(Math.round(friendsSteps))
   })
@@ -70,6 +80,7 @@ const updateUserMessage = (user) => {
 export {
   updateUserGoal,
   updateAverageSteps,
-  updateUserMessage
+  updateUserMessage,
+  updateUserDailyHydration, 
 };
 
