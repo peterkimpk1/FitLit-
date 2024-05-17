@@ -8,7 +8,7 @@ const averageStepDisplay = document.getElementById('display-average-goal-steps')
 const userIdAddressEmail = document.querySelector('.user-id-address-email')
 const userStrideLength = document.querySelector('.user-stride-length')
 const userDailySteps = document.querySelector('.user-daily-step-goal')
-
+const friendsWrapper = document.querySelector('.friends-wrapper')
 
 window.addEventListener('load', () => {
   fetchUserData()
@@ -18,8 +18,8 @@ const updateUserGoal = () => {
   userStepGoalDisplay.innerText = ``
 }
 
-const updateAverageSteps = (allUsers) => {
-  averageStepDisplay.innerText = `${getAverageStepGoalAllUsers(allUsers)}`
+const updateAverageSteps = (steps) => {
+  averageStepDisplay.innerText = `${steps}`
 }
 
 function fetchUserData() {
@@ -28,9 +28,27 @@ function fetchUserData() {
     const user = getUserData(e[0].users, randomUser.id)
     updateUserCard(user)
     updateUserGoal()
+    const friendsSteps = updatedUserFriends(user, e[0].users)
     updateUserMessage(randomUser);
-    updateAverageSteps(e[0].users)
+    updateAverageSteps(Math.round(friendsSteps))
   })
+}
+
+function updatedUserFriends(user, users) {
+  let sortedFriends = user.friends.sort((a,b)=> a-b)
+  let friendsStepGoals = sortedFriends.map(friend => {
+    const singleUser = users.filter(user => user.id === friend)
+    return singleUser[0].dailyStepGoal
+  })
+  let friendsTotal = friendsStepGoals.reduce((total,friend) => {
+    total+= friend
+    return total;
+  },0)
+  for (var i = 0; i < user.friends.length; i++) {
+    friendsWrapper.innerHTML += `<div class="user-friend"> id: ${sortedFriends[i]}
+    <p class="display-user-friend" id="${i}">${friendsStepGoals[i]}</p></div>`
+  }
+  return friendsTotal / friendsStepGoals.length;
 }
 
 function updateUserCard(user) {
