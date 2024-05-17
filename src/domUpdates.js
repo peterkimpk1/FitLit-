@@ -1,5 +1,7 @@
 import { fetchUser } from './fetchData/userData.js'
+import { hydrationData } from '../src/data/hydration.js'
 import { getRandomUser, getUserData, getAverageStepGoalAllUsers } from '../src/userFunctions.js'
+import { getConsumedWaterForDay } from '../src/hydrationFunctions.js'
 const welcomeMessage = document.querySelector('.welcome-message');
 const userStepGoalContainer = document.querySelector('.user-step-goal')
 const averageStepContainer = document.querySelector('.average-goal-steps')
@@ -8,6 +10,7 @@ const averageStepDisplay = document.getElementById('display-average-goal-steps')
 const userIdAddressEmail = document.querySelector('.user-id-address-email')
 const userStrideLength = document.querySelector('.user-stride-length')
 const userDailySteps = document.querySelector('.user-daily-step-goal')
+const userDailyHydration = document.querySelector('.display-user-hydration-day')
 
 
 window.addEventListener('load', () => {
@@ -20,6 +23,10 @@ const updateUserGoal = () => {
 
 const updateAverageSteps = (allUsers) => {
   averageStepDisplay.innerText = `${getAverageStepGoalAllUsers(allUsers)}`
+}
+
+function updateUserDailyHydration(hydrationData,userId,date) {
+    userDailyHydration.innerText = `${getConsumedWaterForDay(hydrationData,userId,date)}`
 }
 
 function fetchUserData() {
@@ -47,6 +54,7 @@ const updateUserMessage = (users) => {
 export {
   updateUserGoal,
   updateAverageSteps,
-  updateUserMessage
+  updateUserMessage,
+  updateUserDailyHydration
 };
 
