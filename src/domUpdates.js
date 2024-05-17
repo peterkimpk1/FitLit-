@@ -29,7 +29,7 @@ const updateAverageSteps = (steps) => {
 }
 
 const updateUserDailyHydration = (data,userId) => {
-  userDailyHydration.innerText = `${getCurrentDayWaterConsumption(data,userId)} ounces`
+  userDailyHydration.innerText = `${getCurrentDayWaterConsumption(data,userId)} ounces 🥤`
 }
 
 function fetchUserData() {
