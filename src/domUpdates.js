@@ -1,8 +1,8 @@
 import { fetchUser } from './fetchData/userData.js';
-import { fetchHydration } from './fetchData/hydrationData.js'
+// import { fetchHydration } from './fetchData/hydrationData.js'
 import hydrationData from '../src/data/hydration.js';
 import { getRandomUser, getUserData, getAverageStepGoalAllUsers } from '../src/userFunctions.js';
-import getConsumedWaterForDay from '../src/hydrationFunctions.js';
+import getCurrentDayWaterConsumption from '../src/hydrationFunctions.js';
 
 const welcomeMessage = document.querySelector('.welcome-message')
 const userStepGoalContainer = document.querySelector('.user-step-goal')
@@ -12,13 +12,11 @@ const averageStepDisplay = document.getElementById('display-average-goal-steps')
 const userIdAddressEmail = document.querySelector('.user-id-address-email')
 const userStrideLength = document.querySelector('.user-stride-length')
 const userDailySteps = document.querySelector('.user-daily-step-goal')
-const userDailyHydration = document.querySelector('.display-user-hydration-day')
-
+const userDailyHydration = document.getElementById('display-user-hydration-day')
 
 window.addEventListener('load', () => {
   fetchUserData()
-  fetchHydrationData() 
-
+  updateUserDailyHydration() 
 })
 
 const updateUserGoal = () => {
@@ -29,9 +27,11 @@ const updateAverageSteps = (allUsers) => {
   averageStepDisplay.innerText = `${getAverageStepGoalAllUsers(allUsers)}`
 }
 
-function updateUserDailyHydration(hydrationData,userId, date) {
-    // userDailyHydration.innerText = `${getConsumedWaterForDay(hydrationData,userId,date)}`
+const updateUserDailyHydration = (data,userId) => {
+//   userDailyHydration.innerText = `${getCurrentDayWaterConsumption(data,userId)}`
+  userDailyHydration.innerText = 'This works!'
 }
+
 
 function fetchUserData() {
   Promise.all([fetchUser()]).then(e => {
@@ -41,7 +41,6 @@ function fetchUserData() {
     updateUserGoal()
     updateUserMessage(randomUser)
     updateAverageSteps(e[0].users)
-    updateUserDailyHydration(hydrationData,randomUser.id)
   })
 }
 
