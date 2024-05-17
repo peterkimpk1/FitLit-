@@ -26,15 +26,11 @@ describe('getCurrentDayWaterConsumption', () => {
 });
 
 describe('consumedWaterForWeek', () => {
-    it('should return the user/s fluid ounces consumed each day over a course of a week', () => {
-        const date = "2023/03/24"
-        const user1 = getConsumedWaterForWeek(sampleData,1,date)
-        expect(user1).to.deep.equal([10,15,20,20,20,20,20]);
-    })
-    it('should return the available user/s fluid ounces even if the data isn/t available for a week', () => {
-        const date = "2023/03/26"
-        const user1 = getConsumedWaterForWeek(sampleData,1,date)
-        expect(user1).to.deep.equal([20,20,20,20,20,20]);
+    it('should return the latest week/s user fluid ounces consumed each day', () => {
+        const user1 = getConsumedWaterForWeek(sampleData,1)
+        const user2 = getConsumedWaterForWeek(sampleData,2)
+        expect(user1).to.deep.equal([20,20,20,20,20,20,15]);
+        expect(user2).to.deep.equal([25,25,25,25,25,25,5]);
     })
 })
 

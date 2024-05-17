@@ -7,24 +7,26 @@ import getCurrentDayWaterConsumption from '../src/hydrationFunctions.js';
 const welcomeMessage = document.querySelector('.welcome-message')
 const userStepGoalContainer = document.querySelector('.user-step-goal')
 const averageStepContainer = document.querySelector('.average-goal-steps')
-const userStepGoalDisplay = document.querySelector('.display-step-goal')
+const userStepGoalDisplay = document.getElementById('display-step-goal')
 const averageStepDisplay = document.getElementById('display-average-goal-steps')
 const userIdAddressEmail = document.querySelector('.user-id-address-email')
 const userStrideLength = document.querySelector('.user-stride-length')
 const userDailySteps = document.querySelector('.user-daily-step-goal')
 const userDailyHydration = document.getElementById('display-user-hydration-day')
+const friendsWrapper = document.querySelector('.friends-wrapper')
 
 window.addEventListener('load', () => {
   fetchUserData()
   updateUserDailyHydration() 
 })
 
-const updateUserGoal = () => {
-  userStepGoalDisplay.innerText = ``
+const updateUserGoal = (user) => {
+  userStepGoalDisplay.innerText = `${user.dailyStepGoal} 👟`
 }
 
-const updateAverageSteps = (allUsers) => {
-  averageStepDisplay.innerText = `${getAverageStepGoalAllUsers(allUsers)}`
+
+const updateAverageSteps = (steps) => {
+  averageStepDisplay.innerText = `${steps}`
 }
 
 const updateUserDailyHydration = (data,userId) => {
@@ -35,13 +37,32 @@ const updateUserDailyHydration = (data,userId) => {
 
 function fetchUserData() {
   Promise.all([fetchUser()]).then(e => {
-    const randomUser = getRandomUser(e[0].users)
-    const user = getUserData(e[0].users, randomUser.id)
+    const userList = e[0].users
+    const randomUser = getRandomUser(userList)
+    const user = getUserData(userList, randomUser.id)
     updateUserCard(user)
-    updateUserGoal()
-    updateUserMessage(randomUser)
-    updateAverageSteps(e[0].users)
+    updateUserGoal(user)
+    const friendsSteps = updatedUserFriends(user, userList)
+    updateUserMessage(randomUser);
+    updateAverageSteps(Math.round(friendsSteps))
   })
+}
+
+function updatedUserFriends(user, users) {
+  let sortedFriends = user.friends.sort((a,b)=> a-b)
+  let friendsStepGoals = sortedFriends.map(friend => {
+    const singleUser = users.filter(user => user.id === friend)
+    return singleUser[0].dailyStepGoal
+  })
+  let friendsTotal = friendsStepGoals.reduce((total,friend) => {
+    total+= friend
+    return total;
+  },0)
+  for (var i = 0; i < user.friends.length; i++) {
+    friendsWrapper.innerHTML += `<div class="user-friend"> id: ${sortedFriends[i]}
+    <p class="display-user-friend" id="${i}">${friendsStepGoals[i]}</p></div>`
+  }
+  return friendsTotal / friendsStepGoals.length;
 }
 
 function updateUserCard(user) {
