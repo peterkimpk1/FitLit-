@@ -61,7 +61,7 @@ body, html {
 } */
 
 .steps-wrapper {
-  background-image: url('/src/images/walking.jpeg');
+  /* background-image: url('/src/images/walking.jpeg'); */
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -79,9 +79,7 @@ body, html {
   display: flex;
   justify-content: space-around;
 }
-.user-friend-one,
-.user-friend-two,
-.user-friend-three {
+.user-friend {
   border: solid 3pt black;
   border-radius: 12px;
   text-align: center;
