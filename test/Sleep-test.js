@@ -6,7 +6,7 @@ const {getUserAverageHoursSlept} = require('../src/sleep')
 describe ('getUserAverageHoursSlept', () => {
     it ('should return a user/s average hours slept for all time', () => {
         const userId = 1;
-        const e = getUserAverageHoursSlept(sampleData,userId)
-        e.expect.to.equal(7)
+        const e = getUserAverageHoursSlept(sampleData,userId);
+        expect(e).to.equal(7)
     })
 })
