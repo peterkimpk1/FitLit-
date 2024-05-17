@@ -44,12 +44,6 @@ function fetchUserData() {
   })
 }
 
-function fetchHydrationData() {
-  Promise.all([fetchHydration()]).then(e => {
-    console.log(e[0].hydrationData)
-  })
-}
-
 function updateUserCard(user) {
   userIdAddressEmail.innerText = `ID: ${user.id}, Address: ${user.address}, Email: ${user.email}`
   userStrideLength.innerText = `Stride Length: ${user.strideLength}`
