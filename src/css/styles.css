@@ -1,14 +1,14 @@
 body, html {
-  background-image: linear-gradient(to top, #ff9a9e 0%, #fecfef 99%, #fecfef 100%);
+  background: lightcyan;
   background-repeat: no-repeat;
   height: 100%;
+  padding: 0;
 }
 
-.activities-dashboard-wrapper,.activities-dashboard {
+.activities-dashboard {
   border: solid 1pt black;
   width: 80vw;
-  /* margin-left: auto; */
-  /* margin-right: auto; */
+  border-radius: 12px;
 }
 
 .display-user-info {
@@ -20,15 +20,18 @@ body, html {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  border-radius: 12px;
 }
 .body-wrapper {
   display: flex;
+  margin-left: 70px;
 }
 
 .friends-section {
-  border: 2px solid black;
+  border: 1pt solid black;
   margin-left: 25px;
   text-align: center;
+  border-radius: 12px;
 }
 
 .friends-wrapper {
@@ -39,11 +42,36 @@ body, html {
   width: 150px;
 }
 
-.activities-dashboard-wrapper {
-  height: 45vh;
+.activities-dashboard {
+  background-image: url('/src/images/working-out.jpeg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+/* h4  {
   display: flex;
-  flex-direction: column;
-  justify-content: space-around;
+  justify-content: center;
+  background-color: lightcyan;
+  width: 100%;
+  & div {
+    background: white;
+    width: fit-content;
+  }
+} */
+
+.steps-wrapper {
+  /* background-image: url('/src/images/walking.jpeg'); */
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.hydration-wrapper{
+  background-image: url('/src/images/H2O.jpeg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
 }
 
 .activities-dashboard {
@@ -51,9 +79,7 @@ body, html {
   display: flex;
   justify-content: space-around;
 }
-.user-friend-one,
-.user-friend-two,
-.user-friend-three {
+.user-friend {
   border: solid 3pt black;
   border-radius: 12px;
   text-align: center;
@@ -78,6 +104,7 @@ body, html {
   line-height: 2.5;
   margin: 2rem;
   height: 6rem;
+  background: white;
 }
 
 .steps-wrapper, .hydration-wrapper {
@@ -86,6 +113,7 @@ body, html {
   width: 80vw;
   height: 20vh;
   border: solid 1pt black;
+  border-radius: 12px;
 }
 
 .user-info {
