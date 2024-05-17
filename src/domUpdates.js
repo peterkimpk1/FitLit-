@@ -14,22 +14,23 @@ window.addEventListener('load', () => {
   fetchUserData()
 });
 
-const updateUserGoal = () => {
-  userStepGoalDisplay.innerText = ``
+const updateUserGoal = (user) => {
+  userStepGoalDisplay.innerText = `${user.dailyStepGoal} 👟`
 }
 
-const updateAverageSteps = (allUsers) => {
-  averageStepDisplay.innerText = `${getAverageStepGoalAllUsers(allUsers)}`
+const updateAverageSteps = (friendsSteps) => {
+  averageStepDisplay.innerText = `${getAverageStepGoalAllUsers(friendsSteps)}`
 }
 
 function fetchUserData() {
   Promise.all([fetchUser()]).then(e => {
-    const randomUser = getRandomUser(e[0].users)
-    const user = getUserData(e[0].users, randomUser.id)
+    const friends = e[0].users
+    const randomUser = getRandomUser(friends)
+    const user = getUserData(friends, randomUser.id)
     updateUserCard(user)
-    updateUserGoal()
+    updateUserGoal(user)
     updateUserMessage(randomUser);
-    updateAverageSteps(e[0].users)
+    updateAverageSteps(friends)
   })
 }
 
