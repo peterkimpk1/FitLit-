@@ -1,8 +1,9 @@
 import { fetchUser } from './fetchData/userData.js'
-import { fetchActivities } from './fetchData/activityData.js';
+import { fetchHydration } from './fetchData/hydrationData.js'
 import { fetchSleep } from './fetchData/sleepData.js'
 import { getRandomUser, getUserData, getAverageStepGoalAllUsers } from '../src/userFunctions.js'
-import getCurrentDayWaterConsumption from '../src/hydrationFunctions.js';
+import { getCurrentDayWaterConsumption, getConsumedWaterForWeek } from '../src/hydration.js';
+
 const welcomeMessage = document.querySelector('.welcome-message');
 const userStepGoalContainer = document.querySelector('.user-step-goal')
 const averageStepContainer = document.querySelector('.average-goal-steps')
@@ -12,31 +13,32 @@ const userIdAddressEmail = document.querySelector('.user-id-address-email')
 const userStrideLength = document.querySelector('.user-stride-length')
 const userDailySteps = document.querySelector('.user-daily-step-goal')
 const userDailyHydration = document.getElementById('display-user-hydration-day')
+const userHydrationWeek = document.getElementById('display-user-hydration-week')
 const friendsWrapper = document.querySelector('.friends-wrapper')
 const userInfo = document.querySelector('.user-info');
 
 window.addEventListener('load', () => {
   fetchUserData()
-  updateUserDailyHydration() 
 })
 
 const updateUserGoal = (user) => {
   userStepGoalDisplay.innerText = `${user.dailyStepGoal} 👟`
 }
 
-
 const updateAverageSteps = (steps) => {
   averageStepDisplay.innerText = `${steps}`
 }
 
 const updateUserDailyHydration = (data,userId) => {
-//   userDailyHydration.innerText = `${getCurrentDayWaterConsumption(data,userId)}`
-  userDailyHydration.innerText = 'This works!'
+  userDailyHydration.innerText = `${getCurrentDayWaterConsumption(data,userId)} ounces 🥤`
 }
 
+const updateWeeklyUserHydration = (data,userId) => {
+  userHydrationWeek.innerText = `${getConsumedWaterForWeek(data,userId)}`
+}
 
 function fetchUserData() {
-  Promise.all([fetchUser()]).then(e => {
+  Promise.all([fetchUser(), fetchHydration()]).then(e => {
     const userList = e[0].users
     const randomUser = getRandomUser(userList)
     const user = getUserData(userList, randomUser.id)
@@ -45,6 +47,9 @@ function fetchUserData() {
     const friendsSteps = updatedUserFriends(user, userList)
     updateUserMessage(randomUser);
     updateAverageSteps(Math.round(friendsSteps))
+    const AllHydrationData = e[1].hydrationData
+    updateUserDailyHydration(AllHydrationData,randomUser.id)
+    updateWeeklyUserHydration(AllHydrationData,randomUser.id)
   })
 }
 
