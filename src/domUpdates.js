@@ -1,8 +1,10 @@
-import { fetchUser } from './fetchData/userData.js'
-import { hydrationData } from '../src/data/hydration.js'
-import { getRandomUser, getUserData, getAverageStepGoalAllUsers } from '../src/userFunctions.js'
-import { getConsumedWaterForDay } from '../src/hydrationFunctions.js'
-const welcomeMessage = document.querySelector('.welcome-message');
+import { fetchUser } from './fetchData/userData.js';
+import { fetchHydration } from './fetchData/hydrationData.js'
+import hydrationData from '../src/data/hydration.js';
+import { getRandomUser, getUserData, getAverageStepGoalAllUsers } from '../src/userFunctions.js';
+import getConsumedWaterForDay from '../src/hydrationFunctions.js';
+
+const welcomeMessage = document.querySelector('.welcome-message')
 const userStepGoalContainer = document.querySelector('.user-step-goal')
 const averageStepContainer = document.querySelector('.average-goal-steps')
 const userStepGoalDisplay = document.querySelector('.display-step-goal')
@@ -15,7 +17,9 @@ const userDailyHydration = document.querySelector('.display-user-hydration-day')
 
 window.addEventListener('load', () => {
   fetchUserData()
-});
+  fetchHydrationData() 
+
+})
 
 const updateUserGoal = () => {
   userStepGoalDisplay.innerText = ``
@@ -25,8 +29,8 @@ const updateAverageSteps = (allUsers) => {
   averageStepDisplay.innerText = `${getAverageStepGoalAllUsers(allUsers)}`
 }
 
-function updateUserDailyHydration(hydrationData,userId,date) {
-    userDailyHydration.innerText = `${getConsumedWaterForDay(hydrationData,userId,date)}`
+function updateUserDailyHydration(hydrationData,userId, date) {
+    // userDailyHydration.innerText = `${getConsumedWaterForDay(hydrationData,userId,date)}`
 }
 
 function fetchUserData() {
@@ -35,8 +39,15 @@ function fetchUserData() {
     const user = getUserData(e[0].users, randomUser.id)
     updateUserCard(user)
     updateUserGoal()
-    updateUserMessage(randomUser);
+    updateUserMessage(randomUser)
     updateAverageSteps(e[0].users)
+    updateUserDailyHydration(hydrationData,randomUser.id)
+  })
+}
+
+function fetchHydrationData() {
+  Promise.all([fetchHydration()]).then(e => {
+    console.log(e[0].hydrationData)
   })
 }
 
@@ -48,13 +59,13 @@ function updateUserCard(user) {
 const updateUserMessage = (users) => {  
   welcomeMessage.innerHTML = `<header>
   <h1 class="welcome-message">Welcome ${users.name}</h1>
-  </header>`;
+  </header>`
 };
 
 export {
   updateUserGoal,
   updateAverageSteps,
   updateUserMessage,
-  updateUserDailyHydration
+  updateUserDailyHydration, 
 };
 
