@@ -2,16 +2,16 @@ import users from "./data/users.js"
 
 const allUsers = users.users
 
-function getUserData(allUsers,userId) {
+function getUserData(allUsers, userId) {
     const userInfo = allUsers.find(user => {
         return user.id === userId
     }); 
     return userInfo
 };
 
-function getAverageStepGoalAllUsers(usersData) {
-    const avgStepGoalAllUsers = usersData.reduce((accumulator, user) => {
-        return accumulator += (user.dailyStepGoal / usersData.length)
+function getAverageStepGoalAllUsers(allUsers) {
+    const avgStepGoalAllUsers = allUsers.reduce((accumulator, user) => {
+        return accumulator += (user.dailyStepGoal / allUsers.length)
     }, 0)
     return avgStepGoalAllUsers
 }; 
