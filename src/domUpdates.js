@@ -16,6 +16,9 @@ const friendsWrapper = document.querySelector('.friends-wrapper');
 const userInfo = document.querySelector('.user-info');
 const userSleepDay = document.getElementById('display-user-sleep-day');
 const userWeeklySleepHours = document.getElementById('display-user-sleep-week');
+const userSleepQuality = document.getElementById('display-user-sleep-quality');
+const userDay = document.getElementById('display-user-day');
+const sleepDay = document.querySelector('.user-sleep-day');
 
 
 window.addEventListener('load', () => {
@@ -54,9 +57,7 @@ function fetchUserData() {
     const allSleepData = e[2].sleepData
     const sleepWeekDateData = getSleepDates(allSleepData,randomUser.id)
     const sleepHoursWeekData = getSleepHoursForWeek(allSleepData,randomUser.id)
-    const sleepHoursWeekDataConverted = sleepHoursWeekData.map (data => {
-      return new Date(data)
-    }) 
+    const sleepHoursWeekDataConverted = sleepWeekDateData.reverse().map(data => new Date(data))
     updateDailySleep(allSleepData, randomUser.id)
     updateWeeklySleepData(allSleepData, randomUser.id)
     new Chart(document.getElementById('sleepHoursWeekChart'), {
@@ -65,7 +66,7 @@ function fetchUserData() {
         labels: sleepHoursWeekDataConverted.map(date => `${date.getMonth()}/${date.getDate()}`),
         datasets: [{
           data: sleepHoursWeekData.map(hours => hours),
-          backgroundColor: 'rgba(39, 76, 245, 0.8)'
+          backgroundColor: 'rgba(213, 184, 255)'
         }]
       },
       options: {
@@ -126,7 +127,7 @@ function fetchUserData() {
     new Chart(document.getElementById('user-friends-average-goal-chart'), {
       type: 'doughnut',
       data: {
-        labels: [`Average Step Goal: ${friendsSteps}`],
+        labels: [`Average Step Goal: ${Math.round(friendsSteps)}`],
         datasets: [{
           label: 'Step Goal',
           data: [`${Math.round(friendsSteps)}`,3000],
@@ -219,12 +220,12 @@ function fetchUserData() {
         }
       }     
     });
-    
   })
 }
 
 function updatedUserFriends(user, users) {
   let sortedFriends = user.friends.sort((a,b)=> a-b)
+  let friendNames = sortedFriends.map(id => users.filter(user => user.id === id)[0].name)
   let friendsStepGoals = sortedFriends.map(friend => {
     const singleUser = users.filter(user => user.id === friend)
     return singleUser[0].dailyStepGoal
@@ -237,7 +238,7 @@ function updatedUserFriends(user, users) {
     friendsWrapper.innerHTML += `<div class=user-friend> <canvas id="friendChart${i}" width="400" height="400"></canvas></div>`;
     let id = "friendChart" + i;
     let index = i;
-    setTimeout(() => {createFriendChart(id, sortedFriends,friendsStepGoals, index);}, 100)
+    setTimeout(() => {createFriendChart(id, friendNames,friendsStepGoals, index);}, 100)
   }
   return friendsTotal / friendsStepGoals.length;
 }
@@ -246,7 +247,7 @@ function createFriendChart(id, friendIds, friendSteps, i) {
   new Chart(document.getElementById(id), {
     type: 'doughnut',
     data: {
-      labels: [`ID: ${friendIds[i]}`],
+      labels: [`${friendIds[i]}`],
       datasets: [{
         label: 'Step Goal',
         data: [`${friendSteps[i]}`,3000],
@@ -280,19 +281,25 @@ function createFriendChart(id, friendIds, friendSteps, i) {
 }
 
 function updateUserCard(user) {
-  userIdAddressEmail.innerText = `ID: ${user.id}, Address: ${user.address}, Email: ${user.email}`
-  userStrideLength.innerText = `Stride Length: ${user.strideLength}`
+  userIdAddressEmail.innerHTML= `<strong>ID:</strong> ${user.id} <strong>Address:</strong> ${user.address} <strong>Email:</strong> ${user.email}`
+  userStrideLength.innerHTML = `<strong>Stride Length:</strong> ${user.strideLength}`
 }
 
 const updateUserMessage = (user) => {  
+  let fullName = user.name.split(' ')
+  let welcomeEmoji = ['🏅','👟','🎽']
+  let randomEmoji = welcomeEmoji[Math.floor(Math.random() * 3)]
   welcomeMessage.innerHTML = `<header>
-  <h1 class="welcome-message">Welcome ${user.name}</h1>
+  <h1 class="welcome-message">Welcome, ${fullName[0]}! ${randomEmoji}</h1>
   </header>`;
   userInfo.innerText = `${user.name}'s Info`
 };
 
 const updateDailySleep = (user, userId) => {
-  userSleepDay.innerText = `${getHoursSleptForCurrentDay(user, userId)}`
+  sleepDay.innerHTML = `Day:<p id="display-user-day"></p>
+  <div class="hours-slept">Hours Slept: ${getHoursSleptForCurrentDay(user, userId)}<p id="display-user-sleep-day"></p></div>
+  <div class="quality-ofl-sleep">Quality Slept: <p id="display-user-sleep-quality"></p></div>
+</div>`
 }
 
 export {
