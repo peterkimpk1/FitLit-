@@ -72,3 +72,5 @@ describe ('getHoursSleptForCurrentDay', () => {
         expect(user2HoursSleptCurrentDay).to.equal(6.2)
     })
 })
+
+
