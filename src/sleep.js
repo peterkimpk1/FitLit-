@@ -20,7 +20,7 @@ function getUserAverageSleepQuality(data, userId) {
     return Math.round(totalSleepQuality / dayCount)
 }
 
-function getUserSleepQualityForAnyDay(data, userId, date) {
+function getUserSleepQualityForGivenDay(data, userId, date) {
     const sleepQuality = data.find( sleepQuality => {})
 }
 
