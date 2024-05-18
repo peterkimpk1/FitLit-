@@ -3,7 +3,7 @@ import { fetchHydration } from './fetchData/hydrationData.js'
 import { fetchSleep } from './fetchData/sleepData.js'
 import { getRandomUser, getUserData, getAverageStepGoalAllUsers } from '../src/userFunctions.js'
 import { getCurrentDayWaterConsumption, getConsumedWaterForWeek, getConsumedWaterDates } from '../src/hydration.js';
-import { getHoursSleptForCurrentDay } from './sleep.js';
+import { getHoursSleptForCurrentDay, getSleepHoursForWeek } from './sleep.js';
 import Chart from 'chart.js/auto';
 const welcomeMessage = document.querySelector('.welcome-message');
 const userStepGoalDisplay = document.getElementById('display-step-goal');
@@ -14,6 +14,7 @@ const userDailyHydration = document.getElementById('display-user-hydration-day')
 const friendsWrapper = document.querySelector('.friends-wrapper');
 const userInfo = document.querySelector('.user-info');
 const userSleepDay = document.getElementById('display-user-sleep-day');
+const userWeeklySleep = document.getElementById('display-user-sleep-week');
 
 
 window.addEventListener('load', () => {
@@ -32,6 +33,10 @@ const updateUserDailyHydration = (data,userId) => {
   userDailyHydration.innerText = `${getCurrentDayWaterConsumption(data,userId)} ounces 🥤`
 }
 
+const updateWeeklySleepData = (data,userId) => {
+  userWeeklySleep.innerText = `${getSleepHoursForWeek(data,userId)} hours`
+}
+
 function fetchUserData() {
   Promise.all([fetchUser(), fetchHydration(), fetchSleep()]).then(e => {
     const userList = e[0].users
@@ -48,7 +53,8 @@ function fetchUserData() {
     const hydrationWeekDateData = getConsumedWaterDates(AllHydrationData,randomUser.id)
     const hydrationDayData = getCurrentDayWaterConsumption(AllHydrationData,randomUser.id)
     const allSleepData = e[2].sleepData
-    updateDailySleep(allSleepData, user.id)
+    updateDailySleep(allSleepData, randomUser.id)
+    updateWeeklySleepData(allSleepData, randomUser.id)
     new Chart(document.getElementById('hydrationWeekChart'), {
       type: 'bar',
       data: {
