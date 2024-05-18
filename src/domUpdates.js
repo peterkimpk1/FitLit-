@@ -3,7 +3,7 @@ import { fetchHydration } from './fetchData/hydrationData.js'
 import { fetchSleep } from './fetchData/sleepData.js'
 import { getRandomUser, getUserData, getAverageStepGoalAllUsers } from '../src/userFunctions.js'
 import { getCurrentDayWaterConsumption, getConsumedWaterForWeek, getConsumedWaterDates } from '../src/hydration.js';
-import { getHoursSleptForCurrentDay, getSleepHoursForWeek, getSleepDates } from './sleep.js';
+import { getHoursSleptForCurrentDay, getSleepHoursForWeek, getSleepDates, getSleepQualityForWeek } from './sleep.js';
 import Chart from 'chart.js/auto';
 
 const welcomeMessage = document.querySelector('.welcome-message');
@@ -14,10 +14,7 @@ const userStrideLength = document.querySelector('.user-stride-length');
 const userDailyHydration = document.getElementById('display-user-hydration-day');
 const friendsWrapper = document.querySelector('.friends-wrapper');
 const userInfo = document.querySelector('.user-info');
-const userSleepDay = document.getElementById('display-user-sleep-day');
 const userWeeklySleepHours = document.getElementById('display-user-sleep-week');
-const userSleepQuality = document.getElementById('display-user-sleep-quality');
-const userDay = document.getElementById('display-user-day');
 const sleepDay = document.querySelector('.user-sleep-day');
 
 
@@ -60,6 +57,8 @@ function fetchUserData() {
     const sleepHoursWeekDataConverted = sleepWeekDateData.reverse().map(data => new Date(data))
     updateDailySleep(allSleepData, randomUser.id)
     updateWeeklySleepData(allSleepData, randomUser.id)
+    getSleepQualityForWeek(allSleepData, randomUser.id)
+    getSleepDates(allSleepData, randomUser.id)
     new Chart(document.getElementById('sleepHoursWeekChart'), {
       type: 'bar',
       data: {
@@ -296,9 +295,10 @@ const updateUserMessage = (user) => {
 };
 
 const updateDailySleep = (user, userId) => {
-  sleepDay.innerHTML = `Day:<p id="display-user-day"></p>
+  const latestDate = getSleepDates(user, userId).map(date => new Date(date))[0]
+  sleepDay.innerHTML = `Day:${latestDate.getMonth()}/${latestDate.getDate()}<p id="display-user-day"></p>
   <div class="hours-slept">Hours Slept: ${getHoursSleptForCurrentDay(user, userId)}<p id="display-user-sleep-day"></p></div>
-  <div class="quality-ofl-sleep">Quality Slept: <p id="display-user-sleep-quality"></p></div>
+  <div class="quality-ofl-sleep">Quality Slept: ${getSleepQualityForWeek(user, userId)[0]}/5<p id="display-user-sleep-quality"></p></div>
 </div>`
 }
 
