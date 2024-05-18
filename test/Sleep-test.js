@@ -23,8 +23,8 @@ describe ('getSleepHoursAndQualityForWeek', () => {
     it ('should return a user/s hours slept and sleep quality for a given week starting from the date', () => {
         const userId = 1;
         const date = '2023/03/25'
-        const e = getSleepHoursForWeek(sampleData, userId, date)
-        expect(e).to.equal([
+        const e = getSleepHoursAndQualityForWeek(sampleData, userId, date)
+        expect(e).to.deep.equal([
             {hoursSlept: 6.3, sleepQuality: 3.3},
             {hoursSlept: 8.5, sleepQuality: 3.6},
             {hoursSlept: 4.3, sleepQuality: 3.2},
