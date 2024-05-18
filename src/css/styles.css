@@ -5,13 +5,13 @@ body, html {
   padding: 0;
 }
 
-.activities-dashboard {
+/* .activities-dashboard {
   width: 80vw;
   border-radius: 12px;
   height: 15vh;
   display: flex;
   justify-content: space-around;
-}
+} */
 
 .display-user-info {
   border: solid 1pt black;
@@ -106,8 +106,6 @@ body, html {
 .flights-of-stairs,
 .minutes-active,
 .number-of-steps,
-.user-step-goal,
-.average-goal-steps, 
 .user-sleep-day,
 .user-sleep-week,
 .user-sleep-alltime
@@ -121,7 +119,10 @@ body, html {
   height: 6rem;
 }
 
-.user-hydration-week, .user-hydration-day {
+.user-hydration-week,
+.user-hydration-day,
+.user-step-goal,
+.average-goal-steps{
   border: solid 3pt black;
   border-radius: 12px;
   text-align: center;
@@ -148,12 +149,8 @@ body, html {
   background-color: lightgreen;
 }
 
-.user-step-goal {
+.user-step-goal, .average-goal-steps{
   background-color: lightpink;
-}
-
-.average-goal-steps {
-  background-color: blueviolet;
 }
 
 .user-sleep-alltime {
@@ -169,14 +166,15 @@ body, html {
 }
 
 .user-friend {
-  background-color: powderblue;
+  background-color: lightpink;
 }
 
 .steps-wrapper, .sleep-wrapper {
   display: flex;
   justify-content: space-evenly;
+  align-items: center;
   width: 80vw;
-  height: 15vh;
+  height: 20vh;
   /* border: solid 1pt black; */
   border-radius: 12px;
 }
@@ -210,4 +208,10 @@ p {
 
 .hidden {
   display: none;
+}
+
+canvas {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
 }
