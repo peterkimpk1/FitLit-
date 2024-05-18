@@ -1,4 +1,4 @@
-function getConsumedWaterForDay(data,userId,date) {
+function getConsumedWaterForSpecificDate(data,userId,date) {
     let totalOunces = 0
     const userDataByUserIdAndDate = data.filter(userData => {
         return userData.userID === userId && userData.date === date   
@@ -6,15 +6,30 @@ function getConsumedWaterForDay(data,userId,date) {
     userDataByUserIdAndDate.forEach(entry => {
         totalOunces += entry.numOunces
     })
-    console.log("totalOunces:", totalOunces)
     return totalOunces
+}
+
+function getCurrentDayWaterConsumption(data,userId) {
+    const hydrationDataForSpecificUser = data.filter(userData => {
+        return userData.userID === userId
+    })
+    hydrationDataForSpecificUser.forEach(specificUserData => {
+        specificUserData.date = new Date(specificUserData.date)
+    })
+    const sortedhydrationDataForSpecificUser = hydrationDataForSpecificUser.sort((dateA, dateB) => {
+        return dateB.date - dateA.date
+    })
+    return sortedhydrationDataForSpecificUser[0].numOunces
 }
 
 function getConsumedWaterForWeek(data,userId) {
     let sortedSingleUserData = data.filter(user => user.userID === userId).sort((a,b) => new Date(b.date) - new Date(a.date))
     return sortedSingleUserData.splice(0,7).map(user => user.numOunces)
 }
-
+function getConsumedWaterDates(data,userId) {
+    let sortedSingleUserData = data.filter(user => user.userID === userId).sort((a,b) => new Date(b.date) - new Date(a.date))
+    return sortedSingleUserData.splice(0,7).map(user => user.date)
+}
 function updatedUserHydration(hydration, user){
     const userHydrationData = hydration.filter(hydrate => hydrate.userID === user);
 
@@ -30,6 +45,8 @@ function updatedUserHydration(hydration, user){
 
 export {
     getConsumedWaterForWeek, 
-    getConsumedWaterForDay, 
+    getConsumedWaterForSpecificDate, 
     updatedUserHydration,
+    getCurrentDayWaterConsumption,
+    getConsumedWaterDates
 }

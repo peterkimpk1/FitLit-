@@ -24,18 +24,20 @@
           <div class="number-of-steps">Number of stairs:<p class="display-number-of-steps"></p></div>    
         </section>
         <section class="steps-wrapper">
-          <div class="user-step-goal">Step Goal:<p class="display-step-goal">steps</p></div>
+
+          <div class="user-step-goal">Step Goal:<p id="display-step-goal">steps</p></div>
           <div class="average-goal-steps">Average step goal:<p id="display-average-goal-steps"></p></div>      
         </section>
       </section>
       <h4 class="display-hydration-dashboard"><div>Hydration Dashboard</div></h4>
       <section class="hydration-wrapper">
-        <div class="user-hydration-day">Day:<p class="display-user-hydration-day"></p></div>
-        <div class="user-hydration-week">Week:<p class="display-user-hydration-week"></p></div>     
+        <div class="user-hydration-day"><canvas id="hydrationDayChart" width="400" height="400"></canvas></div>
+        <div class="user-hydration-week"><canvas id="hydrationWeekChart" width="1000" height="500"></canvas></div>     
+       <p class="hidden" id="display-user-hydration-day"></p>
       </section>
       <h4 class="display-sleep-dashboard"><div>Sleep Dashboard</div></h4>
       <section class="sleep-wrapper">
-        <div class="user-sleep-day">Day:<p class="display-user-sleep-day"></p></div>
+        <div class="user-sleep-day">Day:<p id="display-user-sleep-day"></p></div>
         <div class="user-sleep-week">Week:<p class="display-user-sleep-week"></p></div>
         <div class="user-sleep-alltime">All Time:<p class="display-user-sleep-alltime"></p></div>          
       </section>
@@ -43,13 +45,9 @@
   <section class="friends-section">
     <h3 class="friends-header">Friends</h3>
     <section class="friends-wrapper">
-
-    </section>
+</section>
   </section>
 </section>
-  
-
-
 <!-- Do not include the scripts.js file here - it is done automatically by the webpack server -->
     <script src="bundle.js"></script>
   </body>
