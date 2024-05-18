@@ -18,11 +18,6 @@
       </section>
       <h4 class="display-activities-dashboard"><div>Activities Dashboard</div></h4>
       <section class="activities-dashboard-wrapper">
-        <!-- <section class="activities-dashboard">
-          <div class="flights-of-stairs">flights of stairs:<p class="display-flights-of-stairs"></p></div>
-          <div class="minutes-active">Minutes active:<p class="display-minutes-active"></p></div>
-          <div class="number-of-steps">Number of stairs:<p class="display-number-of-steps"></p></div>    
-        </section> -->
         <section class="steps-wrapper">
           <div class="user-step-goal"><canvas id="user-step-goal-chart" width="400" height="400"></canvas></div>
           <div class="average-goal-steps"><canvas id="user-friends-average-goal-chart" width="400" height="400"></canvas></div>   
@@ -38,7 +33,10 @@
       </section>
       <h4 class="display-sleep-dashboard"><div>Sleep Dashboard</div></h4>
       <section class="sleep-wrapper">
-        <div class="user-sleep-day">Day:<p id="display-user-sleep-day"></p></div>
+        <div class="user-sleep-day">Day:<p id="display-user-day"></p>
+          <div class="hours-slept">Hours Slept: <p id="display-user-sleep-day"></p></div>
+          <div class="quality-of-sleep">Quality Slept: <p id="display-user-sleep-quality"></p></div>
+        </div>
         <div class="user-sleep-week"><canvas id="sleepHoursWeekChart" width="1000" height="500"></canvas></div>
         <p class="hidden" id="display-user-sleep-week"></p></div>
         <div class="user-sleep-alltime">All Time:<p class="display-user-sleep-alltime"></p></div>          

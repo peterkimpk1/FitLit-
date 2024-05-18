@@ -48,12 +48,12 @@ function getUserSleepQualityForGivenDay(data, userId, date) {
 }
 
 function getSleepQualityForWeek(data,userId) {
-    let sortedSingleUserData = data.filter(user => user.userID === userId).sort((a,b) => new Date(b.date) - new Date(a.date))
+    let sortedSingleUserData = data.filter(user => user.userID === userId).sort((a,b) => new Date(a.date) - new Date(b.date))
     return sortedSingleUserData.splice(0,7).map(user => user.sleepQuality)
 }
 
 function getSleepHoursForWeek(data,userId) {
-    let sortedSingleUserData = data.filter(user => user.userID === userId).sort((a,b) => new Date(b.date) - new Date(a.date))
+    let sortedSingleUserData = data.filter(user => user.userID === userId).sort((a,b) => new Date(a.date) - new Date(b.date))
     return sortedSingleUserData.splice(0,7).map(user => user.hoursSlept)
 }
 
