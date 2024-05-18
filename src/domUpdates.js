@@ -39,21 +39,82 @@ function fetchUserData() {
     const randomUser = getRandomUser(userList)
     const user = getUserData(userList, randomUser.id)
     updateUserCard(user)
-    updateUserGoal(user)
     const friendsSteps = updatedUserFriends(user, userList)
     updateUserMessage(randomUser);
-    updateAverageSteps(Math.round(friendsSteps))
     const AllHydrationData = e[1].hydrationData;
     updateUserDailyHydration(AllHydrationData,randomUser.id)
     const hydrationWeekWaterData = getConsumedWaterForWeek(AllHydrationData,randomUser.id)
     const hydrationWeekDateData = getConsumedWaterDates(AllHydrationData,randomUser.id)
+    console.log(hydrationWeekDateData)
     const hydrationDayData = getCurrentDayWaterConsumption(AllHydrationData,randomUser.id)
     const allSleepData = e[2].sleepData
     updateDailySleep(allSleepData, user.id)
+    new Chart(document.getElementById('user-step-goal-chart'), {
+      type: 'doughnut',
+      data: {
+        labels: [`Daily Step Goal: ${user.dailyStepGoal}`],
+        datasets: [{
+          label: 'Step Goal',
+          data: [`${user.dailyStepGoal}`,3000],
+          backgroundColor: [
+            'rgba(166,204,112, 0.8)',
+            'rgba(0, 0, 0, 0.2)'
+          ],
+          borderColor: [
+            'rgba(166,204,112, 0.8)',
+            'rgba(0, 0, 0, 0.2)'
+          ]
+        }]
+      },
+      options: {
+        circumference: 180,
+        rotation: 270,
+        aspectRatio: 1.5,
+        cutout: '80%',
+        plugins: {
+          tooltip: {
+            filter: (tooltipItem) => {
+              return tooltipItem.dataIndex === 0;
+            }
+          },
+        }
+      },
+    });
+    new Chart(document.getElementById('user-friends-average-goal-chart'), {
+      type: 'doughnut',
+      data: {
+        labels: [`Average Step Goal: ${friendsSteps}`],
+        datasets: [{
+          label: 'Step Goal',
+          data: [`${Math.round(friendsSteps)}`,3000],
+          backgroundColor: [
+            'rgba(166,204,112, 0.8)',
+            'rgba(0, 0, 0, 0.2)'
+          ],
+          borderColor: [
+            'rgba(166,204,112, 0.8)',
+            'rgba(0, 0, 0, 0.2)'
+          ]
+        }]
+      },
+      options: {
+        circumference: 180,
+        rotation: 270,
+        aspectRatio: 1.5,
+        cutout: '80%',
+        plugins: {
+          tooltip: {
+            filter: (tooltipItem) => {
+              return tooltipItem.dataIndex === 0;
+            }
+          },
+        }
+      },
+    });
     new Chart(document.getElementById('hydrationWeekChart'), {
       type: 'bar',
       data: {
-        labels: hydrationWeekDateData.map(date => `${date.getMonth()}/${date.getDate()}`),
+        labels: hydrationWeekDateData.reverse().map(date => `${date.getMonth()}/${date.getDate()}`),
         datasets: [{
           data: hydrationWeekWaterData.map(ounces => ounces),
           backgroundColor: 'rgba(39, 76, 245, 0.8)'
@@ -86,7 +147,7 @@ function fetchUserData() {
     new Chart(document.getElementById('hydrationDayChart'), {
       type: 'doughnut',
       data: {
-        labels: [`Day: ${hydrationWeekDateData[0].getMonth()}/${hydrationWeekDateData[0].getDate()}, Water Consumption: ${hydrationDayData} fl oz`],
+        labels: [`Day: ${hydrationWeekDateData[6].getMonth()}/${hydrationWeekDateData[6].getDate()}, Water Consumption: ${hydrationDayData} fl oz`],
         datasets: [{
           label: 'Fluid Ounces',
           data: [hydrationDayData, 30],
@@ -115,6 +176,7 @@ function fetchUserData() {
         }
       }     
     });
+    
   })
 }
 
@@ -129,8 +191,6 @@ function updatedUserFriends(user, users) {
     return total;
   },0)
   for (var i = 0; i < user.friends.length; i++) {
-    // friendsWrapper.innerHTML += `<div class="user-friend"> id: ${sortedFriends[i]}
-    // <p class="display-user-friend" id="${i}">${friendsStepGoals[i]}</p></div>`
     friendsWrapper.innerHTML += `<div class=user-friend> <canvas id="friendChart${i}" width="400" height="400"></canvas></div>`;
     let id = "friendChart" + i;
     let index = i;
@@ -146,7 +206,7 @@ function createFriendChart(id, friendIds, friendSteps, i) {
       labels: [`ID: ${friendIds[i]}`],
       datasets: [{
         label: 'Step Goal',
-        data: [`${friendSteps[i]}`,5000],
+        data: [`${friendSteps[i]}`,3000],
         backgroundColor: [
           'rgba(166,204,112, 0.8)',
           'rgba(0, 0, 0, 0.2)'
@@ -158,6 +218,8 @@ function createFriendChart(id, friendIds, friendSteps, i) {
       }]
     },
     options: {
+      circumference: 180,
+      rotation: 270,
       cutout: '80%',
       plugins: {
         legend: {
