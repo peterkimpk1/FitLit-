@@ -149,7 +149,7 @@ function fetchUserData() {
     new Chart(document.getElementById('hydrationDayChart'), {
       type: 'doughnut',
       data: {
-        labels: [`Day: ${hydrationWeekDateData[0].getMonth()}/${hydrationWeekDateData[0].getDate()}, Water Consumption: ${hydrationDayData} fl oz`],
+        labels: [`Day: ${hydrationWeekDateData[6].getMonth()}/${hydrationWeekDateData[6].getDate()}, Water Consumption: ${hydrationDayData} fl oz`],
         datasets: [{
           label: 'Fluid Ounces',
           data: [hydrationDayData, 30],
