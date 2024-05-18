@@ -1,7 +1,7 @@
 import { expect } from 'chai';
 import sleepData from "../src/data/sample-sleep-test-data.js"
 const sampleData = sleepData.sleepData
-const {getUserAverageHoursSlept, getUserAverageSleepQuality, getSleepHoursAndQualityForWeek, getHoursSleptForCurrentDay, getUserSleepQualityForGivenDay, } = require('../src/sleep')
+const {getUserAverageHoursSlept, getUserAverageSleepQuality, getSleepHoursAndQualityForWeek, getHoursSleptForCurrentDay, getUserSleepQualityForGivenDay, getUserSleepQualityForGivenWeek, } = require('../src/sleep')
 
 describe ('getUserAverageHoursSlept', () => {
     it ('should return a user/s average hours slept for all time', () => {
@@ -65,7 +65,7 @@ describe ('getUserSleepQualityForGivenWeek', () => {
         const userId = 3;
         const startOfWeek = '2023/03/24';
         const expectedSleepQuality = [4.7, 9.5, 4.7, 3.4, 1.3, 4.7, 4.9]
-        const givenWeekSleepQuality = getUserSleepQualityForGivenDay(sampleData, userId, startOfWeek)
+        const givenWeekSleepQuality = getUserSleepQualityForGivenWeek(sampleData, userId, startOfWeek)
         expect(givenWeekSleepQuality).to.equal(expectedSleepQuality)
     })
 })
