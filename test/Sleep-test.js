@@ -19,22 +19,6 @@ describe ('getUserAverageSleepQuality', () => {
     })
 })
 
-describe ('getHoursSleptForCurrentDay', () => {
-    it ('should return how many hours a user slept for the current day', () => {
-        const userId = 1;
-        const user1HoursSleptCurrentDay = getHoursSleptForCurrentDay(sampleData, userId)
-        expect(user1HoursSleptCurrentDay).to.equal(4.4)
-    })
-})
-
-describe ('getHoursSleptForCurrentDay', () => {
-    it ('should return how many hours a different user slept for the current day', () => {
-        const userId = 2;
-        const user2HoursSleptCurrentDay = getHoursSleptForCurrentDay(sampleData, userId)
-        expect(user2HoursSleptCurrentDay).to.equal(6.2)
-    })
-})
-
 describe ('getSleepHoursAndQualityForWeek', () => {
     it ('should return a user/s hours slept and sleep quality for a given week starting from the date', () => {
         const userId = 1;
@@ -49,5 +33,20 @@ describe ('getSleepHoursAndQualityForWeek', () => {
             {hoursSlept: 6.5, sleepQuality: 2.4},
             {hoursSlept: 8.2, sleepQuality: 4.2}
           ])
+    })
+})
+describe ('getHoursSleptForCurrentDay', () => {
+    it ('should return how many hours a user slept for the current day', () => {
+        const userId = 1;
+        const user1HoursSleptCurrentDay = getHoursSleptForCurrentDay(sampleData, userId)
+        expect(user1HoursSleptCurrentDay).to.equal(4.4)
+    })
+})
+
+describe ('getHoursSleptForCurrentDay', () => {
+    it ('should return how many hours a different user slept for the current day', () => {
+        const userId = 2;
+        const user2HoursSleptCurrentDay = getHoursSleptForCurrentDay(sampleData, userId)
+        expect(user2HoursSleptCurrentDay).to.equal(6.2)
     })
 })
