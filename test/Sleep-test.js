@@ -59,10 +59,10 @@ describe ('getSleepHoursForWeek', () => {
 })
 describe ('getHoursSleptForCurrentDay', () => {
     it ('should return how many hours a user slept for the current day', () => {
-        const userId = 1;
-        const user1HoursSleptCurrentDay = getHoursSleptForCurrentDay(sampleData, userId)
-        const userId = 2;
-        const user2HoursSleptCurrentDay = getHoursSleptForCurrentDay(sampleData, userId)
+        const userId1 = 1;
+        const userId2 = 2;
+        const user1HoursSleptCurrentDay = getHoursSleptForCurrentDay(sampleData, userId1)
+        const user2HoursSleptCurrentDay = getHoursSleptForCurrentDay(sampleData, userId2)
         expect(user1HoursSleptCurrentDay).to.equal(4.4)
         expect(user2HoursSleptCurrentDay).to.equal(6.2)
     })
