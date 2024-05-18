@@ -1,7 +1,7 @@
 import { expect } from 'chai';
 import sleepData from "../src/data/sample-sleep-test-data.js"
 const sampleData = sleepData.sleepData
-const {getUserAverageHoursSlept, getUserAverageSleepQuality, getSleepHoursAndQualityForAnyWeek, getHoursSleptForCurrentDay, getSleepQualityForWeek, getSleepHoursForWeek} = require('../src/sleep')
+const {getUserAverageHoursSlept, getUserAverageSleepQuality, getSleepHoursAndQualityForAnyWeek, getHoursSleptForCurrentDay, getSleepQualityForWeek, getSleepHoursForWeek, getUserSleepQualityForGivenDay,} = require('../src/sleep')
 
 describe ('getUserAverageHoursSlept', () => {
     it ('should return a user/s average hours slept for all time', () => {
@@ -61,15 +61,19 @@ describe ('getHoursSleptForCurrentDay', () => {
     it ('should return how many hours a user slept for the current day', () => {
         const userId = 1;
         const user1HoursSleptCurrentDay = getHoursSleptForCurrentDay(sampleData, userId)
+        const userId = 2;
+        const user2HoursSleptCurrentDay = getHoursSleptForCurrentDay(sampleData, userId)
         expect(user1HoursSleptCurrentDay).to.equal(4.4)
+        expect(user2HoursSleptCurrentDay).to.equal(6.2)
     })
 })
 
-describe ('getHoursSleptForCurrentDay', () => {
-    it ('should return how many hours a different user slept for the current day', () => {
-        const userId = 2;
-        const user2HoursSleptCurrentDay = getHoursSleptForCurrentDay(sampleData, userId)
-        expect(user2HoursSleptCurrentDay).to.equal(6.2)
+describe ('getUserSleepQualityForGivenDay', () => {
+    it ('should return the quality of sleep for a given day', () => {
+        const userId = 3;
+        const givenDay = '2023/03/27';
+        const givenDaySleepQuality = getUserSleepQualityForGivenDay(sampleData, userId, givenDay)
+        expect(givenDaySleepQuality).to.equal(3.4)
     })
 })
 

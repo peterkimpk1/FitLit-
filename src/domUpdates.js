@@ -5,6 +5,7 @@ import { getRandomUser, getUserData, getAverageStepGoalAllUsers } from '../src/u
 import { getCurrentDayWaterConsumption, getConsumedWaterForWeek, getConsumedWaterDates } from '../src/hydration.js';
 import { getHoursSleptForCurrentDay, getSleepHoursForWeek, getSleepDates } from './sleep.js';
 import Chart from 'chart.js/auto';
+
 const welcomeMessage = document.querySelector('.welcome-message');
 const userStepGoalDisplay = document.getElementById('display-step-goal');
 const averageStepDisplay = document.getElementById('display-average-goal-steps');
@@ -43,10 +44,8 @@ function fetchUserData() {
     const randomUser = getRandomUser(userList)
     const user = getUserData(userList, randomUser.id)
     updateUserCard(user)
-    updateUserGoal(user)
     const friendsSteps = updatedUserFriends(user, userList)
     updateUserMessage(randomUser);
-    updateAverageSteps(Math.round(friendsSteps))
     const AllHydrationData = e[1].hydrationData;
     updateUserDailyHydration(AllHydrationData,randomUser.id)
     const hydrationWeekWaterData = getConsumedWaterForWeek(AllHydrationData,randomUser.id)
@@ -54,15 +53,12 @@ function fetchUserData() {
     const hydrationDayData = getCurrentDayWaterConsumption(AllHydrationData,randomUser.id)
     const allSleepData = e[2].sleepData
     const sleepWeekDateData = getSleepDates(allSleepData,randomUser.id)
-    console.log("sleepWeekDateData:", sleepWeekDateData)
     const sleepHoursWeekData = getSleepHoursForWeek(allSleepData,randomUser.id)
     const sleepHoursWeekDataConverted = sleepHoursWeekData.map (data => {
       return new Date(data)
     }) 
-    console.log(sleepHoursWeekDataConverted)
     updateDailySleep(allSleepData, randomUser.id)
     updateWeeklySleepData(allSleepData, randomUser.id)
-    
     new Chart(document.getElementById('sleepHoursWeekChart'), {
       type: 'bar',
       data: {
@@ -96,11 +92,72 @@ function fetchUserData() {
         }
       }
     });
-
+    new Chart(document.getElementById('user-step-goal-chart'), {
+      type: 'doughnut',
+      data: {
+        labels: [`Daily Step Goal: ${user.dailyStepGoal}`],
+        datasets: [{
+          label: 'Step Goal',
+          data: [`${user.dailyStepGoal}`,3000],
+          backgroundColor: [
+            'rgba(166,204,112, 0.8)',
+            'rgba(0, 0, 0, 0.2)'
+          ],
+          borderColor: [
+            'rgba(166,204,112, 0.8)',
+            'rgba(0, 0, 0, 0.2)'
+          ]
+        }]
+      },
+      options: {
+        circumference: 180,
+        rotation: 270,
+        aspectRatio: 1.5,
+        cutout: '80%',
+        plugins: {
+          tooltip: {
+            filter: (tooltipItem) => {
+              return tooltipItem.dataIndex === 0;
+            }
+          },
+        }
+      },
+    });
+    new Chart(document.getElementById('user-friends-average-goal-chart'), {
+      type: 'doughnut',
+      data: {
+        labels: [`Average Step Goal: ${friendsSteps}`],
+        datasets: [{
+          label: 'Step Goal',
+          data: [`${Math.round(friendsSteps)}`,3000],
+          backgroundColor: [
+            'rgba(166,204,112, 0.8)',
+            'rgba(0, 0, 0, 0.2)'
+          ],
+          borderColor: [
+            'rgba(166,204,112, 0.8)',
+            'rgba(0, 0, 0, 0.2)'
+          ]
+        }]
+      },
+      options: {
+        circumference: 180,
+        rotation: 270,
+        aspectRatio: 1.5,
+        cutout: '80%',
+        plugins: {
+          tooltip: {
+            filter: (tooltipItem) => {
+              return tooltipItem.dataIndex === 0;
+            }
+          },
+        }
+      },
+    });
     new Chart(document.getElementById('hydrationWeekChart'), {
       type: 'bar',
       data: {
-        labels: hydrationWeekDateData.map(date => `${date.getMonth()}/${date.getDate()}`),
+        labels: hydrationWeekDateData.reverse().map(date => `${date.getMonth()}/${date.getDate()}`),
         datasets: [{
           data: hydrationWeekWaterData.map(ounces => ounces),
           backgroundColor: 'rgba(39, 76, 245, 0.8)'
@@ -133,7 +190,7 @@ function fetchUserData() {
     new Chart(document.getElementById('hydrationDayChart'), {
       type: 'doughnut',
       data: {
-        labels: [`Day: ${hydrationWeekDateData[0].getMonth()}/${hydrationWeekDateData[0].getDate()}, Water Consumption: ${hydrationDayData} fl oz`],
+        labels: [`Day: ${hydrationWeekDateData[6].getMonth()}/${hydrationWeekDateData[6].getDate()}, Water Consumption: ${hydrationDayData} fl oz`],
         datasets: [{
           label: 'Fluid Ounces',
           data: [hydrationDayData, 30],
@@ -162,6 +219,7 @@ function fetchUserData() {
         }
       }     
     });
+    
   })
 }
 
@@ -176,10 +234,49 @@ function updatedUserFriends(user, users) {
     return total;
   },0)
   for (var i = 0; i < user.friends.length; i++) {
-    friendsWrapper.innerHTML += `<div class="user-friend"> id: ${sortedFriends[i]}
-    <p class="display-user-friend" id="${i}">${friendsStepGoals[i]}</p></div>`
+    friendsWrapper.innerHTML += `<div class=user-friend> <canvas id="friendChart${i}" width="400" height="400"></canvas></div>`;
+    let id = "friendChart" + i;
+    let index = i;
+    setTimeout(() => {createFriendChart(id, sortedFriends,friendsStepGoals, index);}, 100)
   }
   return friendsTotal / friendsStepGoals.length;
+}
+
+function createFriendChart(id, friendIds, friendSteps, i) {
+  new Chart(document.getElementById(id), {
+    type: 'doughnut',
+    data: {
+      labels: [`ID: ${friendIds[i]}`],
+      datasets: [{
+        label: 'Step Goal',
+        data: [`${friendSteps[i]}`,3000],
+        backgroundColor: [
+          'rgba(166,204,112, 0.8)',
+          'rgba(0, 0, 0, 0.2)'
+        ],
+        borderColor: [
+          'rgba(166,204,112, 0.8)',
+          'rgba(0, 0, 0, 0.2)'
+        ]
+      }]
+    },
+    options: {
+      circumference: 180,
+      rotation: 270,
+      cutout: '80%',
+      plugins: {
+        legend: {
+          display: true,
+        },
+        tooltip: {
+          filter: (tooltipItem) => {
+            return tooltipItem.dataIndex === 0;
+          }
+        },
+      }
+    },
+  })
+
 }
 
 function updateUserCard(user) {
