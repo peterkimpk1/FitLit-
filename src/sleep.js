@@ -50,8 +50,6 @@ function getUserSleepQualityForGivenDay(data, userId, date) {
     console.log(givenDay.sleepQuality)
     return givenDay.sleepQuality
 }
-
-function getUserSleepQualityForGivenWeek(data, userId, startingDate) {}
     
     export {
     getUserAverageHoursSlept,
@@ -59,5 +57,4 @@ function getUserSleepQualityForGivenWeek(data, userId, startingDate) {}
     getHoursSleptForCurrentDay,
     getSleepHoursAndQualityForWeek,
     getUserSleepQualityForGivenDay,
-    getUserSleepQualityForGivenWeek,
 }
