@@ -21,7 +21,11 @@ function getUserAverageSleepQuality(data, userId) {
 }
 
 function getUserSleepQualityForGivenDay(data, userId, date) {
-    const sleepQuality = data.find( sleepQuality => {})
+    const givenDay = data.find( userData => {
+        return userData.userID === userId && userData.date === date
+    })
+    console.log(givenDay.sleepQuality)
+    return givenDay.sleepQuality
 }
 
 
@@ -51,6 +55,7 @@ function getSleepHoursAndQualityForWeek(data, userId, startingDate) {
 export {
     getUserAverageHoursSlept,
     getUserAverageSleepQuality,
-    getSleepHoursAndQualityForWeek,
+    getUserSleepQualityForGivenDay,
     getHoursSleptForCurrentDay,
+    getSleepHoursAndQualityForWeek,
 }

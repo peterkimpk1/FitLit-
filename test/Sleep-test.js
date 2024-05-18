@@ -53,9 +53,9 @@ describe ('getHoursSleptForCurrentDay', () => {
 
 describe ('getUserSleepQualityForGivenDay', () => {
     it ('should return the quality of sleep for a given day', () => {
-        const userId = 2;
-        const givenDay = 0;
+        const userId = 3;
+        const givenDay = '2023/03/27';
         const givenDaySleepQuality = getUserSleepQualityForGivenDay(sampleData, userId, givenDay)
-        expect(givenDaySleepQuality).to.equal()
+        expect(givenDaySleepQuality).to.equal(3.4)
     })
 })
