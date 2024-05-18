@@ -39,10 +39,8 @@ function fetchUserData() {
     const randomUser = getRandomUser(userList)
     const user = getUserData(userList, randomUser.id)
     updateUserCard(user)
-    // updateUserGoal(user)
     const friendsSteps = updatedUserFriends(user, userList)
     updateUserMessage(randomUser);
-    // updateAverageSteps(Math.round(friendsSteps))
     const AllHydrationData = e[1].hydrationData;
     updateUserDailyHydration(AllHydrationData,randomUser.id)
     const hydrationWeekWaterData = getConsumedWaterForWeek(AllHydrationData,randomUser.id)
