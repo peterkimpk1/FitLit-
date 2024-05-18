@@ -20,6 +20,10 @@ function getUserAverageSleepQuality(data, userId) {
     return Math.round(totalSleepQuality / dayCount)
 }
 
+function getUserSleepQualityForAnyDay(data, userId) {
+    const sleepQuality = 
+}
+
 
 function getHoursSleptForCurrentDay(data, userId) {
     const sleepDataForSpecificUser = data.filter(userData => {
