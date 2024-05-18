@@ -18,15 +18,16 @@
       </section>
       <h4 class="display-activities-dashboard"><div>Activities Dashboard</div></h4>
       <section class="activities-dashboard-wrapper">
-        <section class="activities-dashboard">
+        <!-- <section class="activities-dashboard">
           <div class="flights-of-stairs">flights of stairs:<p class="display-flights-of-stairs"></p></div>
           <div class="minutes-active">Minutes active:<p class="display-minutes-active"></p></div>
           <div class="number-of-steps">Number of stairs:<p class="display-number-of-steps"></p></div>    
-        </section>
+        </section> -->
         <section class="steps-wrapper">
-
-          <div class="user-step-goal">Step Goal:<p id="display-step-goal">steps</p></div>
-          <div class="average-goal-steps">Average step goal:<p id="display-average-goal-steps"></p></div>      
+          <div class="user-step-goal"><canvas id="user-step-goal-chart" width="400" height="400"></canvas></div>
+          <div class="average-goal-steps"><canvas id="user-friends-average-goal-chart" width="400" height="400"></canvas></div>   
+          <p class="hidden" id="display-step-goal">steps</p>   
+          <p class="hidden" id="display-average-goal-steps"></p>
         </section>
       </section>
       <h4 class="display-hydration-dashboard"><div>Hydration Dashboard</div></h4>
