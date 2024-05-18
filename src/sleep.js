@@ -20,6 +20,7 @@ function getUserAverageSleepQuality(data, userId) {
     return Math.round(totalSleepQuality / dayCount)
 }
 
+
 function getHoursSleptForCurrentDay(data, userId) {
     const sleepDataForSpecificUser = data.filter(userData => {
         return userData.userID === userId    
@@ -34,6 +35,7 @@ function getHoursSleptForCurrentDay(data, userId) {
 }
 
 //Return how many hours a user slept each day over the course of a given week
+
 function getSleepHoursAndQualityForWeek(data, userId, startingDate){
     let singleUserData = data.filter(user => user.userID === userId)
     let startDateIndex = singleUserData.findIndex(user => user.userID === userId && user.date === startingDate)
