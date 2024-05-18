@@ -46,5 +46,5 @@ export {
     getUserAverageHoursSlept,
     getUserAverageSleepQuality,
     getSleepHoursAndQualityForWeek,
-    getHoursSleptForCurrentDay
+    getHoursSleptForCurrentDay,
 }
