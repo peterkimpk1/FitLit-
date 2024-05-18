@@ -1,7 +1,7 @@
 import { expect } from 'chai';
 import sleepData from "../src/data/sample-sleep-test-data.js"
 const sampleData = sleepData.sleepData
-const {getUserAverageHoursSlept, getUserAverageSleepQuality, getSleepHoursAndQualityForWeek, getHoursSleptForCurrentDay} = require('../src/sleep')
+const {getUserAverageHoursSlept, getUserAverageSleepQuality, getSleepHoursAndQualityForAnyWeek, getHoursSleptForCurrentDay, getSleepQualityForWeek, getSleepHoursForWeek} = require('../src/sleep')
 
 describe ('getUserAverageHoursSlept', () => {
     it ('should return a user/s average hours slept for all time', () => {
@@ -23,7 +23,7 @@ describe ('getSleepHoursAndQualityForWeek', () => {
     it ('should return a user/s hours slept and sleep quality for a given week starting from the date', () => {
         const userId = 1;
         const date = '2023/03/25'
-        const e = getSleepHoursAndQualityForWeek(sampleData, userId, date)
+        const e = getSleepHoursAndQualityForAnyWeek(sampleData, userId, date)
         expect(e).to.deep.equal([
             {hoursSlept: 6.3, sleepQuality: 3.3},
             {hoursSlept: 8.5, sleepQuality: 3.6},
@@ -33,6 +33,28 @@ describe ('getSleepHoursAndQualityForWeek', () => {
             {hoursSlept: 6.5, sleepQuality: 2.4},
             {hoursSlept: 8.2, sleepQuality: 4.2}
           ])
+    })
+})
+
+describe ('getSleepQualityForWeek', () => {
+    it ('should return a user/s latest week/s sleep quality from the available data', () => {
+        const userId2 = 2;
+        const userId3 = 3;
+        const user2 = getSleepQualityForWeek(sampleData, userId2);
+        const user3 = getSleepQualityForWeek(sampleData, userId3);
+        expect(user2).to.deep.equal([4.4, 3.9, 1.7, 1.6, 3.5, 2.6, 4.7])
+        expect(user3).to.deep.equal([3.1, 1.8, 4.9, 4.7, 1.3, 3.4, 4.7])
+    })
+})
+
+describe ('getSleepHoursForWeek', () => {
+    it ('should return a user/s latest week/s hours slept from the availble data', () => {
+        const userId1 = 1;
+        const userId3 = 3;
+        const user1 = getSleepHoursForWeek(sampleData, userId1);
+        const user3 = getSleepHoursForWeek(sampleData, userId3);
+        expect(user1).to.deep.equal([4.4, 8.2, 6.5, 10.5, 5.5, 4.3, 8.5])
+        expect(user3).to.deep.equal([9.2, 10.8, 7.5, 7.4, 4.3, 9.9, 10.9])
     })
 })
 describe ('getHoursSleptForCurrentDay', () => {
