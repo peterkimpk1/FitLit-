@@ -298,7 +298,7 @@ const updateDailySleep = (user, userId) => {
   const latestDate = getSleepDates(user, userId).map(date => new Date(date))[0]
   sleepDay.innerHTML = `Day:${latestDate.getMonth()}/${latestDate.getDate()}<p id="display-user-day"></p>
   <div class="hours-slept">Hours Slept: ${getHoursSleptForCurrentDay(user, userId)}<p id="display-user-sleep-day"></p></div>
-  <div class="quality-ofl-sleep">Quality Slept: ${getSleepQualityForWeek(user, userId)[0]}/5<p id="display-user-sleep-quality"></p></div>
+  <div class="quality-of-sleep">Quality Slept: ${getSleepQualityForWeek(user, userId)[0]}/5<p id="display-user-sleep-quality"></p></div>
 </div>`
 }
 
