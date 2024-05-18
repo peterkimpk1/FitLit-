@@ -55,7 +55,6 @@ function getSleepDates(data,userId) {
     return sortedSingleUserData.splice(0,7).map(user => user.date)
 }
 
-
 export {
     getUserAverageHoursSlept,
     getUserAverageSleepQuality,
