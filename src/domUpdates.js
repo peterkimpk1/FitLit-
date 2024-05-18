@@ -3,7 +3,7 @@ import { fetchHydration } from './fetchData/hydrationData.js'
 import { fetchSleep } from './fetchData/sleepData.js'
 import { getRandomUser, getUserData, getAverageStepGoalAllUsers } from '../src/userFunctions.js'
 import { getCurrentDayWaterConsumption, getConsumedWaterForWeek, getConsumedWaterDates } from '../src/hydration.js';
-import { getHoursSleptForCurrentDay } from './sleep.js';
+import { getHoursSleptForCurrentDay, getSleepHoursForWeek, getSleepDates } from './sleep.js';
 import Chart from 'chart.js/auto';
 
 const welcomeMessage = document.querySelector('.welcome-message');
@@ -15,6 +15,7 @@ const userDailyHydration = document.getElementById('display-user-hydration-day')
 const friendsWrapper = document.querySelector('.friends-wrapper');
 const userInfo = document.querySelector('.user-info');
 const userSleepDay = document.getElementById('display-user-sleep-day');
+const userWeeklySleepHours = document.getElementById('display-user-sleep-week');
 
 
 window.addEventListener('load', () => {
@@ -33,6 +34,10 @@ const updateUserDailyHydration = (data,userId) => {
   userDailyHydration.innerText = `${getCurrentDayWaterConsumption(data,userId)} ounces 🥤`
 }
 
+const updateWeeklySleepData = (data,userId) => {
+  userWeeklySleepHours.innerText = `${getSleepHoursForWeek(data,userId)}`
+}
+
 function fetchUserData() {
   Promise.all([fetchUser(), fetchHydration(), fetchSleep()]).then(e => {
     const userList = e[0].users
@@ -45,10 +50,48 @@ function fetchUserData() {
     updateUserDailyHydration(AllHydrationData,randomUser.id)
     const hydrationWeekWaterData = getConsumedWaterForWeek(AllHydrationData,randomUser.id)
     const hydrationWeekDateData = getConsumedWaterDates(AllHydrationData,randomUser.id)
-    console.log(hydrationWeekDateData)
     const hydrationDayData = getCurrentDayWaterConsumption(AllHydrationData,randomUser.id)
     const allSleepData = e[2].sleepData
-    updateDailySleep(allSleepData, user.id)
+    const sleepWeekDateData = getSleepDates(allSleepData,randomUser.id)
+    const sleepHoursWeekData = getSleepHoursForWeek(allSleepData,randomUser.id)
+    const sleepHoursWeekDataConverted = sleepHoursWeekData.map (data => {
+      return new Date(data)
+    }) 
+    updateDailySleep(allSleepData, randomUser.id)
+    updateWeeklySleepData(allSleepData, randomUser.id)
+    new Chart(document.getElementById('sleepHoursWeekChart'), {
+      type: 'bar',
+      data: {
+        labels: sleepHoursWeekDataConverted.map(date => `${date.getMonth()}/${date.getDate()}`),
+        datasets: [{
+          data: sleepHoursWeekData.map(hours => hours),
+          backgroundColor: 'rgba(39, 76, 245, 0.8)'
+        }]
+      },
+      options: {
+        plugins: {
+          legend: {
+            display: false
+          }
+        },
+        scales: {
+          y: {
+            display: true,
+            title: {
+              display: true,
+              text: 'Hours Slept'
+            }
+          },
+          x: {
+            display: true,
+            title: {
+              display: true,
+              text: `Week: ${sleepHoursWeekDataConverted[0].getMonth()}/${sleepHoursWeekDataConverted[0].getDate()} - ${sleepHoursWeekDataConverted[6].getMonth()}/${sleepHoursWeekDataConverted[6].getDate()}`
+            }
+          },
+        }
+      }
+    });
     new Chart(document.getElementById('user-step-goal-chart'), {
       type: 'doughnut',
       data: {
