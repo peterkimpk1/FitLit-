@@ -5,6 +5,7 @@ import { getRandomUser, getUserData, getAverageStepGoalAllUsers } from '../src/u
 import { getCurrentDayWaterConsumption, getConsumedWaterForWeek, getConsumedWaterDates } from '../src/hydration.js';
 import { getHoursSleptForCurrentDay } from './sleep.js';
 import Chart from 'chart.js/auto';
+
 const welcomeMessage = document.querySelector('.welcome-message');
 const userStepGoalDisplay = document.getElementById('display-step-goal');
 const averageStepDisplay = document.getElementById('display-average-goal-steps');
@@ -128,10 +129,49 @@ function updatedUserFriends(user, users) {
     return total;
   },0)
   for (var i = 0; i < user.friends.length; i++) {
-    friendsWrapper.innerHTML += `<div class="user-friend"> id: ${sortedFriends[i]}
-    <p class="display-user-friend" id="${i}">${friendsStepGoals[i]}</p></div>`
+    // friendsWrapper.innerHTML += `<div class="user-friend"> id: ${sortedFriends[i]}
+    // <p class="display-user-friend" id="${i}">${friendsStepGoals[i]}</p></div>`
+    friendsWrapper.innerHTML += `<div class=user-friend> <canvas id="friendChart${i}" width="400" height="400"></canvas></div>`;
+    let id = "friendChart" + i;
+    let index = i;
+    setTimeout(() => {createFriendChart(id, sortedFriends,friendsStepGoals, index);}, 100)
   }
   return friendsTotal / friendsStepGoals.length;
+}
+
+function createFriendChart(id, friendIds, friendSteps, i) {
+  new Chart(document.getElementById(id), {
+    type: 'doughnut',
+    data: {
+      labels: [`ID: ${friendIds[i]}`],
+      datasets: [{
+        label: 'Step Goal',
+        data: [`${friendSteps[i]}`,5000],
+        backgroundColor: [
+          'rgba(166,204,112, 0.8)',
+          'rgba(0, 0, 0, 0.2)'
+        ],
+        borderColor: [
+          'rgba(166,204,112, 0.8)',
+          'rgba(0, 0, 0, 0.2)'
+        ]
+      }]
+    },
+    options: {
+      cutout: '80%',
+      plugins: {
+        legend: {
+          display: true,
+        },
+        tooltip: {
+          filter: (tooltipItem) => {
+            return tooltipItem.dataIndex === 0;
+          }
+        },
+      }
+    },
+  })
+
 }
 
 function updateUserCard(user) {
