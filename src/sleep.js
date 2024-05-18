@@ -34,19 +34,29 @@ function getHoursSleptForCurrentDay(data, userId) {
     return sortedSleepDataForSpecificUser[0].hoursSlept
 }
 
-//Return how many hours a user slept each day over the course of a given week
 
-function getSleepHoursAndQualityForWeek(data, userId, startingDate){
+function getSleepHoursAndQualityForAnyWeek(data, userId, startingDate){
     let singleUserData = data.filter(user => user.userID === userId)
     let startDateIndex = singleUserData.findIndex(user => user.userID === userId && user.date === startingDate)
     return singleUserData.splice(startDateIndex,startDateIndex + 6).map(user => ({
         hoursSlept: user.hoursSlept, sleepQuality: user.sleepQuality}))
 }
 
+function getSleepQualityForWeek(data,userId) {
+    let sortedSingleUserData = data.filter(user => user.userID === userId).sort((a,b) => new Date(b.date) - new Date(a.date))
+    return sortedSingleUserData.splice(0,7).map(user => user.sleepQuality)
+}
+
+function getSleepHoursForWeek(data,userId) {
+    let sortedSingleUserData = data.filter(user => user.userID === userId).sort((a,b) => new Date(b.date) - new Date(a.date))
+    return sortedSingleUserData.splice(0,7).map(user => user.hoursSlept)
+}
 
 export {
     getUserAverageHoursSlept,
     getUserAverageSleepQuality,
-    getSleepHoursAndQualityForWeek,
+    getSleepHoursAndQualityForAnyWeek,
     getHoursSleptForCurrentDay,
+    getSleepHoursForWeek,
+    getSleepQualityForWeek
 }
