@@ -51,20 +51,22 @@ function fetchUserData() {
     updateUserDailyHydration(AllHydrationData,randomUser.id)
     const hydrationWeekWaterData = getConsumedWaterForWeek(AllHydrationData,randomUser.id)
     const hydrationWeekDateData = getConsumedWaterDates(AllHydrationData,randomUser.id)
-    console.log("hydrationWeekDateData:", hydrationWeekDateData)
     const hydrationDayData = getCurrentDayWaterConsumption(AllHydrationData,randomUser.id)
     const allSleepData = e[2].sleepData
-    const sleepHoursWeekData = getSleepHoursForWeek(allSleepData,randomUser.id)
-    console.log("sleepHoursWeekData:", sleepHoursWeekData)
     const sleepWeekDateData = getSleepDates(allSleepData,randomUser.id)
     console.log("sleepWeekDateData:", sleepWeekDateData)
+    const sleepHoursWeekData = getSleepHoursForWeek(allSleepData,randomUser.id)
+    const sleepHoursWeekDataConverted = sleepHoursWeekData.map (data => {
+      return new Date(data)
+    }) 
+    console.log(sleepHoursWeekDataConverted)
     updateDailySleep(allSleepData, randomUser.id)
     updateWeeklySleepData(allSleepData, randomUser.id)
     
     new Chart(document.getElementById('sleepHoursWeekChart'), {
       type: 'bar',
       data: {
-        labels: hydrationWeekDateData.map(date => `${date.getMonth()}/${date.getDate()}`),
+        labels: sleepHoursWeekDataConverted.map(date => `${date.getMonth()}/${date.getDate()}`),
         datasets: [{
           data: sleepHoursWeekData.map(hours => hours),
           backgroundColor: 'rgba(39, 76, 245, 0.8)'
@@ -88,7 +90,7 @@ function fetchUserData() {
             display: true,
             title: {
               display: true,
-              text: `Week: ${hydrationWeekDateData[0].getMonth()}/${hydrationWeekDateData[0].getDate()} - ${hydrationWeekDateData[6].getMonth()}/${hydrationWeekDateData[6].getDate()}`
+              text: `Week: ${sleepHoursWeekDataConverted[0].getMonth()}/${sleepHoursWeekDataConverted[0].getDate()} - ${sleepHoursWeekDataConverted[6].getMonth()}/${sleepHoursWeekDataConverted[6].getDate()}`
             }
           },
         }
