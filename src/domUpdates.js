@@ -3,7 +3,7 @@ import { fetchHydration } from './fetchData/hydrationData.js'
 import { fetchSleep } from './fetchData/sleepData.js'
 import { getRandomUser, getUserData, getAverageStepGoalAllUsers } from '../src/userFunctions.js'
 import { getCurrentDayWaterConsumption, getConsumedWaterForWeek, getConsumedWaterDates } from '../src/hydration.js';
-import { getHoursSleptForCurrentDay, getSleepHoursForWeek, getSleepDates, getSleepQualityForWeek } from './sleep.js';
+import { getHoursSleptForCurrentDay, getSleepHoursForWeek, getSleepDates, getSleepQualityForWeek, getUserAverageHoursSlept, getUserAverageSleepQuality } from './sleep.js';
 import Chart from 'chart.js/auto';
 
 const welcomeMessage = document.querySelector('.welcome-message');
@@ -16,6 +16,7 @@ const friendsWrapper = document.querySelector('.friends-wrapper');
 const userInfo = document.querySelector('.user-info');
 const userWeeklySleepHours = document.getElementById('display-user-sleep-week');
 const sleepDay = document.querySelector('.user-sleep-day');
+const allTimeSleep = document.querySelector('.user-sleep-alltime');
 
 
 window.addEventListener('load', () => {
@@ -58,6 +59,9 @@ function fetchUserData() {
     updateDailySleep(allSleepData, randomUser.id)
     updateWeeklySleepData(allSleepData, randomUser.id)
     getSleepQualityForWeek(allSleepData, randomUser.id)
+    getUserAverageHoursSlept(allSleepData, randomUser.id)
+    getUserAverageSleepQuality(allSleepData, randomUser.id)
+    updateAllTimeSleep(allSleepData, randomUser.id)
     getSleepDates(allSleepData, randomUser.id)
     new Chart(document.getElementById('sleepHoursWeekChart'), {
       type: 'bar',
@@ -302,11 +306,20 @@ const updateDailySleep = (user, userId) => {
 </div>`
 }
 
+const updateAllTimeSleep = (user, userId) => {
+  const recentDate = getSleepDates(user, userId).map(date => new Date(date))[0]
+  allTimeSleep.innerHTML = `All Time: ${recentDate.getMonth()}/${recentDate.getDate()}<p class="users-sleep-alltime"></p>
+  <div class="hours-slept-alltime">Hours Slept: ${getUserAverageHoursSlept(user, userId)} <p id="sleep-day-hours-alltime"></p></div>
+  <div class="quality-of-sleep-alltime">Quality Slept: ${getUserAverageSleepQuality(user, userId)}/5 <p id="sleep-quality-alltime"></p></div>
+</div>`
+}
+
 export {
   updateUserGoal,
   updateAverageSteps,
   updateUserMessage,
   // updateUserDailyHydration, 
-  updateDailySleep
+  updateDailySleep,
+  updateAllTimeSleep
 };
 
