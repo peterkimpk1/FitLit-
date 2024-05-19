@@ -1,4 +1,5 @@
-body, html {
+body, 
+html {
   background: lightcyan;
   background-repeat: no-repeat;
   height: 100%;
@@ -100,22 +101,13 @@ header {
   margin-left: 8px;
 }
 
-.user-sleep-day, .user-sleep-week{
+.user-sleep-day, 
+.user-sleep-week, 
+.user-sleep-alltime {
   border: solid 3pt black;
   border-radius: 12px;
   text-align: center;
   width: 30rem;
-  line-height: 2.5;
-  margin: .5rem;
-  height: 15rem;
-}
-
-.user-sleep-alltime
-{
-  border: solid 3pt black;
-  border-radius: 12px;
-  text-align: center;
-  width: 27rem;
   line-height: 2.5;
   margin: .5rem;
   height: 15rem;
@@ -134,14 +126,6 @@ header {
   height: 12rem;
 }
 
-/* .flights-of-stairs {
-  background-color: coral;
-} */
-
-/* .minutes-active {
-  background-color: aqua;
-} */
-
 .user-hydration-day,
 .user-hydration-week {
   background-color: paleturquoise;
@@ -151,16 +135,14 @@ header {
   background-color: lightgreen;
 }
 
-.user-step-goal, .average-goal-steps{
+.user-step-goal, 
+.average-goal-steps{
   background-color: lightpink;
 }
 
-.user-sleep-alltime {
-  background-color: lightgoldenrodyellow;
-}
-
 .user-sleep-day,
-.user-sleep-week {
+.user-sleep-week,
+.user-sleep-alltime {
   background-color: rgb(241, 231, 254)
 }
 
@@ -204,17 +186,16 @@ p {
   margin: 0;
 }
 
-.hidden {
-  display: none;
-}
-
-#user-step-goal-chart, #user-friends-average-goal-chart, #sleepHoursWeekChart{
+#user-step-goal-chart, 
+#user-friends-average-goal-chart, 
+#sleepHoursWeekChart {
   display: block;
   margin: auto;
   padding: 0;
 }
 
-.user-sleep-day {
+.user-sleep-day, 
+.user-sleep-alltime {
   display: flex;
   justify-content: space-evenly;
 }
@@ -225,6 +206,8 @@ p {
   margin: 0 0 0 5;
 }
 
-strong,.user-id-address-email, .user-stride-length {
+strong,
+.user-id-address-email, 
+.user-stride-length {
   font-size: 30px;
 }
