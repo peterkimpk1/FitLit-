@@ -126,19 +126,44 @@ function fetchUserData() {
         }
       }     
     });
-    new Chart(document.getElementById('sleepHoursWeekChart'), {
+    new Chart(document.getElementById('sleepHoursandQualityWeekChart'), {
       type: 'bar',
       data: {
         labels: sleepHoursWeekDataConverted.map(date => `${date.getMonth() + 1}/${date.getDate()}`),
         datasets: [{
           data: sleepHoursWeekData.map(hours => hours),
           backgroundColor: 'rgba(213, 184, 255)'
-        }]
+        },
+        {
+          data: sleepQualityWeekData.map(quality => quality),
+          backgroundColor: 'rgb(147,112,219)', 
+        }
+      ]
       },
       options: {
         plugins: {
           legend: {
             display: false
+          },
+          tooltip: {
+            callbacks: {
+              label: function(context) {
+                  const datasetIndex = context.datasetIndex;
+                  let label = '';
+                if (datasetIndex === 0 && !label) {
+                  label = context.dataset.label || 'Hours Slept';
+                } else if (datasetIndex === 1 && !label) {
+                  label = context.dataset.label || 'Sleep Quality';
+                }
+                if (label) {
+                  label += ': ';
+                }
+                if (context.parsed.y!== null) {
+                  label += context.parsed.y;
+                }
+                return label;
+              }
+            }
           }
         },
         scales: {
@@ -146,7 +171,7 @@ function fetchUserData() {
             display: true,
             title: {
               display: true,
-              text: 'Hours Slept'
+              text: 'Hours Slept and Sleep Quality'
             }
           },
           x: {
