@@ -135,7 +135,7 @@ function fetchUserData() {
           backgroundColor: 'rgba(213, 184, 255)'
         },
         {
-          data: sleepHoursWeekData.map(hours => hours),
+          data: sleepQualityWeekData.map(quality => quality),
           backgroundColor: 'rgb(147,112,219)', 
         }
       ]
@@ -151,7 +151,7 @@ function fetchUserData() {
             display: true,
             title: {
               display: true,
-              text: 'Hours Slept'
+              text: 'Hours Slept and Sleep Quality'
             }
           },
           x: {
