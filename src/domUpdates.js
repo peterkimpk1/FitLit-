@@ -126,14 +126,19 @@ function fetchUserData() {
         }
       }     
     });
-    new Chart(document.getElementById('sleepHoursWeekChart'), {
+    new Chart(document.getElementById('sleepHoursandQualityWeekChart'), {
       type: 'bar',
       data: {
         labels: sleepHoursWeekDataConverted.map(date => `${date.getMonth() + 1}/${date.getDate()}`),
         datasets: [{
           data: sleepHoursWeekData.map(hours => hours),
           backgroundColor: 'rgba(213, 184, 255)'
-        }]
+        },
+        {
+          data: sleepHoursWeekData.map(hours => hours),
+          backgroundColor: 'rgb(147,112,219)', 
+        }
+      ]
       },
       options: {
         plugins: {
