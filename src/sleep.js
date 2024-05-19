@@ -6,7 +6,7 @@ function getUserAverageHoursSlept(data, userId) {
         return total;
     },0)
     const dayCount = data.filter(sleep => sleep.userID === userId).length
-    return Math.round(totalHours / dayCount)
+    return (totalHours / dayCount).toFixed(2)
 }
 
 function getUserAverageSleepQuality(data, userId) {
@@ -17,7 +17,7 @@ function getUserAverageSleepQuality(data, userId) {
         return total;
     },0)
     const dayCount = data.filter(sleep => sleep.userID === userId).length
-    return Math.round(totalSleepQuality / dayCount)
+    return (totalSleepQuality / dayCount).toFixed(2)
 }
 
 function getHoursSleptForCurrentDay(data, userId) {
@@ -48,18 +48,22 @@ function getUserSleepQualityForGivenDay(data, userId, date) {
 }
 
 function getSleepQualityForWeek(data,userId) {
-    let sortedSingleUserData = data.filter(user => user.userID === userId).sort((a,b) => new Date(a.date) - new Date(b.date))
+    let sortedSingleUserData = data.filter(user => user.userID === userId).sort((a,b) => new Date(b.date) - new Date(a.date))
     return sortedSingleUserData.splice(0,7).map(user => user.sleepQuality)
 }
 
 function getSleepHoursForWeek(data,userId) {
-    let sortedSingleUserData = data.filter(user => user.userID === userId).sort((a,b) => new Date(a.date) - new Date(b.date))
+    let sortedSingleUserData = data.filter(user => user.userID === userId).sort((a,b) => new Date(b.date) - new Date(a.date))
     return sortedSingleUserData.splice(0,7).map(user => user.hoursSlept)
 }
 
 function getSleepDates(data,userId) {
     let sortedSingleUserData = data.filter(user => user.userID === userId).sort((a,b) => new Date(b.date) - new Date(a.date))
     return sortedSingleUserData.splice(0,7).map(user => user.date)
+}
+
+function getSleepDatesForAllTime(data, userId) {
+    return data.filter(user => user.userID === userId).sort((a,b) => new Date(b.date) - new Date(a.date)).map(user => ({month: user.date.getMonth() + 1, date: user.date.getDate()}))
 }
 
 export {
@@ -71,4 +75,5 @@ export {
     getSleepQualityForWeek,
     getSleepDates,
     getUserSleepQualityForGivenDay,
+    getSleepDatesForAllTime
 }

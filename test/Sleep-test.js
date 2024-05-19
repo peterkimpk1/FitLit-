@@ -1,13 +1,13 @@
 import { expect } from 'chai';
 import sleepData from "../src/data/sample-sleep-test-data.js"
 const sampleData = sleepData.sleepData
-const {getUserAverageHoursSlept, getUserAverageSleepQuality, getSleepHoursAndQualityForAnyWeek, getHoursSleptForCurrentDay, getSleepQualityForWeek, getSleepHoursForWeek, getUserSleepQualityForGivenDay,} = require('../src/sleep')
+const {getUserAverageHoursSlept, getUserAverageSleepQuality, getSleepHoursAndQualityForAnyWeek, getHoursSleptForCurrentDay, getSleepQualityForWeek, getSleepHoursForWeek, getUserSleepQualityForGivenDay, getSleepDatesForAllTime} = require('../src/sleep')
 
 describe ('getUserAverageHoursSlept', () => {
     it ('should return a user/s average hours slept for all time', () => {
         const userId = 1;
         const e = getUserAverageHoursSlept(sampleData,userId);
-        expect(e).to.equal(7)
+        expect(e).to.equal('7.09')
     })
 })
 
@@ -15,7 +15,7 @@ describe ('getUserAverageSleepQuality', () => {
     it ('should return a user/s average sleep quality for all time', () => {
         const userId = 1;
         const e = getUserAverageSleepQuality(sampleData, userId);
-        expect(e).to.equal(4)
+        expect(e).to.equal('3.51')
     })
 })
 
@@ -77,4 +77,11 @@ describe ('getUserSleepQualityForGivenDay', () => {
     })
 })
 
-
+describe ('getSleepDatesForAllTime', () => {
+    it ('should return a user/s sleep dates for all time', () => {
+        const userId = 1;
+        const e = getSleepDatesForAllTime(sampleData, userId);
+        expect(e[0]).to.deep.equal({month: 4, date: 1});
+        expect(e[8]).to.deep.equal({month: 3, date: 24});
+    })
+})

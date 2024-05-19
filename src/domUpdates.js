@@ -1,43 +1,21 @@
 import { fetchUser } from './fetchData/userData.js'
 import { fetchHydration } from './fetchData/hydrationData.js'
 import { fetchSleep } from './fetchData/sleepData.js'
-import { getRandomUser, getUserData, getAverageStepGoalAllUsers } from '../src/userFunctions.js'
+import { getRandomUser, getUserData} from '../src/userFunctions.js'
 import { getCurrentDayWaterConsumption, getConsumedWaterForWeek, getConsumedWaterDates } from '../src/hydration.js';
-import { getHoursSleptForCurrentDay, getSleepHoursForWeek, getSleepDates, getSleepQualityForWeek, getUserAverageHoursSlept, getUserAverageSleepQuality } from './sleep.js';
+import { getHoursSleptForCurrentDay, getSleepHoursForWeek, getSleepDates, getSleepQualityForWeek, getUserAverageHoursSlept, getUserAverageSleepQuality, getSleepDatesForAllTime} from './sleep.js';
 import Chart from 'chart.js/auto';
 
 const welcomeMessage = document.querySelector('.welcome-message');
-const userStepGoalDisplay = document.getElementById('display-step-goal');
-const averageStepDisplay = document.getElementById('display-average-goal-steps');
 const userIdAddressEmail = document.querySelector('.user-id-address-email');
 const userStrideLength = document.querySelector('.user-stride-length');
-const userDailyHydration = document.getElementById('display-user-hydration-day');
 const friendsWrapper = document.querySelector('.friends-wrapper');
 const userInfo = document.querySelector('.user-info');
-const userWeeklySleepHours = document.getElementById('display-user-sleep-week');
-const sleepDay = document.querySelector('.user-sleep-day');
-const allTimeSleep = document.querySelector('.user-sleep-alltime');
 
 
 window.addEventListener('load', () => {
   fetchUserData()
 })
-
-const updateUserGoal = (user) => {
-  userStepGoalDisplay.innerText = `${user.dailyStepGoal} 👟`
-}
-
-const updateAverageSteps = (steps) => {
-  averageStepDisplay.innerText = `${steps}`
-}
-
-const updateUserDailyHydration = (data,userId) => {
-  userDailyHydration.innerText = `${getCurrentDayWaterConsumption(data,userId)} ounces 🥤`
-}
-
-const updateWeeklySleepData = (data,userId) => {
-  userWeeklySleepHours.innerText = `${getSleepHoursForWeek(data,userId)}`
-}
 
 function fetchUserData() {
   Promise.all([fetchUser(), fetchHydration(), fetchSleep()]).then(e => {
@@ -48,22 +26,79 @@ function fetchUserData() {
     const friendsSteps = updatedUserFriends(user, userList)
     updateUserMessage(randomUser);
     const AllHydrationData = e[1].hydrationData;
-    updateUserDailyHydration(AllHydrationData,randomUser.id)
     const hydrationWeekWaterData = getConsumedWaterForWeek(AllHydrationData,randomUser.id)
-    const hydrationWeekDateData = getConsumedWaterDates(AllHydrationData,randomUser.id)
+    const hydrationWeekDateData = getConsumedWaterDates(AllHydrationData,randomUser.id).map(data => new Date(data))
     const hydrationDayData = getCurrentDayWaterConsumption(AllHydrationData,randomUser.id)
     const allSleepData = e[2].sleepData
     const sleepWeekDateData = getSleepDates(allSleepData,randomUser.id)
     const sleepHoursWeekData = getSleepHoursForWeek(allSleepData,randomUser.id)
     const sleepHoursWeekDataConverted = sleepWeekDateData.reverse().map(data => new Date(data))
     const sleepHoursDayData = getHoursSleptForCurrentDay(allSleepData, randomUser.id)
-    // updateDailySleep(allSleepData, randomUser.id)
-    updateWeeklySleepData(allSleepData, randomUser.id)
     const sleepQualityWeekData = getSleepQualityForWeek(allSleepData, randomUser.id)
-    getUserAverageHoursSlept(allSleepData, randomUser.id)
-    getUserAverageSleepQuality(allSleepData, randomUser.id)
-    updateAllTimeSleep(allSleepData, randomUser.id)
-    getSleepDates(allSleepData, randomUser.id)
+    const sleepHoursAverageData = getUserAverageHoursSlept(allSleepData, randomUser.id)
+    const sleepQualityAverageData = getUserAverageSleepQuality(allSleepData, randomUser.id)
+    new Chart(document.getElementById('sleepHoursAverageChart'), {
+      type: 'doughnut',
+      data: {
+        labels: [`Average Hours Slept: ${sleepHoursAverageData} hours`],
+        datasets: [{
+          label: 'Sleep Quality',
+          data: [+sleepHoursAverageData, 2],
+          backgroundColor: [
+            'rgba(213, 184, 255)',
+            'rgba(0, 0, 0, 0.2)'
+          ],
+         borderColor: [
+            'rgba(213, 184, 255)',
+            'rgba(0, 0, 0, 0.2)'
+          ]
+        }]
+      },
+      options: {
+        cutout: '80%',
+        plugins: {
+          legend: {
+            display: true,
+          },
+          tooltip: {
+            filter: (tooltipItem) => {
+              return tooltipItem.dataIndex === 0;
+            }
+          }
+        }
+      }     
+    });
+    new Chart(document.getElementById('sleepQualityAverageChart'), {
+      type: 'doughnut',
+      data: {
+        labels: [`Average Sleep Quality: ${sleepQualityAverageData}/5`],
+        datasets: [{
+          label: 'Sleep Quality',
+          data: [+sleepQualityAverageData, 2],
+          backgroundColor: [
+            'rgba(213, 184, 255)',
+            'rgba(0, 0, 0, 0.2)'
+          ],
+         borderColor: [
+            'rgba(213, 184, 255)',
+            'rgba(0, 0, 0, 0.2)'
+          ]
+        }]
+      },
+      options: {
+        cutout: '80%',
+        plugins: {
+          legend: {
+            display: true,
+          },
+          tooltip: {
+            filter: (tooltipItem) => {
+              return tooltipItem.dataIndex === 0;
+            }
+          }
+        }
+      }     
+    });
     new Chart(document.getElementById('sleepQualityDailyChart'), {
       type: 'doughnut',
       data: {
@@ -368,7 +403,6 @@ function createFriendChart(id, friendIds, friendSteps, i) {
       }
     },
   })
-
 }
 
 function updateUserCard(user) {
@@ -384,30 +418,5 @@ const updateUserMessage = (user) => {
   <h1 class="welcome-message">Welcome, ${fullName[0]}! ${randomEmoji}</h1>
   </header>`;
   userInfo.innerText = `${user.name}'s Info`
-};
-
-const updateDailySleep = (user, userId) => {
-  const latestDate = getSleepDates(user, userId).map(date => new Date(date))[0]
-  sleepDay.innerHTML = `Day:${latestDate.getMonth() + 1}/${latestDate.getDate()}<p id="display-user-day"></p>
-  <div class="hours-slept">Hours Slept: ${getHoursSleptForCurrentDay(user, userId)}<p id="display-user-sleep-day"></p></div>
-  <div class="quality-of-sleep">Quality Slept: ${getSleepQualityForWeek(user, userId)[0]}/5<p id="display-user-sleep-quality"></p></div>
-</div>`
-}
-
-const updateAllTimeSleep = (user, userId) => {
-  const recentDate = getSleepDates(user, userId).map(date => new Date(date))[0]
-  allTimeSleep.innerHTML = `All Time: ${recentDate.getMonth() + 1}/${recentDate.getDate()}<p class="users-sleep-alltime"></p>
-  <div class="hours-slept-alltime">Hours Slept: ${getUserAverageHoursSlept(user, userId)} <p id="sleep-day-hours-alltime"></p></div>
-  <div class="quality-of-sleep-alltime">Quality Slept: ${getUserAverageSleepQuality(user, userId)}/5 <p id="sleep-quality-alltime"></p></div>
-</div>`
-}
-
-export {
-  updateUserGoal,
-  updateAverageSteps,
-  updateUserMessage,
-  // updateUserDailyHydration, 
-  updateDailySleep,
-  updateAllTimeSleep
 };
 
