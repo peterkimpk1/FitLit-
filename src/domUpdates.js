@@ -56,17 +56,80 @@ function fetchUserData() {
     const sleepWeekDateData = getSleepDates(allSleepData,randomUser.id)
     const sleepHoursWeekData = getSleepHoursForWeek(allSleepData,randomUser.id)
     const sleepHoursWeekDataConverted = sleepWeekDateData.reverse().map(data => new Date(data))
-    updateDailySleep(allSleepData, randomUser.id)
+    const sleepHoursDayData = getHoursSleptForCurrentDay(allSleepData, randomUser.id)
+    // updateDailySleep(allSleepData, randomUser.id)
     updateWeeklySleepData(allSleepData, randomUser.id)
-    getSleepQualityForWeek(allSleepData, randomUser.id)
+    const sleepQualityWeekData = getSleepQualityForWeek(allSleepData, randomUser.id)
     getUserAverageHoursSlept(allSleepData, randomUser.id)
     getUserAverageSleepQuality(allSleepData, randomUser.id)
     updateAllTimeSleep(allSleepData, randomUser.id)
     getSleepDates(allSleepData, randomUser.id)
+    new Chart(document.getElementById('sleepQualityDailyChart'), {
+      type: 'doughnut',
+      data: {
+        labels: [`Day: ${sleepHoursWeekDataConverted[6].getMonth() + 1}/${sleepHoursWeekDataConverted[6].getDate()}, Sleep Quality: ${sleepQualityWeekData[0]}/5`],
+        datasets: [{
+          label: 'Sleep Quality',
+          data: [sleepQualityWeekData[0], 2],
+          backgroundColor: [
+            'rgba(213, 184, 255)',
+            'rgba(0, 0, 0, 0.2)'
+          ],
+         borderColor: [
+            'rgba(213, 184, 255)',
+            'rgba(0, 0, 0, 0.2)'
+          ]
+        }]
+      },
+      options: {
+        cutout: '80%',
+        plugins: {
+          legend: {
+            display: true,
+          },
+          tooltip: {
+            filter: (tooltipItem) => {
+              return tooltipItem.dataIndex === 0;
+            }
+          }
+        }
+      }     
+    });
+    new Chart(document.getElementById('sleepHoursDailyChart'), {
+      type: 'doughnut',
+      data: {
+        labels: [`Day: ${sleepHoursWeekDataConverted[6].getMonth() + 1}/${sleepHoursWeekDataConverted[6].getDate()}, Hours Slept: ${sleepHoursDayData} hours`],
+        datasets: [{
+          label: 'Hours Slept',
+          data: [sleepHoursDayData, 3],
+          backgroundColor: [
+            'rgba(213, 184, 255)',
+            'rgba(0, 0, 0, 0.2)'
+          ],
+         borderColor: [
+            'rgba(213, 184, 255)',
+            'rgba(0, 0, 0, 0.2)'
+          ]
+        }]
+      },
+      options: {
+        cutout: '80%',
+        plugins: {
+          legend: {
+            display: true,
+          },
+          tooltip: {
+            filter: (tooltipItem) => {
+              return tooltipItem.dataIndex === 0;
+            }
+          }
+        }
+      }     
+    });
     new Chart(document.getElementById('sleepHoursWeekChart'), {
       type: 'bar',
       data: {
-        labels: sleepHoursWeekDataConverted.map(date => `${date.getMonth()}/${date.getDate()}`),
+        labels: sleepHoursWeekDataConverted.map(date => `${date.getMonth() + 1}/${date.getDate()}`),
         datasets: [{
           data: sleepHoursWeekData.map(hours => hours),
           backgroundColor: 'rgba(213, 184, 255)'
@@ -90,7 +153,7 @@ function fetchUserData() {
             display: true,
             title: {
               display: true,
-              text: `Week: ${sleepHoursWeekDataConverted[0].getMonth()}/${sleepHoursWeekDataConverted[0].getDate()} - ${sleepHoursWeekDataConverted[6].getMonth()}/${sleepHoursWeekDataConverted[6].getDate()}`
+              text: `Week: ${sleepHoursWeekDataConverted[0].getMonth() + 1}/${sleepHoursWeekDataConverted[0].getDate()} - ${sleepHoursWeekDataConverted[6].getMonth() + 1}/${sleepHoursWeekDataConverted[6].getDate()}`
             }
           },
         }
@@ -130,7 +193,7 @@ function fetchUserData() {
     new Chart(document.getElementById('user-friends-average-goal-chart'), {
       type: 'doughnut',
       data: {
-        labels: [`Average Step Goal: ${Math.round(friendsSteps)}`],
+        labels: [`Average Friend's Step Goal: ${Math.round(friendsSteps)}`],
         datasets: [{
           label: 'Step Goal',
           data: [`${Math.round(friendsSteps)}`,3000],
@@ -161,7 +224,7 @@ function fetchUserData() {
     new Chart(document.getElementById('hydrationWeekChart'), {
       type: 'bar',
       data: {
-        labels: hydrationWeekDateData.reverse().map(date => `${date.getMonth()}/${date.getDate()}`),
+        labels: hydrationWeekDateData.reverse().map(date => `${date.getMonth() + 1}/${date.getDate()}`),
         datasets: [{
           data: hydrationWeekWaterData.map(ounces => ounces),
           backgroundColor: 'rgba(39, 76, 245, 0.8)'
@@ -185,7 +248,7 @@ function fetchUserData() {
             display: true,
             title: {
               display: true,
-              text: `Week: ${hydrationWeekDateData[0].getMonth()}/${hydrationWeekDateData[0].getDate()} - ${hydrationWeekDateData[6].getMonth()}/${hydrationWeekDateData[6].getDate()}`
+              text: `Week: ${hydrationWeekDateData[0].getMonth() + 1}/${hydrationWeekDateData[0].getDate()} - ${hydrationWeekDateData[6].getMonth() + 1}/${hydrationWeekDateData[6].getDate()}`
             }
           }
         }
@@ -194,7 +257,7 @@ function fetchUserData() {
     new Chart(document.getElementById('hydrationDayChart'), {
       type: 'doughnut',
       data: {
-        labels: [`Day: ${hydrationWeekDateData[6].getMonth()}/${hydrationWeekDateData[6].getDate()}, Water Consumption: ${hydrationDayData} fl oz`],
+        labels: [`Day: ${hydrationWeekDateData[6].getMonth() + 1}/${hydrationWeekDateData[6].getDate()}, Water Consumption: ${hydrationDayData} fl oz`],
         datasets: [{
           label: 'Fluid Ounces',
           data: [hydrationDayData, 30],
@@ -300,7 +363,7 @@ const updateUserMessage = (user) => {
 
 const updateDailySleep = (user, userId) => {
   const latestDate = getSleepDates(user, userId).map(date => new Date(date))[0]
-  sleepDay.innerHTML = `Day:${latestDate.getMonth()}/${latestDate.getDate()}<p id="display-user-day"></p>
+  sleepDay.innerHTML = `Day:${latestDate.getMonth() + 1}/${latestDate.getDate()}<p id="display-user-day"></p>
   <div class="hours-slept">Hours Slept: ${getHoursSleptForCurrentDay(user, userId)}<p id="display-user-sleep-day"></p></div>
   <div class="quality-of-sleep">Quality Slept: ${getSleepQualityForWeek(user, userId)[0]}/5<p id="display-user-sleep-quality"></p></div>
 </div>`
@@ -308,7 +371,7 @@ const updateDailySleep = (user, userId) => {
 
 const updateAllTimeSleep = (user, userId) => {
   const recentDate = getSleepDates(user, userId).map(date => new Date(date))[0]
-  allTimeSleep.innerHTML = `All Time: ${recentDate.getMonth()}/${recentDate.getDate()}<p class="users-sleep-alltime"></p>
+  allTimeSleep.innerHTML = `All Time: ${recentDate.getMonth() + 1}/${recentDate.getDate()}<p class="users-sleep-alltime"></p>
   <div class="hours-slept-alltime">Hours Slept: ${getUserAverageHoursSlept(user, userId)} <p id="sleep-day-hours-alltime"></p></div>
   <div class="quality-of-sleep-alltime">Quality Slept: ${getUserAverageSleepQuality(user, userId)}/5 <p id="sleep-quality-alltime"></p></div>
 </div>`
