@@ -144,6 +144,26 @@ function fetchUserData() {
         plugins: {
           legend: {
             display: false
+          },
+          tooltip: {
+            callbacks: {
+              label: function(context) {
+                  const datasetIndex = context.datasetIndex;
+                  let label = '';
+                if (datasetIndex === 0 && !label) {
+                  label = context.dataset.label || 'Hours Slept';
+                } else if (datasetIndex === 1 && !label) {
+                  label = context.dataset.label || 'Sleep Quality';
+                }
+                if (label) {
+                  label += ': ';
+                }
+                if (context.parsed.y!== null) {
+                  label += context.parsed.y;
+                }
+                return label;
+              }
+            }
           }
         },
         scales: {
