@@ -34,7 +34,7 @@ describe('consumedWaterForWeek', () => {
     })
 })
 
-describe('Hydration', ()=> {
+describe('Updated user hydration', ()=> {
     it('should return user/s average fluid ounces consumed per day for all time', ()=>{
       const user = 1
       const hydrationUpdates1 = updatedUserHydration(sampleData, user)
