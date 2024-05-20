@@ -5,11 +5,42 @@ html {
   height: 100%;
   padding: 0;
 }
+
 header {
   display: block;
   width: 80vw;
   margin-right: auto;
   margin-left: 35px;
+}
+
+.welcome-message {
+  font-size: 60px;
+  text-align: center;
+}
+
+p {
+  margin: 0 0 10px 0;
+  border: 0;
+  padding: 0;
+}
+
+strong,
+.user-id-address-email, 
+.user-stride-length {
+  font-size: 30px;
+}
+
+.user-info {
+  font-size: 40px;
+  border: 0;
+  margin: 0 0 0 5;
+  text-align: center;
+}
+
+.body-wrapper {
+  display: flex;
+  margin-left: 70px;
+  border-radius: 12px;
 }
 
 .display-user-info {
@@ -22,30 +53,6 @@ header {
   justify-content: center;
   align-items: center;
   border-radius: 12px;
-}
-.body-wrapper {
-  display: flex;
-  margin-left: 70px;
-  border-radius: 12px;
-}
-
-.friends-section {
-  border: 1pt solid black;
-  margin-left: 25px;
-  text-align: center;
-  border-radius: 12px;
-  background: url('/src/images/amigos.avif');
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-}
-
-.friends-wrapper {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-evenly;
-  height: 780px;
-  width: 150px;
 }
 
 .activities-dashboard-wrapper {
@@ -61,7 +68,15 @@ header {
   background-color: lightcyan;
 }
 
-.hydration-wrapper{
+.display-activities-dashboard, 
+.display-hydration-dashboard,
+.display-sleep-dashboard {
+  font-size: 30px;
+  text-align: center;
+  margin: 0;
+}
+
+.hydration-wrapper {
   background-image: url('/src/images/waters.avif');
   background-size: cover;
   background-position: center;
@@ -91,16 +106,6 @@ header {
   border-radius: 12px;
 }
 
-.user-friend {
-  border: solid 3pt black;
-  border-radius: 12px;
-  text-align: center;
-  width: 8rem;
-  line-height: 2.5;
-  height: 8rem;
-  margin-left: 8px;
-}
-
 .user-sleep-day, 
 .user-sleep-week, 
 .user-sleep-alltime {
@@ -116,7 +121,7 @@ header {
 .user-hydration-week,
 .user-hydration-day,
 .user-step-goal,
-.average-goal-steps{
+.average-goal-steps {
   border: solid 3pt black;
   border-radius: 12px;
   text-align: center;
@@ -131,12 +136,8 @@ header {
   background-color: paleturquoise;
 }
 
-.number-of-steps {
-  background-color: lightgreen;
-}
-
 .user-step-goal, 
-.average-goal-steps{
+.average-goal-steps {
   background-color: lightpink;
 }
 
@@ -148,9 +149,35 @@ header {
 
 .user-friend {
   background-color: lightpink;
+  border: solid 3pt black;
+  border-radius: 12px;
+  text-align: center;
+  width: 8rem;
+  line-height: 2.5;
+  height: 8rem;
+  margin-left: 8px;
 }
 
-.steps-wrapper{
+.friends-section {
+  border: 1pt solid black;
+  margin-left: 25px;
+  text-align: center;
+  border-radius: 12px;
+  background: url('/src/images/amigos.avif');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.friends-wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  height: 780px;
+  width: 150px;
+}
+
+.steps-wrapper {
   display: flex;
   justify-content: space-evenly;
   align-items: center;
@@ -159,31 +186,8 @@ header {
   border-radius: 12px;
 }
 
-.user-info {
-  text-align: center;
-}
-
-.user-friends {
-  width: 20vw;
-}
-
-p {
-  margin: 0 0 10px 0;
-  border: 0;
-  padding: 0;
-}
-
-.welcome-message {
-  font-size: 60px;
-  text-align: center;
-}
-
-.display-activities-dashboard, 
-.display-hydration-dashboard,
-.display-sleep-dashboard{
+.friends-header {
   font-size: 30px;
-  text-align: center;
-  margin: 0;
 }
 
 #user-step-goal-chart, 
@@ -198,16 +202,4 @@ p {
 .user-sleep-alltime {
   display: flex;
   justify-content: space-evenly;
-}
-
-.user-info {
-  font-size: 40px;
-  border: 0;
-  margin: 0 0 0 5;
-}
-
-strong,
-.user-id-address-email, 
-.user-stride-length {
-  font-size: 30px;
 }
