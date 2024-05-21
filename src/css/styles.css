@@ -24,8 +24,8 @@ p {
   padding: 0;
 }
 
-strong,
-.user-id-address-email, 
+.user-id-email, 
+.user-address, 
 .user-stride-length {
   font-size: 30px;
 }

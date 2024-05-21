@@ -7,7 +7,8 @@ import { getHoursSleptForCurrentDay, getSleepHoursForWeek, getSleepDates, getSle
 import Chart from 'chart.js/auto';
 
 const welcomeMessage = document.querySelector('.welcome-message');
-const userIdAddressEmail = document.querySelector('.user-id-address-email');
+const userIdEmail = document.querySelector('.user-id-email');
+const userAddress = document.querySelector('.user-address');
 const userStrideLength = document.querySelector('.user-stride-length');
 const friendsWrapper = document.querySelector('.friends-wrapper');
 const userInfo = document.querySelector('.user-info');
@@ -406,17 +407,16 @@ function createFriendChart(id, friendIds, friendSteps, i) {
 }
 
 function updateUserCard(user) {
-  userIdAddressEmail.innerHTML= `<strong>ID:</strong> ${user.id} <strong>Address:</strong> ${user.address} <strong>Email:</strong> ${user.email}`
-  userStrideLength.innerHTML = `<strong>Stride Length:</strong> ${user.strideLength}`
+  userIdEmail.innerHTML = `<b>ID:</b> ${user.id} <b>Email:</b> ${user.email}`
+  userAddress.innerHTML = `<b>Address:</b> ${user.address}`
+  userStrideLength.innerHTML = `<b>Stride Length:</b> ${user.strideLength}`
 }
 
 const updateUserMessage = (user) => {  
   let fullName = user.name.split(' ')
   let welcomeEmoji = ['🏅','👟','🎽']
   let randomEmoji = welcomeEmoji[Math.floor(Math.random() * 3)]
-  welcomeMessage.innerHTML = `<header>
-  <h1 class="welcome-message">Welcome, ${fullName[0]}! ${randomEmoji}</h1>
-  </header>`;
+  welcomeMessage.innerText = `Welcome, ${fullName[0]}! ${randomEmoji}`;
   userInfo.innerText = `${user.name}'s Info`
 };
 
