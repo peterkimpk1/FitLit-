@@ -379,12 +379,12 @@ function createFriendChart(id, friendIds, friendSteps, i) {
         label: 'Step Goal',
         data: [`${friendSteps[i]}`,3000],
         backgroundColor: [
-          'rgba(166,204,112, 0.8)',
+          'rgba(0,204,112, 0.8)',
           'rgba(0, 0, 0, 0.2)'
         ],
         borderColor: [
-          'rgba(166,204,112, 0.8)',
-          'rgba(0, 0, 0, 0.2)'
+          'rgba(0, 0, 0, 0.4)',
+          'rgba(0, 0, 0, 0)'
         ]
       }]
     },
