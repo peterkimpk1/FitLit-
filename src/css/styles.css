@@ -29,7 +29,8 @@ p {
   padding: 0;
 }
 
-.user-id-email, 
+.user-id, 
+.user-email, 
 .user-address, 
 .user-stride-length {
   font-size: 30px;
@@ -56,7 +57,7 @@ p {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  /* align-items: center; */
+  align-items: center;
   border-radius: 12px;
 }
 

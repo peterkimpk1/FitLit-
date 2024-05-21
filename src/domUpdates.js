@@ -7,7 +7,8 @@ import { getHoursSleptForCurrentDay, getSleepHoursForWeek, getSleepDates, getSle
 import Chart from 'chart.js/auto';
 
 const welcomeMessage = document.querySelector('.welcome-message');
-const userIdEmail = document.querySelector('.user-id-email');
+const userId = document.querySelector('.user-id');
+const userEmail = document.querySelector('.user-email');
 const userAddress = document.querySelector('.user-address');
 const userStrideLength = document.querySelector('.user-stride-length');
 const friendsWrapper = document.querySelector('.friends-wrapper');
@@ -407,7 +408,8 @@ function createFriendChart(id, friendIds, friendSteps, i) {
 }
 
 function updateUserCard(user) {
-  userIdEmail.innerHTML = `<b>ID:</b> ${user.id} <b>Email:</b> ${user.email}`
+  userId.innerHTML = `<b>ID:</b> ${user.id}`
+  userEmail.innerHTML = `<b>Email:</b> ${user.email}`
   userAddress.innerHTML = `<b>Address:</b> ${user.address}`
   userStrideLength.innerHTML = `<b>Stride Length:</b> ${user.strideLength}`
 }
