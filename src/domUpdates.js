@@ -47,11 +47,11 @@ function fetchUserData() {
           data: [+sleepHoursAverageData, 2],
           backgroundColor: [
             'rgba(213, 184, 255)',
-            'rgba(0, 0, 0, 0.2)'
+            'rgba(180, 153, 180, 0.3)'
           ],
          borderColor: [
-            'rgba(213, 184, 255)',
-            'rgba(0, 0, 0, 0.2)'
+            'rgba(0, 0, 0, 0.4)',
+            'rgba(0, 0, 0, 0)'
           ]
         }]
       },
@@ -417,6 +417,6 @@ const updateUserMessage = (user) => {
   let welcomeEmoji = ['🏅','👟','🎽']
   let randomEmoji = welcomeEmoji[Math.floor(Math.random() * 3)]
   welcomeMessage.innerText = `Welcome, ${fullName[0]}! ${randomEmoji}`;
-  userInfo.innerText = `${user.name}'s Info`
+  userInfo.innerText = `${user.name}`
 };
 
