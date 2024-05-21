@@ -78,11 +78,11 @@ function fetchUserData() {
           data: [+sleepQualityAverageData, 2],
           backgroundColor: [
             'rgba(213, 184, 255)',
-            'rgba(0, 0, 0, 0.2)'
+            'rgba(180, 153, 180, 0.3)'
           ],
          borderColor: [
-            'rgba(213, 184, 255)',
-            'rgba(0, 0, 0, 0.2)'
+            'rgba(0, 0, 0, 0.4)',
+            'rgba(0, 0, 0, 0)'
           ]
         }]
       },
@@ -109,11 +109,11 @@ function fetchUserData() {
           data: [sleepQualityWeekData[0], 2],
           backgroundColor: [
             'rgba(213, 184, 255)',
-            'rgba(0, 0, 0, 0.2)'
+            'rgba(180, 153, 180, 0.3)'
           ],
          borderColor: [
-            'rgba(213, 184, 255)',
-            'rgba(0, 0, 0, 0.2)'
+            'rgba(0, 0, 0, 0.4)',
+            'rgba(0, 0, 0, 0)'
           ]
         }]
       },
@@ -140,11 +140,11 @@ function fetchUserData() {
           data: [sleepHoursDayData, 3],
           backgroundColor: [
             'rgba(213, 184, 255)',
-            'rgba(0, 0, 0, 0.2)'
+            'rgba(180, 153, 180, 0.3)'
           ],
          borderColor: [
-            'rgba(213, 184, 255)',
-            'rgba(0, 0, 0, 0.2)'
+            'rgba(0, 0, 0, 0.4)',
+            'rgba(0, 0, 0, 0)'
           ]
         }]
       },
@@ -228,12 +228,12 @@ function fetchUserData() {
           label: 'Step Goal',
           data: [`${user.dailyStepGoal}`,3000],
           backgroundColor: [
-            'rgba(166,204,112, 0.8)',
+            'rgba(0,204,112, 0.8)',
             'rgba(0, 0, 0, 0.2)'
           ],
           borderColor: [
-            'rgba(166,204,112, 0.8)',
-            'rgba(0, 0, 0, 0.2)'
+            'rgba(0, 0, 0, 0.4)',
+            'rgba(0, 0, 0, 0)'
           ]
         }]
       },
@@ -259,12 +259,12 @@ function fetchUserData() {
           label: 'Step Goal',
           data: [`${Math.round(friendsSteps)}`,3000],
           backgroundColor: [
-            'rgba(166,204,112, 0.8)',
+            'rgba(0,204,112, 0.8)',
             'rgba(0, 0, 0, 0.2)'
           ],
           borderColor: [
-            'rgba(166,204,112, 0.8)',
-            'rgba(0, 0, 0, 0.2)'
+            'rgba(0, 0, 0, 0.4)',
+            'rgba(0, 0, 0, 0)'
           ]
         }]
       },
@@ -326,9 +326,9 @@ function fetchUserData() {
             'rgba(39, 76, 245, 0.8)',
             'rgba(0, 0, 0, 0.2)'
           ],
-         borderColor: [
-            'rgba(39, 76, 245, 0.8)',
-            'rgba(0, 0, 0, 0.2)'
+          borderColor: [
+            'rgba(0, 0, 0, 0.4)',
+            'rgba(0, 0, 0, 0)'
           ]
         }]
       },

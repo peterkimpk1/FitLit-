@@ -18,6 +18,11 @@ header {
   text-align: center;
 }
 
+h3 {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
 p {
   margin: 0 0 10px 0;
   border: 0;
@@ -51,7 +56,7 @@ p {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: center;
+  /* align-items: center; */
   border-radius: 12px;
 }
 
@@ -138,17 +143,17 @@ p {
 
 .user-step-goal, 
 .average-goal-steps {
-  background-color: lightpink;
+  background-color: rgb(236, 191, 240);
 }
 
 .user-sleep-day,
 .user-sleep-week,
 .user-sleep-alltime {
-  background-color: rgb(241, 231, 254)
+  background-color: rgb(254, 249, 231)
 }
 
 .user-friend {
-  background-color: lightpink;
+  background-color: rgb(236, 191, 240);
   border: solid 3pt black;
   border-radius: 12px;
   text-align: center;
