@@ -4,61 +4,104 @@
 <head>
   <link rel="stylesheet" href="../src/css/styles.css">
   <meta charset="UTF-8">
-  <title>Fitlit</title>
+  <title>
+    Fitlit
+  </title>
 </head>
 <header>
-  <h1 class="welcome-message">Welcome current user</h1>
+  <h1 class="welcome-message">
+    Welcome, current user! 🏅
+  </h1>
 </header>
 
 <body>
   <section class=body-wrapper>
     <main class="main-wrapper">
       <section class="display-user-info">
-        <h3 class="user-info"> User's Info</h3>
-        <p class="user-id-email">id, email</p>
-        <p class="user-address">address</p>
-        <p class="user-stride-length">stride length</p>
+        <h3 class="user-info">
+          User's Info
+        </h3>
+        <p class="user-id-email">
+          id, email
+        </p>
+        <p class="user-address">
+          address
+        </p>
+        <p class="user-stride-length">
+          stride length
+        </p>
       </section>
       <h4 class="display-activities-dashboard">
-        <div>Activities Dashboard</div>
+        <div role="heading" aria-level="4">
+          Activities Dashboard
+        </div>
       </h4>
       <section class="activities-dashboard-wrapper">
         <section class="steps-wrapper">
-          <div class="user-step-goal"><canvas id="user-step-goal-chart" width="400" height="400"></canvas></div>
-          <div class="average-goal-steps"><canvas id="user-friends-average-goal-chart" width="400"
-              height="400"></canvas></div>
+          <div class="user-step-goal">
+            <canvas id="user-step-goal-chart" width="400" height="400">              
+            </canvas>
+          </div>
+          <div class="average-goal-steps">
+            <canvas id="user-friends-average-goal-chart" width="400" height="400">
+            </canvas>
+          </div>
         </section>
       </section>
       <h4 class="display-hydration-dashboard">
-        <div role="heading" aria-level="4">Hydration Dashboard</div>
+        Hydration Dashboard
       </h4>
       <section class="hydration-wrapper">
-        <div class="user-hydration-day"><canvas id="hydrationDayChart" width="400" height="400"></canvas></div>
-        <div class="user-hydration-week"><canvas id="hydrationWeekChart" width="1000" height="500"></canvas></div>
+        <div class="user-hydration-day">
+          <canvas id="hydrationDayChart" width="400" height="400">
+          </canvas>
+        </div>
+        <div class="user-hydration-week">
+          <canvas id="hydrationWeekChart" width="1000" height="500">
+          </canvas>
+        </div>
       </section>
-      <h4 class="display-sleep-dashboard">Sleep Dashboard</h4>
+      <h4 class="display-sleep-dashboard">
+        Sleep Dashboard
+      </h4>
       <section class="sleep-wrapper">
         <div class="user-sleep-day">
-          <div class="hours-slept"><canvas id=sleepHoursDailyChart width="300" height="300"></canvas></div>
-          <div class="quality-of-sleep"><canvas id="sleepQualityDailyChart" width="300" height="300"></canvas></div>
+          <div class="hours-slept">
+            <canvas id=sleepHoursDailyChart width="300" height="300">
+            </canvas>
+          </div>
+          <div class="quality-of-sleep">
+            <canvas id="sleepQualityDailyChart" width="300" height="300">
+            </canvas>
+          </div>
         </div>
-        <div class="user-sleep-week"><canvas id="sleepHoursandQualityWeekChart" width="1000" height="500"></canvas>
+        <div class="user-sleep-week">
+          <canvas id="sleepHoursandQualityWeekChart" width="1000" height="500">
+          </canvas>
         </div>
         <div class="user-sleep-alltime">
-          <div class="hours-slept-alltime"> <canvas id="sleepHoursAverageChart" width="400" height="400"></canvas></div>
-          <div class="quality-of-sleep-alltime"><canvas id="sleepQualityAverageChart" width="400" height="400"></canvas>
+          <div class="hours-slept-alltime">
+            <canvas id="sleepHoursAverageChart" width="400" height="400">
+            </canvas>
+          </div>
+          <div class="quality-of-sleep-alltime">
+            <canvas id="sleepQualityAverageChart" width="400" height="400">
+            </canvas>
           </div>
         </div>
       </section>
     </main>
-      <section class="friends-section">
-        <h4 class="friends-header">Friends</h4>
-        <section class="friends-wrapper">
-        </section>
+    <section class="friends-section">
+      <h4 class="friends-header">
+        Friends
+      </h4>
+      <section class="friends-wrapper">
       </section>
+    </section>
   </section>
   <!-- Do not include the scripts.js file here - it is done automatically by the webpack server -->
-  <script src="bundle.js"></script>
+  <script src="bundle.js">
+  </script>
 </body>
 
 </html>
