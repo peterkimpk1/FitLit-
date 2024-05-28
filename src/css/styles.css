@@ -62,7 +62,7 @@ p {
 }
 
 .activities-dashboard-wrapper {
-  background-image: url('/src/images/working-out.jpeg');
+  background-color: rgb(236,191,240);
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -83,7 +83,7 @@ p {
 }
 
 .hydration-wrapper {
-  background-image: url('/src/images/waters.avif');
+  background-color: rgb(175,238,238);
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -100,7 +100,8 @@ p {
 .sleep-wrapper {
   border: 1pt solid black;
   border-radius: 12px;
-  background-image: url('/src/images/nuhNight.avif');
+  /* background-image: url('/src/images/nuhNight.avif'); */
+  background-color: rgb(254,249,231);
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -169,7 +170,7 @@ p {
   margin-left: 25px;
   text-align: center;
   border-radius: 12px;
-  background: url('/src/images/amigos.avif');
+  background-color: rgb(236,191,240);
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
