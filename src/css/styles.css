@@ -1,6 +1,14 @@
+:root {
+  --page-background-color: lightcyan;
+  --step-goal-red: rgb(238, 139, 159);
+  --hydration-blue: rgb(175, 238, 238);
+  --sleep-color: rgb(213, 242, 176);
+  --friend-color: rgb(215, 187, 230);
+}
+
 body, 
 html {
-  background: lightcyan;
+  background: var(--page-background-color);
   background-repeat: no-repeat;
   height: 100%;
   padding: 0;
@@ -62,7 +70,7 @@ p {
 }
 
 .activities-dashboard-wrapper {
-  background-color: rgb(236,191,240);
+  background-color: var(--step-goal-red);
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -71,7 +79,7 @@ p {
 }
 
 .display-activities-dashboard {
-  background-color: lightcyan;
+  background-color: var(--page-background-color);
 }
 
 .display-activities-dashboard, 
@@ -83,7 +91,7 @@ p {
 }
 
 .hydration-wrapper {
-  background-color: rgb(175,238,238);
+  background-color: var(--hydration-blue);
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -100,8 +108,7 @@ p {
 .sleep-wrapper {
   border: 1pt solid black;
   border-radius: 12px;
-  /* background-image: url('/src/images/nuhNight.avif'); */
-  background-color: rgb(254,249,231);
+  background-color: var(--sleep-color);
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -140,22 +147,22 @@ p {
 
 .user-hydration-day,
 .user-hydration-week {
-  background-color: paleturquoise;
+  background-color: var(--hydration-blue);
 }
 
 .user-step-goal, 
 .average-goal-steps {
-  background-color: rgb(236, 191, 240);
+  background-color: var(--step-goal-red);
 }
 
 .user-sleep-day,
 .user-sleep-week,
 .user-sleep-alltime {
-  background-color: rgb(254, 249, 231)
+  background-color: var(--sleep-color)
 }
 
 .user-friend {
-  background-color: rgb(236, 191, 240);
+  background-color: var(--friend-color);
   border: solid 3pt black;
   border-radius: 12px;
   text-align: center;
@@ -170,7 +177,7 @@ p {
   margin-left: 25px;
   text-align: center;
   border-radius: 12px;
-  background-color: rgb(236,191,240);
+  background-color: var(--friend-color);
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
