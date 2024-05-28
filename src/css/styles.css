@@ -1,5 +1,6 @@
 :root {
   --page-background-color: lightcyan;
+  --user-info-color: rgb(170,194,223);
   --step-goal-color: rgb(236, 146, 164);
   --hydration-color: rgb(175, 238, 238);
   --sleep-color: rgb(213, 242, 176);
@@ -13,17 +14,18 @@ html {
   background-repeat: no-repeat;
   height: 100%;
   padding: 0;
+  margin: 0;
 }
 
 header {
   display: block;
-  width: 80vw;
+  width: 100vw;
   margin-right: auto;
   margin-left: 35px;
 }
 
 .welcome-message {
-  font-size: 50px;
+  font-size: 48px;
   text-align: center;
 }
 
@@ -66,8 +68,9 @@ p {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: center;
+  text-align: center;
   border-radius: var(--section-border-radius);
+  background-color: var(--user-info-color);
 }
 
 .activities-dashboard-wrapper {
