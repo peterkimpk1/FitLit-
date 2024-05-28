@@ -4,6 +4,7 @@
   --hydration-color: rgb(175, 238, 238);
   --sleep-color: rgb(213, 242, 176);
   --friend-color: rgb(215, 187, 230);
+  --section-border-radius: 12px;
 }
 
 body, 
@@ -54,7 +55,7 @@ p {
 .body-wrapper {
   display: flex;
   margin-left: 70px;
-  border-radius: 12px;
+  border-radius: var(--section-border-radius);
 }
 
 .display-user-info {
@@ -66,7 +67,7 @@ p {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  border-radius: 12px;
+  border-radius: var(--section-border-radius);
 }
 
 .activities-dashboard-wrapper {
@@ -74,7 +75,7 @@ p {
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-  border-radius: 12px;
+  border-radius: var(--section-border-radius);
   border: 1pt solid black;
 }
 
@@ -95,19 +96,19 @@ p {
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-  border-radius: 12px;
+  border-radius: var(--section-border-radius);
   border: 1pt solid black;
   display: flex;
   justify-content: space-evenly;
   align-items: center;
   width: 80vw;
   height: fit-content;
-  border-radius: 12px;
+  border-radius: var(--section-border-radius);
 }
 
 .sleep-wrapper {
   border: 1pt solid black;
-  border-radius: 12px;
+  border-radius: var(--section-border-radius);
   background-color: var(--sleep-color);
   background-size: cover;
   background-position: center;
@@ -117,14 +118,13 @@ p {
   align-items: center;
   width: 80vw;
   height: fit-content;
-  border-radius: 12px;
 }
 
 .user-sleep-day, 
 .user-sleep-week, 
 .user-sleep-alltime {
   border: solid 3pt black;
-  border-radius: 12px;
+  border-radius: var(--section-border-radius);
   text-align: center;
   width: 30rem;
   line-height: 2.5;
@@ -137,7 +137,7 @@ p {
 .user-step-goal,
 .average-goal-steps {
   border: solid 3pt black;
-  border-radius: 12px;
+  border-radius: var(--section-border-radius);
   text-align: center;
   width: 25rem;
   line-height: 1.5;
@@ -164,7 +164,7 @@ p {
 .user-friend {
   background-color: var(--friend-color);
   border: solid 3pt black;
-  border-radius: 12px;
+  border-radius: var(--section-border-radius);
   text-align: center;
   width: 8rem;
   line-height: 2.5;
@@ -176,7 +176,7 @@ p {
   border: 1pt solid black;
   margin-left: 25px;
   text-align: center;
-  border-radius: 12px;
+  border-radius: var(--section-border-radius);
   background-color: var(--friend-color);
   background-size: cover;
   background-position: center;
@@ -197,7 +197,7 @@ p {
   align-items: center;
   width: 80vw;
   height: fit-content;
-  border-radius: 12px;
+  border-radius: var(--section-border-radius);
 }
 
 .friends-header {
