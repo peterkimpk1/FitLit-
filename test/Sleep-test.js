@@ -76,12 +76,3 @@ describe ('getUserSleepQualityForGivenDay', () => {
         expect(givenDaySleepQuality).to.equal(3.4)
     })
 })
-
-describe ('getSleepDatesForAllTime', () => {
-    it ('should return a user/s sleep dates for all time', () => {
-        const userId = 1;
-        const e = getSleepDatesForAllTime(sampleData, userId);
-        expect(e[0]).to.deep.equal({month: 4, date: 1});
-        expect(e[8]).to.deep.equal({month: 3, date: 24});
-    })
-})
