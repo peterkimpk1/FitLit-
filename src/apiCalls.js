@@ -6,7 +6,7 @@ function fetchData(dataType) {
     return promise
     }
     
-    export {
-        fetchData
-    }
+export {
+fetchData
+}
 
