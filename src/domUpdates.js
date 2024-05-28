@@ -1,6 +1,4 @@
-import { fetchUser } from './fetchData/userData.js'
-import { fetchHydration } from './fetchData/hydrationData.js'
-import { fetchSleep } from './fetchData/sleepData.js'
+import { fetchData } from './apiCalls.js'
 import { createFriendChart, createSleepHoursAverageChart,
   createSleepQualityAverageChart,
   createSleepQualityDailyChart,
@@ -60,7 +58,7 @@ function updateUserData(data, id) {
 }
 
 function fetchUserData() {
-  Promise.all([fetchUser(), fetchHydration(), fetchSleep()]).then(e => {
+  Promise.all([fetchData('users'), fetchData('hydration'), fetchData('sleep')]).then(e => {
     const randomUser = getRandomUser(e[0].users)
     updateUserMessage(randomUser);
     updateUserData(e[0].users,randomUser.id)
