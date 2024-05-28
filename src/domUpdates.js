@@ -7,7 +7,9 @@ import { getHoursSleptForCurrentDay, getSleepHoursForWeek, getSleepDates, getSle
 import Chart from 'chart.js/auto';
 
 const welcomeMessage = document.querySelector('.welcome-message');
-const userIdAddressEmail = document.querySelector('.user-id-address-email');
+const userId = document.querySelector('.user-id');
+const userEmail = document.querySelector('.user-email');
+const userAddress = document.querySelector('.user-address');
 const userStrideLength = document.querySelector('.user-stride-length');
 const friendsWrapper = document.querySelector('.friends-wrapper');
 const userInfo = document.querySelector('.user-info');
@@ -46,11 +48,11 @@ function fetchUserData() {
           data: [+sleepHoursAverageData, 2],
           backgroundColor: [
             'rgba(213, 184, 255)',
-            'rgba(0, 0, 0, 0.2)'
+            'rgba(180, 153, 180, 0.3)'
           ],
          borderColor: [
-            'rgba(213, 184, 255)',
-            'rgba(0, 0, 0, 0.2)'
+            'rgba(0, 0, 0, 0.4)',
+            'rgba(0, 0, 0, 0)'
           ]
         }]
       },
@@ -77,11 +79,11 @@ function fetchUserData() {
           data: [+sleepQualityAverageData, 2],
           backgroundColor: [
             'rgba(213, 184, 255)',
-            'rgba(0, 0, 0, 0.2)'
+            'rgba(180, 153, 180, 0.3)'
           ],
          borderColor: [
-            'rgba(213, 184, 255)',
-            'rgba(0, 0, 0, 0.2)'
+            'rgba(0, 0, 0, 0.4)',
+            'rgba(0, 0, 0, 0)'
           ]
         }]
       },
@@ -108,11 +110,11 @@ function fetchUserData() {
           data: [sleepQualityWeekData[0], 2],
           backgroundColor: [
             'rgba(213, 184, 255)',
-            'rgba(0, 0, 0, 0.2)'
+            'rgba(180, 153, 180, 0.3)'
           ],
          borderColor: [
-            'rgba(213, 184, 255)',
-            'rgba(0, 0, 0, 0.2)'
+            'rgba(0, 0, 0, 0.4)',
+            'rgba(0, 0, 0, 0)'
           ]
         }]
       },
@@ -139,11 +141,11 @@ function fetchUserData() {
           data: [sleepHoursDayData, 3],
           backgroundColor: [
             'rgba(213, 184, 255)',
-            'rgba(0, 0, 0, 0.2)'
+            'rgba(180, 153, 180, 0.3)'
           ],
          borderColor: [
-            'rgba(213, 184, 255)',
-            'rgba(0, 0, 0, 0.2)'
+            'rgba(0, 0, 0, 0.4)',
+            'rgba(0, 0, 0, 0)'
           ]
         }]
       },
@@ -227,12 +229,12 @@ function fetchUserData() {
           label: 'Step Goal',
           data: [`${user.dailyStepGoal}`,3000],
           backgroundColor: [
-            'rgba(166,204,112, 0.8)',
+            'rgba(0,204,112, 0.8)',
             'rgba(0, 0, 0, 0.2)'
           ],
           borderColor: [
-            'rgba(166,204,112, 0.8)',
-            'rgba(0, 0, 0, 0.2)'
+            'rgba(0, 0, 0, 0.4)',
+            'rgba(0, 0, 0, 0)'
           ]
         }]
       },
@@ -258,12 +260,12 @@ function fetchUserData() {
           label: 'Step Goal',
           data: [`${Math.round(friendsSteps)}`,3000],
           backgroundColor: [
-            'rgba(166,204,112, 0.8)',
+            'rgba(0,204,112, 0.8)',
             'rgba(0, 0, 0, 0.2)'
           ],
           borderColor: [
-            'rgba(166,204,112, 0.8)',
-            'rgba(0, 0, 0, 0.2)'
+            'rgba(0, 0, 0, 0.4)',
+            'rgba(0, 0, 0, 0)'
           ]
         }]
       },
@@ -325,9 +327,9 @@ function fetchUserData() {
             'rgba(39, 76, 245, 0.8)',
             'rgba(0, 0, 0, 0.2)'
           ],
-         borderColor: [
-            'rgba(39, 76, 245, 0.8)',
-            'rgba(0, 0, 0, 0.2)'
+          borderColor: [
+            'rgba(0, 0, 0, 0.4)',
+            'rgba(0, 0, 0, 0)'
           ]
         }]
       },
@@ -378,12 +380,12 @@ function createFriendChart(id, friendIds, friendSteps, i) {
         label: 'Step Goal',
         data: [`${friendSteps[i]}`,3000],
         backgroundColor: [
-          'rgba(166,204,112, 0.8)',
+          'rgba(0,204,112, 0.8)',
           'rgba(0, 0, 0, 0.2)'
         ],
         borderColor: [
-          'rgba(166,204,112, 0.8)',
-          'rgba(0, 0, 0, 0.2)'
+          'rgba(0, 0, 0, 0.4)',
+          'rgba(0, 0, 0, 0)'
         ]
       }]
     },
@@ -406,17 +408,16 @@ function createFriendChart(id, friendIds, friendSteps, i) {
 }
 
 function updateUserCard(user) {
-  userIdAddressEmail.innerHTML= `<strong>ID:</strong> ${user.id} <strong>Address:</strong> ${user.address} <strong>Email:</strong> ${user.email}`
-  userStrideLength.innerHTML = `<strong>Stride Length:</strong> ${user.strideLength}`
+  userEmail.innerHTML = `<b>Email:</b> ${user.email}`
+  userAddress.innerHTML = `<b>Address:</b> ${user.address}`
+  userStrideLength.innerHTML = `<b>Stride Length:</b> ${user.strideLength}`
 }
 
 const updateUserMessage = (user) => {  
   let fullName = user.name.split(' ')
   let welcomeEmoji = ['🏅','👟','🎽']
   let randomEmoji = welcomeEmoji[Math.floor(Math.random() * 3)]
-  welcomeMessage.innerHTML = `<header>
-  <h1 class="welcome-message">Welcome, ${fullName[0]}! ${randomEmoji}</h1>
-  </header>`;
-  userInfo.innerText = `${user.name}'s Info`
+  welcomeMessage.innerText = `Welcome, ${fullName[0]}! ${randomEmoji}`;
+  userInfo.innerText = `${user.name}`
 };
 
