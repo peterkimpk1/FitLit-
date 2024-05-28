@@ -1,7 +1,7 @@
 import { expect } from 'chai';
 import sleepData from "../src/data/sample-sleep-test-data.js"
 const sampleData = sleepData.sleepData
-const {getUserAverageHoursSlept, getUserAverageSleepQuality, getSleepHoursAndQualityForAnyWeek, getHoursSleptForCurrentDay, getSleepQualityForWeek, getSleepHoursForWeek, getUserSleepQualityForGivenDay, getSleepDatesForAllTime} = require('../src/sleep')
+const {getUserAverageHoursSlept, getUserAverageSleepQuality, getSleepHoursAndQualityForAnyWeek, getHoursSleptForCurrentDay, getSleepQualityForWeek, getSleepHoursForWeek, getUserSleepQualityForGivenDay} = require('../src/sleep')
 
 describe ('getUserAverageHoursSlept', () => {
     it ('should return a user/s average hours slept for all time', () => {
