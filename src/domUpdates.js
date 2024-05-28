@@ -3,7 +3,7 @@ import { fetchHydration } from './fetchData/hydrationData.js'
 import { fetchSleep } from './fetchData/sleepData.js'
 import { getRandomUser, getUserData} from '../src/userFunctions.js'
 import { getCurrentDayWaterConsumption, getConsumedWaterForWeek, getConsumedWaterDates } from '../src/hydration.js';
-import { getHoursSleptForCurrentDay, getSleepHoursForWeek, getSleepDates, getSleepQualityForWeek, getUserAverageHoursSlept, getUserAverageSleepQuality, getSleepDatesForAllTime} from './sleep.js';
+import { getHoursSleptForCurrentDay, getSleepHoursForWeek, getSleepDates, getSleepQualityForWeek, getUserAverageHoursSlept, getUserAverageSleepQuality } from './sleep.js';
 import Chart from 'chart.js/auto';
 
 const welcomeMessage = document.querySelector('.welcome-message');
