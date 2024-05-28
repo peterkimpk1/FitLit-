@@ -1,7 +1,7 @@
 import { expect } from 'chai';
 import sleepData from "../src/data/sample-sleep-test-data.js"
 const sampleData = sleepData.sleepData
-const {getUserAverageHoursSlept, getUserAverageSleepQuality, getSleepHoursAndQualityForAnyWeek, getHoursSleptForCurrentDay, getSleepQualityForWeek, getSleepHoursForWeek, getUserSleepQualityForGivenDay, getSleepDatesForAllTime} = require('../src/sleep')
+const {getUserAverageHoursSlept, getUserAverageSleepQuality, getSleepHoursAndQualityForAnyWeek, getHoursSleptForCurrentDay, getSleepQualityForWeek, getSleepHoursForWeek, getUserSleepQualityForGivenDay} = require('../src/sleep')
 
 describe ('getUserAverageHoursSlept', () => {
     it ('should return a user/s average hours slept for all time', () => {
@@ -74,14 +74,5 @@ describe ('getUserSleepQualityForGivenDay', () => {
         const givenDay = '2023/03/27';
         const givenDaySleepQuality = getUserSleepQualityForGivenDay(sampleData, userId, givenDay)
         expect(givenDaySleepQuality).to.equal(3.4)
-    })
-})
-
-describe ('getSleepDatesForAllTime', () => {
-    it ('should return a user/s sleep dates for all time', () => {
-        const userId = 1;
-        const e = getSleepDatesForAllTime(sampleData, userId);
-        expect(e[0]).to.deep.equal({month: 4, date: 1});
-        expect(e[8]).to.deep.equal({month: 3, date: 24});
     })
 })

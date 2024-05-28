@@ -11,7 +11,7 @@ import { createFriendChart, createSleepHoursAverageChart,
   createHydrationDayChart } from './domCharts.js'
 import { getRandomUser, getUserData} from '../src/userFunctions.js'
 import { getCurrentDayWaterConsumption, getConsumedWaterForWeek, getConsumedWaterDates } from '../src/hydration.js';
-import { getHoursSleptForCurrentDay, getSleepHoursForWeek, getSleepDates, getSleepQualityForWeek, getUserAverageHoursSlept, getUserAverageSleepQuality, getSleepDatesForAllTime} from './sleep.js';
+import { getHoursSleptForCurrentDay, getSleepHoursForWeek, getSleepDates, getSleepQualityForWeek, getUserAverageHoursSlept, getUserAverageSleepQuality } from './sleep.js';
 
 
 const welcomeMessage = document.querySelector('.welcome-message');
@@ -66,7 +66,7 @@ function fetchUserData() {
     updateUserData(e[0].users,randomUser.id)
     updateHydrationData(e[1].hydrationData, randomUser.id)
     updateSleepData(e[2].sleepData,randomUser.id)
-  })
+  }).catch(err => alert('Could not display user info!!', err))
 }
 
 function updatedUserFriends(user, users) {
