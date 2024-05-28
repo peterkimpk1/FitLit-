@@ -62,10 +62,6 @@ function getSleepDates(data,userId) {
     return sortedSingleUserData.splice(0,7).map(user => user.date)
 }
 
-function getSleepDatesForAllTime(data, userId) {
-    return data.filter(user => user.userID === userId).sort((a,b) => new Date(b.date) - new Date(a.date)).map(user => ({month: user.date.getMonth() + 1, date: user.date.getDate()}))
-}
-
 export {
     getUserAverageHoursSlept,
     getUserAverageSleepQuality,
@@ -75,5 +71,4 @@ export {
     getSleepQualityForWeek,
     getSleepDates,
     getUserSleepQualityForGivenDay,
-    getSleepDatesForAllTime
 }
