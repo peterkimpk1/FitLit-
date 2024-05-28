@@ -408,7 +408,6 @@ function createFriendChart(id, friendIds, friendSteps, i) {
 }
 
 function updateUserCard(user) {
-  userId.innerHTML = `<b>ID:</b> ${user.id}`
   userEmail.innerHTML = `<b>Email:</b> ${user.email}`
   userAddress.innerHTML = `<b>Address:</b> ${user.address}`
   userStrideLength.innerHTML = `<b>Stride Length:</b> ${user.strideLength}`
