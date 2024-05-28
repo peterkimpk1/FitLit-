@@ -1,7 +1,7 @@
 :root {
   --page-background-color: lightcyan;
-  --step-goal-red: rgb(238, 139, 159);
-  --hydration-blue: rgb(175, 238, 238);
+  --step-goal-color: rgb(238, 139, 159);
+  --hydration-color: rgb(175, 238, 238);
   --sleep-color: rgb(213, 242, 176);
   --friend-color: rgb(215, 187, 230);
 }
@@ -70,7 +70,7 @@ p {
 }
 
 .activities-dashboard-wrapper {
-  background-color: var(--step-goal-red);
+  background-color: var(--step-goal-color);
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -91,7 +91,7 @@ p {
 }
 
 .hydration-wrapper {
-  background-color: var(--hydration-blue);
+  background-color: var(--hydration-color);
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -147,12 +147,12 @@ p {
 
 .user-hydration-day,
 .user-hydration-week {
-  background-color: var(--hydration-blue);
+  background-color: var(--hydration-color);
 }
 
 .user-step-goal, 
 .average-goal-steps {
-  background-color: var(--step-goal-red);
+  background-color: var(--step-goal-color);
 }
 
 .user-sleep-day,
