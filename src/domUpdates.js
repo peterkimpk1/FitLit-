@@ -348,7 +348,7 @@ function fetchUserData() {
         }
       }     
     });
-  })
+  }).catch(err => alert('Could not display user info!!', err))
 }
 
 function updatedUserFriends(user, users) {
