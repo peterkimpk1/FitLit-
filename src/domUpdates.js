@@ -35,7 +35,7 @@ OpenModalBtn.addEventListener('click', function(){
 
 submitBtn.addEventListener('click', function(){
   form.style.display = 'none';
-  postUserData(userId,sleepDate.value,hoursSlept.value,qualityOfSleep.value)
+  postSleepData(userId,sleepDate.value,hoursSlept.value,qualityOfSleep.value)
 })
 
 function updateHydrationData(data, id) {
