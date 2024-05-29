@@ -243,6 +243,12 @@ input {
   margin-top: 5px;
 }
 
+#submitBtn {
+  display: block; 
+  margin-top: 10px;
+  width: 100%;
+}
+
 .user-sleep-day, 
 .user-sleep-alltime {
   display: flex;
