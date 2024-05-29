@@ -168,10 +168,9 @@ p {
   background-color: var(--friend-color);
   border: solid 3pt black;
   border-radius: var(--section-border-radius);
-  text-align: center;
   width: 8rem;
   line-height: 2.5;
-  height: 6rem;
+  height: fit-content;
   margin-left: 19px;
   
 }
@@ -182,9 +181,6 @@ p {
   text-align: center;
   border-radius: var(--section-border-radius);
   background-color: var(--friend-color);
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
 }
 
 .friends-wrapper {
