@@ -254,3 +254,12 @@ input {
   display: flex;
   justify-content: space-evenly;
 }
+
+.hours-slept-error-message,
+.sleep-quality-error-message {
+  color: red
+}
+
+.hidden {
+  display: none;
+}
