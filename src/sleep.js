@@ -22,15 +22,21 @@ function getUserAverageSleepQuality(data, userId) {
 
 function getHoursSleptForCurrentDay(data, userId) {
     const sleepDataForSpecificUser = data.filter(userData => {
-        return userData.userID === userId    
-    })
+        return userData.userID === userId;
+    });
+    if (sleepDataForSpecificUser.length === 0) {
+        return {
+            error: true,
+            message: 'No data found for the current day',
+        };
+    }
     sleepDataForSpecificUser.forEach(specificUserData => {
-        specificUserData.date = new Date(specificUserData.date)
-    })
+        specificUserData.date = new Date(specificUserData.date);
+    });
     const sortedSleepDataForSpecificUser = sleepDataForSpecificUser.sort((dateA, dateB) => {
-        return dateB.date - dateA.date
-    })
-    return sortedSleepDataForSpecificUser[0].hoursSlept
+        return dateB.date - dateA.date;
+    });
+    return sortedSleepDataForSpecificUser[0].hoursSlept;
 }
 
 function getSleepHoursAndQualityForAnyWeek(data, userId, startingDate) {
@@ -57,9 +63,18 @@ function getSleepHoursForWeek(data,userId) {
     return sortedSingleUserData.splice(0,7).map(user => user.hoursSlept)
 }
 
-function getSleepDates(data,userId) {
-    let sortedSingleUserData = data.filter(user => user.userID === userId).sort((a,b) => new Date(b.date) - new Date(a.date))
-    return sortedSingleUserData.splice(0,7).map(user => user.date)
+function getSleepDates(data, userId) {
+    const userEntries = data.filter(user => user.userID === userId);
+    if (userEntries.length === 0) {
+        return null; 
+    }
+    let sortedUserEntries = userEntries.sort((a, b) => new Date(b.date) - new Date(a.date));
+    return sortedUserEntries.splice(0, 7).map(user => user.date);
+}
+
+
+function getSleepDatesForAllTime(data, userId) {
+    return data.filter(user => user.userID === userId).sort((a,b) => new Date(b.date) - new Date(a.date)).map(user => ({month: user.date.getMonth() + 1, date: user.date.getDate()}))
 }
 
 export {
@@ -71,4 +86,5 @@ export {
     getSleepQualityForWeek,
     getSleepDates,
     getUserSleepQualityForGivenDay,
+    getSleepDatesForAllTime
 }

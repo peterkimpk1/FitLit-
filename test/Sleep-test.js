@@ -34,6 +34,7 @@ describe ('getSleepHoursAndQualityForWeek', () => {
             {hoursSlept: 8.2, sleepQuality: 4.2}
           ])
     })
+    
 })
 
 describe ('getSleepQualityForWeek', () => {
@@ -66,6 +67,12 @@ describe ('getHoursSleptForCurrentDay', () => {
         expect(user1HoursSleptCurrentDay).to.equal(4.4)
         expect(user2HoursSleptCurrentDay).to.equal(6.2)
     })
+    it('should return an error if no data exists for the current day', () => {
+        const userId = 4; 
+        const result = getHoursSleptForCurrentDay(sampleData, userId);
+        expect(result).to.have.property('error', true);
+        expect(result.message).to.equal('No data found for the current day');
+    });
 })
 
 describe ('getUserSleepQualityForGivenDay', () => {
