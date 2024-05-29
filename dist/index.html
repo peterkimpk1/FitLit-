@@ -91,11 +91,11 @@
       <section class="sleep-input-form-wrapper">
         <form>
           <label for="date">Date</label>
-          <input type="text"> 
+          <input type="date" id="date" name="date"> 
           <label for="hours-slept">Hours Slept</label>
-          <input type="number" value="0" max="24">
+          <input type="number" id="hours-slept" name="hours-slept" placeholder="Max 24" step="0.25" min="0" max="24">
           <label for="quality-of-sleep">Quality of Sleep</label>
-          <input type="number" value="0" max="10">
+          <input type="number" id="quality-of-sleep" name="quality-of-sleep" placeholder="Max 5" step="0.25" min="0" max="5">
         </form>
       </section>
     </main>
