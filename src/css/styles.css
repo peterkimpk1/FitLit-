@@ -171,8 +171,9 @@ p {
   text-align: center;
   width: 8rem;
   line-height: 2.5;
-  height: 8rem;
-  margin-left: 8px;
+  height: 6rem;
+  margin-left: 19px;
+  
 }
 
 .friends-section {
@@ -190,8 +191,8 @@ p {
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
-  height: 780px;
-  width: 150px;
+  height: 580px;
+  width: 175px;
 }
 
 .steps-wrapper {
@@ -224,6 +225,14 @@ p {
 .sleep-input-form-wrapper {
   display: flex;
   flex-direction: column; 
+  margin-top: 10px;
+  margin-left: 15px;
+  border: 2px solid black;
+  border-radius: var(--section-border-radius);
+  background-color: var(--sleep-color);
+  height: fit-content;
+  width: fit-content;
+  align-items: center;
 }
 
 .enter-sleep-details {
@@ -234,19 +243,25 @@ label {
   display: block;
   margin-top: 15px;
   margin-bottom: 5px;
-
 }
 
 input {
   display: block;
-  width: 100%;
+  width: fit-content;
   margin-top: 5px;
+}
+
+#openModalBtn {
+  display: block;
+  width: fit-content;
+  border-radius: 15%;
 }
 
 #submitBtn {
   display: block; 
   margin-top: 10px;
-  width: 100%;
+  border-radius: 15%;
+  width: fit-content;
 }
 
 .user-sleep-day, 
