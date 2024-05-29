@@ -57,7 +57,7 @@ function updateSleepData(data, id) {
   createSleepQualityAverageChart(sleepQualityAverageData)
   createSleepQualityDailyChart(sleepQualityWeekData,sleepHoursWeekDataConverted)
   createSleepHoursDailyChart(sleepHoursDayData,sleepHoursWeekDataConverted)
-  createSleepHoursAndQualityWeekChart(sleepHoursWeekData,sleepHoursWeekDataConverted)
+  createSleepHoursAndQualityWeekChart(sleepHoursWeekData,sleepQualityWeekData,sleepHoursWeekDataConverted)
 }
 
 function updateUserData(data, id) {

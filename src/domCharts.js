@@ -133,17 +133,17 @@ function createSleepHoursDailyChart(data, dates) {
         }     
       });
 }
-function createSleepHoursAndQualityWeekChart(data, dates) {
+function createSleepHoursAndQualityWeekChart(hoursData, qualityData, dates) {
     new Chart(document.getElementById('sleepHoursandQualityWeekChart'), {
         type: 'bar',
         data: {
           labels: dates.map(date => `${date.getMonth() + 1}/${date.getDate()}`),
           datasets: [{
-            data: data.map(hours => hours),
+            data: hoursData.map(hours => hours),
             backgroundColor: 'rgba(213, 184, 255)'
           },
           {
-            data: data.map(quality => quality),
+            data: qualityData.map(quality => quality),
             backgroundColor: 'rgb(147,112,219)', 
           }
         ]
