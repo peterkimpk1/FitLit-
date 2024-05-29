@@ -1,8 +1,9 @@
 function getConsumedWaterForSpecificDate(data,userId,date) {
+    const userDataByUserIdAndDate = data.filter(userData => userData.userID === userId && userData.date === date)
+    if(userDataByUserIdAndDate.length === 0){
+        return undefined;
+    }
     let totalOunces = 0
-    const userDataByUserIdAndDate = data.filter(userData => {
-        return userData.userID === userId && userData.date === date   
-    })
     userDataByUserIdAndDate.forEach(entry => {
         totalOunces += entry.numOunces
     })

@@ -9,6 +9,12 @@ describe('getConsumedWaterForSpecificDate', () => {
         const user1NumOunces = getConsumedWaterForSpecificDate(sampleData,1,date)
         expect(user1NumOunces).to.equal(10)
     });
+    it('should return undefined if the user does not exist', () => {
+        const nonExistentUserId = 999; 
+        const date = "2023/03/24";
+        const result = getConsumedWaterForSpecificDate(sampleData, nonExistentUserId, date);
+        expect(result).to.equal(undefined);
+    });
 });
 
 describe('getCurrentDayWaterConsumption', () => {
