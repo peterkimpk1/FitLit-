@@ -7,7 +7,7 @@ function createSleepHoursAverageChart(data) {
           labels: [`Average Hours Slept: ${data} hours`],
           datasets: [{
             label: 'Sleep Quality',
-            data: [+data, 2],
+            data: [+data, 10/[+data]],
             backgroundColor: [
               'rgba(213, 184, 255)',
               'rgba(180, 153, 180, 0.3)'
@@ -41,7 +41,7 @@ function createSleepQualityAverageChart(data) {
           labels: [`Average Sleep Quality: ${data}/5`],
           datasets: [{
             label: 'Sleep Quality',
-            data: [+data, 2],
+            data: [+data, 5/[+data]],
             backgroundColor: [
               'rgba(213, 184, 255)',
               'rgba(180, 153, 180, 0.3)'
@@ -74,7 +74,7 @@ function createSleepQualityDailyChart(data, dates) {
           labels: [`Day: ${dates[6].getMonth() + 1}/${dates[6].getDate()}, Sleep Quality: ${data[0]}/5`],
           datasets: [{
             label: 'Sleep Quality',
-            data: [data[0], 2],
+            data: [data[0], 5/data[0]],
             backgroundColor: [
               'rgba(213, 184, 255)',
               'rgba(180, 153, 180, 0.3)'
@@ -107,7 +107,7 @@ function createSleepHoursDailyChart(data, dates) {
           labels: [`Day: ${dates[6].getMonth() + 1}/${dates[6].getDate()}, Hours Slept: ${data} hours`],
           datasets: [{
             label: 'Hours Slept',
-            data: [data, 3],
+            data: [data, 10/data],
             backgroundColor: [
               'rgba(213, 184, 255)',
               'rgba(180, 153, 180, 0.3)'
@@ -133,17 +133,17 @@ function createSleepHoursDailyChart(data, dates) {
         }     
       });
 }
-function createSleepHoursAndQualityWeekChart(data, dates) {
+function createSleepHoursAndQualityWeekChart(hoursData, qualityData, dates) {
     new Chart(document.getElementById('sleepHoursandQualityWeekChart'), {
         type: 'bar',
         data: {
           labels: dates.map(date => `${date.getMonth() + 1}/${date.getDate()}`),
           datasets: [{
-            data: data.map(hours => hours),
+            data: hoursData.map(hours => hours),
             backgroundColor: 'rgba(213, 184, 255)'
           },
           {
-            data: data.map(quality => quality),
+            data: qualityData.map(quality => quality),
             backgroundColor: 'rgb(147,112,219)', 
           }
         ]
@@ -203,7 +203,7 @@ function createStepCharts(user, friendsSteps) {
           labels: [`Daily Step Goal: ${user.dailyStepGoal}`],
           datasets: [{
             label: 'Step Goal',
-            data: [`${user.dailyStepGoal}`,3000],
+            data: [`${user.dailyStepGoal}`,10000* (3000/`${user.dailyStepGoal}`)],
             backgroundColor: [
               'rgba(0,204,112, 0.8)',
               'rgba(0, 0, 0, 0.2)'
@@ -234,7 +234,7 @@ function createStepCharts(user, friendsSteps) {
           labels: [`Average Friend's Step Goal: ${Math.round(friendsSteps)}`],
           datasets: [{
             label: 'Step Goal',
-            data: [`${Math.round(friendsSteps)}`,3000],
+            data: [`${Math.round(friendsSteps)}`,10000* (3000/`${Math.round(friendsSteps)}`)],
             backgroundColor: [
               'rgba(0,204,112, 0.8)',
               'rgba(0, 0, 0, 0.2)'
@@ -303,7 +303,7 @@ function createHydrationDayChart(data,dates) {
           labels: [`Day: ${dates[6].getMonth() + 1}/${dates[6].getDate()}, Water Consumption: ${data} fl oz`],
           datasets: [{
             label: 'Fluid Ounces',
-            data: [data, 30],
+            data: [data, 100* (20/data)],
             backgroundColor: [
               'rgba(39, 76, 245, 0.8)',
               'rgba(0, 0, 0, 0.2)'
@@ -341,7 +341,7 @@ function createFriendChart(id, friendIds, friendSteps, i) {
         labels: [`${friendIds[i]}`],
         datasets: [{
           label: 'Step Goal',
-          data: [`${friendSteps[i]}`,3000],
+          data: [`${friendSteps[i]}`,10000* (3000/`${friendSteps[i]}`)],
           backgroundColor: [
             'rgba(0,204,112, 0.8)',
             'rgba(0, 0, 0, 0.2)'
