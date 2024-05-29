@@ -1,7 +1,7 @@
 import Chart from 'chart.js/auto';
 
 function createSleepHoursAverageChart(data) {
-    new Chart(document.getElementById('sleepHoursAverageChart'), {
+    const chart = new Chart(document.getElementById('sleepHoursAverageChart'), {
         type: 'doughnut',
         data: {
           labels: [`Average Hours Slept: ${data} hours`],
@@ -32,10 +32,11 @@ function createSleepHoursAverageChart(data) {
           }
         }     
       });
+      return chart;
 }
 
 function createSleepQualityAverageChart(data) {
-    new Chart(document.getElementById('sleepQualityAverageChart'), {
+    const chart = new Chart(document.getElementById('sleepQualityAverageChart'), {
         type: 'doughnut',
         data: {
           labels: [`Average Sleep Quality: ${data}/5`],
@@ -66,9 +67,10 @@ function createSleepQualityAverageChart(data) {
           }
         }     
       });
+      return chart;
 }
 function createSleepQualityDailyChart(data, dates) {
-    new Chart(document.getElementById('sleepQualityDailyChart'), {
+    const chart = new Chart(document.getElementById('sleepQualityDailyChart'), {
         type: 'doughnut',
         data: {
           labels: [`Day: ${dates[6].getMonth() + 1}/${dates[6].getDate()}, Sleep Quality: ${data[0]}/5`],
@@ -99,9 +101,10 @@ function createSleepQualityDailyChart(data, dates) {
           }
         }     
       });
+      return chart;
 }
 function createSleepHoursDailyChart(data, dates) {
-    new Chart(document.getElementById('sleepHoursDailyChart'), {
+    const chart = new Chart(document.getElementById('sleepHoursDailyChart'), {
         type: 'doughnut',
         data: {
           labels: [`Day: ${dates[6].getMonth() + 1}/${dates[6].getDate()}, Hours Slept: ${data} hours`],
@@ -132,9 +135,10 @@ function createSleepHoursDailyChart(data, dates) {
           }
         }     
       });
+      return chart;
 }
 function createSleepHoursAndQualityWeekChart(hoursData, qualityData, dates) {
-    new Chart(document.getElementById('sleepHoursandQualityWeekChart'), {
+    const chart = new Chart(document.getElementById('sleepHoursandQualityWeekChart'), {
         type: 'bar',
         data: {
           labels: dates.map(date => `${date.getMonth() + 1}/${date.getDate()}`),
@@ -192,6 +196,7 @@ function createSleepHoursAndQualityWeekChart(hoursData, qualityData, dates) {
           }
         }
       });
+      return chart;
 }   
 
      

@@ -12,6 +12,11 @@ import { getCurrentDayWaterConsumption, getConsumedWaterForWeek, getConsumedWate
 import { getHoursSleptForCurrentDay, getSleepHoursForWeek, getSleepDates, getSleepQualityForWeek, getUserAverageHoursSlept, getUserAverageSleepQuality } from './sleep.js';
 
 let userId = 0;
+let sleepHoursChart;
+let sleepQualityChart;
+let sleepQualityDailyChart;
+let sleepHoursDailyChart;
+let sleepHoursAndQualityChart;
 const welcomeMessage = document.querySelector('.welcome-message');
 const userEmail = document.querySelector('.user-email');
 const userAddress = document.querySelector('.user-address');
@@ -40,9 +45,9 @@ OpenModalBtn.addEventListener('click', function(){
 })
 
 
-submitBtn.addEventListener('click', function(e){
-  e.preventDefault(); 
+submitBtn.addEventListener('click', function(){
   postSleepData(userId,dateInput.value,hoursSleptInput.value,qualitySleptInput.value)
+  updateCurrentSleepData()
 })
 
 hoursSleptInput.addEventListener('input', updateHoursSleptValidationStatus)
@@ -96,11 +101,11 @@ function updateSleepData(data, id) {
   const sleepQualityWeekData = getSleepQualityForWeek(allSleepData, id)
   const sleepHoursAverageData = getUserAverageHoursSlept(allSleepData, id)
   const sleepQualityAverageData = getUserAverageSleepQuality(allSleepData, id)
-  createSleepHoursAverageChart(sleepHoursAverageData)
-  createSleepQualityAverageChart(sleepQualityAverageData)
-  createSleepQualityDailyChart(sleepQualityWeekData,sleepHoursWeekDataConverted)
-  createSleepHoursDailyChart(sleepHoursDayData,sleepHoursWeekDataConverted)
-  createSleepHoursAndQualityWeekChart(sleepHoursWeekData,sleepQualityWeekData,sleepHoursWeekDataConverted)
+  sleepHoursChart = createSleepHoursAverageChart(sleepHoursAverageData)
+  sleepQualityChart = createSleepQualityAverageChart(sleepQualityAverageData)
+  sleepQualityDailyChart = createSleepQualityDailyChart(sleepQualityWeekData,sleepHoursWeekDataConverted)
+  sleepHoursDailyChart = createSleepHoursDailyChart(sleepHoursDayData,sleepHoursWeekDataConverted)
+  sleepHoursAndQualityChart = createSleepHoursAndQualityWeekChart(sleepHoursWeekData,sleepQualityWeekData,sleepHoursWeekDataConverted)
 }
 
 function updateUserData(data, id) {
@@ -134,6 +139,46 @@ function postSleepData(id, date, hoursSlept, sleepQuality) {
     }),
     headers: {'Content-Type': 'application/json'}
   }).catch(err => alert('Could not post new sleep data.', err))
+}
+
+function updateCurrentSleepData() {
+  setTimeout(() => Promise.all([fetchData('sleep')]).then(e => {
+    const allSleepData = e[0].sleepData
+    const sleepWeekDateData = getSleepDates(allSleepData,userId)
+    const sleepHoursWeekData = getSleepHoursForWeek(allSleepData,userId)
+    const sleepHoursWeekDataConverted = sleepWeekDateData.reverse().map(data => new Date(data))
+    const sleepHoursDayData = getHoursSleptForCurrentDay(allSleepData, userId)
+    const sleepQualityWeekData = getSleepQualityForWeek(allSleepData, userId)
+    const sleepHoursAverageData = getUserAverageHoursSlept(allSleepData, userId)
+    const sleepQualityAverageData = getUserAverageSleepQuality(allSleepData, userId)
+    console.log(allSleepData)
+    sleepHoursChart.config.data.labels = [`Average Hours Slept: ${sleepHoursAverageData} hours`]
+    sleepHoursChart.config.data.datasets.data = [+sleepHoursAverageData, 10/[+sleepHoursAverageData]]
+    sleepQualityChart.config.data.labels = [`Average Sleep Quality: ${sleepQualityAverageData}/5`]
+    sleepHoursChart.config.data.datasets.data = [+sleepQualityAverageData, 5/[+sleepQualityAverageData]]
+    
+    sleepQualityDailyChart.config.data.labels = [`Day: ${sleepHoursWeekDataConverted[6].getMonth() + 1}/${sleepHoursWeekDataConverted[6].getDate()}, Sleep Quality: ${sleepQualityWeekData[0]}/5`]
+    sleepQualityDailyChart.config.data.datasets.data = [+sleepQualityWeekData, 5/[+sleepQualityWeekData]]
+    
+    sleepHoursDailyChart.config.data.labels = [`Day: ${sleepHoursWeekDataConverted[6].getMonth() + 1}/${sleepHoursWeekDataConverted[6].getDate()}, Hours Slept: ${sleepHoursDayData} hours`]
+    sleepHoursDailyChart.config.data.datasets.data = [sleepHoursDayData, 10/sleepHoursDayData],
+
+    sleepHoursAndQualityChart.config.data.labels = sleepHoursWeekDataConverted.map(date => `${date.getMonth() + 1}/${date.getDate()}`)
+    sleepHoursAndQualityChart.config.data.datasets = [{
+      data: sleepHoursWeekData.map(hours => hours),
+      backgroundColor: 'rgba(213, 184, 255)'
+    },
+    {
+      data: sleepQualityWeekData.map(quality => quality),
+      backgroundColor: 'rgb(147,112,219)', 
+    }
+  ]
+    sleepHoursChart.update()
+    sleepQualityChart.update()
+    sleepQualityDailyChart.update()
+    sleepHoursDailyChart.update()
+    sleepHoursAndQualityChart.update()
+  }),3000)
 }
 
 function updatedUserFriends(user, users) {
