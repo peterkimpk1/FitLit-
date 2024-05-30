@@ -32,11 +32,10 @@ const hoursSleptInput = document.getElementById('hours-slept');
 const qualitySleptInput = document.getElementById('quality-of-sleep')
 const hoursSleptErrorMessage = document.querySelector('.hours-slept-error-message')
 const qualitySleptErrorMessage = document.querySelector('.sleep-quality-error-message')
-
+const dateErrorMessage = document.getElementById('date-error-message')
 
 window.addEventListener('load', () => {
   fetchUserData()
-  disableSubmitButton()
 })
 
 OpenModalBtn.addEventListener('click', function(){
@@ -44,34 +43,57 @@ OpenModalBtn.addEventListener('click', function(){
 })
 
 submitBtn.addEventListener('click', function(){
-  disableSubmitButton()
+  form.style.display = 'none'
   postSleepData(userId,dateInput.value,hoursSleptInput.value,qualitySleptInput.value)
   updateCurrentSleepData()
 })
 
-hoursSleptInput.addEventListener('input', validateHoursSleptInput)
-qualitySleptInput.addEventListener('input', validateSleepQualityInput)
+hoursSleptInput.addEventListener('input', validateInputs)
+qualitySleptInput.addEventListener('input', validateInputs)
+dateInput.addEventListener('input', validateInputs)
+
+function validateInputs() {
+  console.log(validateHoursSleptInput())
+  console.log(validateSleepQualityInput())
+  console.log(validateDateInput())
+  if (validateHoursSleptInput() && validateSleepQualityInput() && validateDateInput()) {
+    submitBtn.removeAttribute('disabled')
+  }
+}
+
+function validateDateInput() {
+  const date = dateInput.value;
+  let newDate = new Date(date)
+  if ((newDate.getMonth() + 1 <= 12 && newDate.getMonth() + 1 >=1) && (newDate.getDate() <=31 && newDate.getDate() >= 1) &&
+ (newDate.getFullYear() <= 2024 && newDate.getFullYear() >= 1900)) {
+    return true;
+  }
+  else if (newDate.getFullYear() > 2024) {
+    dateErrorMessage.classList.remove('hidden')
+    return false;
+  }
+}
 
 function validateHoursSleptInput() {
   const hours = hoursSleptInput.value
-  if(hours >= 0 && hours <= 24) {
+  if((hours >= 0 && hours <= 24) && hours) {
     hoursSleptErrorMessage.classList.add('hidden'); 
-    submitBtn.disabled = false;
-  } else {
+    return true;
+  } else if (hours > 24) {
     hoursSleptErrorMessage.classList.remove('hidden'); 
-    submitBtn.disabled = true;
+    return false;
   }
 }
 
 function validateSleepQualityInput() {
   const quality = qualitySleptInput.value
-  if(quality >= 0 && quality <= 5) {
+  if(quality >= 0 && quality <= 5 && quality) {
     qualitySleptErrorMessage.classList.add('hidden')
-    submitBtn.disabled = false;
+    return true; 
   
-  } else {
+  } else if (quality > 5) {
     qualitySleptErrorMessage.classList.remove('hidden')
-    submitBtn.disabled = true;
+    return false; 
   }
 }
 
