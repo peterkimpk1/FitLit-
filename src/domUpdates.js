@@ -53,9 +53,6 @@ qualitySleptInput.addEventListener('input', validateInputs)
 dateInput.addEventListener('input', validateInputs)
 
 function validateInputs() {
-  console.log(validateHoursSleptInput())
-  console.log(validateSleepQualityInput())
-  console.log(validateDateInput())
   if (validateHoursSleptInput() && validateSleepQualityInput() && validateDateInput()) {
     submitBtn.removeAttribute('disabled')
   }
