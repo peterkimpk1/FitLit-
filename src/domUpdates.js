@@ -42,7 +42,8 @@ OpenModalBtn.addEventListener('click', function(){
   form.style.display = 'block';
 })
 
-submitBtn.addEventListener('click', function(){
+submitBtn.addEventListener('click', function(e){
+  e.preventDefault();
   form.style.display = 'none'
   postSleepData(userId,dateInput.value,hoursSleptInput.value,qualitySleptInput.value)
   updateCurrentSleepData()
