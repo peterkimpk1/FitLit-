@@ -6,7 +6,7 @@ function createSleepHoursAverageChart(data) {
         data: {
           labels: [`Average Hours Slept: ${data} hours`],
           datasets: [{
-            label: 'Sleep Quality',
+            label: 'Sleep Hours',
             data: [+data, 10/[+data]],
             backgroundColor: [
               'rgba(213, 184, 255)',
@@ -25,10 +25,10 @@ function createSleepHoursAverageChart(data) {
               display: true,
             },
             tooltip: {
-              filter: (tooltipItem) => {
-                return tooltipItem.dataIndex === 0;
-              }
-            }
+                filter: (tooltipItem) => {
+                  return tooltipItem.dataIndex === 0;
+                }
+            },
           }
         }     
       });
@@ -63,7 +63,7 @@ function createSleepQualityAverageChart(data) {
               filter: (tooltipItem) => {
                 return tooltipItem.dataIndex === 0;
               }
-            }
+          },
           }
         }     
       });
@@ -97,7 +97,7 @@ function createSleepQualityDailyChart(data, dates) {
               filter: (tooltipItem) => {
                 return tooltipItem.dataIndex === 0;
               }
-            }
+            },
           }
         }     
       });
@@ -131,7 +131,7 @@ function createSleepHoursDailyChart(data, dates) {
               filter: (tooltipItem) => {
                 return tooltipItem.dataIndex === 0;
               }
-            }
+          },
           }
         }     
       });
@@ -198,8 +198,6 @@ function createSleepHoursAndQualityWeekChart(hoursData, qualityData, dates) {
       });
       return chart;
 }   
-
-     
 
 function createStepCharts(user, friendsSteps) {
     new Chart(document.getElementById('user-step-goal-chart'), {

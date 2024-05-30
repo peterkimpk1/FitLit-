@@ -142,8 +142,8 @@ function postSleepData(id, date, hoursSlept, sleepQuality) {
 }
 
 function updateCurrentSleepData() {
-  setTimeout(() => Promise.all([fetchData('sleep')]).then(e => {
-    const allSleepData = e[0].sleepData
+  setTimeout(() => fetchData('sleep').then(e => {
+    const allSleepData = e.sleepData
     const sleepWeekDateData = getSleepDates(allSleepData,userId)
     const sleepHoursWeekData = getSleepHoursForWeek(allSleepData,userId)
     const sleepHoursWeekDataConverted = sleepWeekDateData.reverse().map(data => new Date(data))
@@ -151,33 +151,16 @@ function updateCurrentSleepData() {
     const sleepQualityWeekData = getSleepQualityForWeek(allSleepData, userId)
     const sleepHoursAverageData = getUserAverageHoursSlept(allSleepData, userId)
     const sleepQualityAverageData = getUserAverageSleepQuality(allSleepData, userId)
-    console.log(allSleepData)
-    sleepHoursChart.config.data.labels = [`Average Hours Slept: ${sleepHoursAverageData} hours`]
-    sleepHoursChart.config.data.datasets.data = [+sleepHoursAverageData, 10/[+sleepHoursAverageData]]
-    sleepQualityChart.config.data.labels = [`Average Sleep Quality: ${sleepQualityAverageData}/5`]
-    sleepHoursChart.config.data.datasets.data = [+sleepQualityAverageData, 5/[+sleepQualityAverageData]]
-    
-    sleepQualityDailyChart.config.data.labels = [`Day: ${sleepHoursWeekDataConverted[6].getMonth() + 1}/${sleepHoursWeekDataConverted[6].getDate()}, Sleep Quality: ${sleepQualityWeekData[0]}/5`]
-    sleepQualityDailyChart.config.data.datasets.data = [+sleepQualityWeekData, 5/[+sleepQualityWeekData]]
-    
-    sleepHoursDailyChart.config.data.labels = [`Day: ${sleepHoursWeekDataConverted[6].getMonth() + 1}/${sleepHoursWeekDataConverted[6].getDate()}, Hours Slept: ${sleepHoursDayData} hours`]
-    sleepHoursDailyChart.config.data.datasets.data = [sleepHoursDayData, 10/sleepHoursDayData],
-
-    sleepHoursAndQualityChart.config.data.labels = sleepHoursWeekDataConverted.map(date => `${date.getMonth() + 1}/${date.getDate()}`)
-    sleepHoursAndQualityChart.config.data.datasets = [{
-      data: sleepHoursWeekData.map(hours => hours),
-      backgroundColor: 'rgba(213, 184, 255)'
-    },
-    {
-      data: sleepQualityWeekData.map(quality => quality),
-      backgroundColor: 'rgb(147,112,219)', 
-    }
-  ]
-    sleepHoursChart.update()
-    sleepQualityChart.update()
-    sleepQualityDailyChart.update()
-    sleepHoursDailyChart.update()
-    sleepHoursAndQualityChart.update()
+    sleepHoursChart.destroy()
+    sleepQualityChart.destroy()
+    sleepQualityDailyChart.destroy()
+    sleepHoursDailyChart.destroy()
+    sleepHoursAndQualityChart.destroy()
+    sleepHoursChart = createSleepHoursAverageChart(sleepHoursAverageData)
+    sleepQualityChart = createSleepQualityAverageChart(sleepQualityAverageData)
+    sleepQualityDailyChart = createSleepQualityDailyChart(sleepQualityWeekData,sleepHoursWeekDataConverted)
+    sleepHoursDailyChart = createSleepHoursDailyChart(sleepHoursDayData,sleepHoursWeekDataConverted)
+    sleepHoursAndQualityChart = createSleepHoursAndQualityWeekChart(sleepHoursWeekData,sleepQualityWeekData,sleepHoursWeekDataConverted)
   }),3000)
 }
 
