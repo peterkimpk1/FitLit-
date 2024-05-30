@@ -15,7 +15,7 @@ function getAverageStepGoalAllUsers(users: User[]): number {
     return avgStepGoalAllUsers
 }; 
 
-function getRandomUser(users: User[]): {
+function getRandomUser(users: User[]): User | undefined {
     const randomIndex = Math.floor(Math.random() * users.length);
     return users[randomIndex]
 };
