@@ -181,6 +181,7 @@ p {
   text-align: center;
   border-radius: var(--section-border-radius);
   background-color: var(--friend-color);
+  height: 800px;
 }
 
 .friends-wrapper {
