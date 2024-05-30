@@ -37,6 +37,7 @@ const qualitySleptErrorMessage = document.querySelector('.sleep-quality-error-me
 
 window.addEventListener('load', () => {
   fetchUserData()
+  disableSubmitButton()
 })
 
 OpenModalBtn.addEventListener('click', function(){
@@ -44,24 +45,14 @@ OpenModalBtn.addEventListener('click', function(){
 })
 
 submitBtn.addEventListener('click', function(){
+  disableSubmitButton()
   postSleepData(userId,dateInput.value,hoursSleptInput.value,qualitySleptInput.value)
   updateCurrentSleepData()
 })
 
-dateInput.addEventListener('input', validateDateInput)
+// dateInput.addEventListener('input', validateDateInput)
 hoursSleptInput.addEventListener('input', validateHoursSleptInput)
 qualitySleptInput.addEventListener('input', validateSleepQualityInput)
-
-function validateDateInput() {
-  const isValidInput = isValidDateInput(dateInput.value)
-  if (!isValidInput) {
-    dateErrorMessage.classList.remove('hidden'); 
-    submitBtn.disabled = true;
-  } else {
-    dateErrorMessage.classList.add('hidden'); 
-    submitBtn.disabled = false;
-  }
-}
 
 function validateHoursSleptInput() {
   const hours = hoursSleptInput.value
@@ -86,12 +77,13 @@ function validateSleepQualityInput() {
   }
 }
 
-function isValidDateInput(date) {
-  if (date.value) {
-    return true
+function disableSubmitButton() {
+  if(hoursSleptInput.value && qualitySleptInput.value) {
+    submitBtn.disabled = false
+  } else {
+    submitBtn.disabled = true
   }
-} 
-
+}
 
 function updateHydrationData(data, id) {
   const AllHydrationData = data
