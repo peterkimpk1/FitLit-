@@ -27,14 +27,12 @@ const OpenModalBtn = document.getElementById('openModalBtn');
 const submitBtn = document.getElementById('submitBtn')
 const form = document.getElementById('detailsModal');
 
-
+const dateInput = document.getElementById('date')
 const hoursSleptInput = document.getElementById('hours-slept');
 const qualitySleptInput = document.getElementById('quality-of-sleep')
-const dateInput = document.getElementById('date')
-const dateErrorMessage = document.querySelector('.date-error-message')
 const hoursSleptErrorMessage = document.querySelector('.hours-slept-error-message')
 const qualitySleptErrorMessage = document.querySelector('.sleep-quality-error-message')
-
+const dateErrorMessage = document.getElementById('date-error-message')
 
 window.addEventListener('load', () => {
   fetchUserData()
@@ -44,43 +42,56 @@ OpenModalBtn.addEventListener('click', function(){
   form.style.display = 'block';
 })
 
-
 submitBtn.addEventListener('click', function(){
+  form.style.display = 'none'
   postSleepData(userId,dateInput.value,hoursSleptInput.value,qualitySleptInput.value)
   updateCurrentSleepData()
 })
 
-hoursSleptInput.addEventListener('input', updateHoursSleptValidationStatus)
-qualitySleptInput.addEventListener('input', updateSleepQualityValidationStatus)
+hoursSleptInput.addEventListener('input', validateInputs)
+qualitySleptInput.addEventListener('input', validateInputs)
+dateInput.addEventListener('input', validateInputs)
 
-function updateHoursSleptValidationStatus() {
-  const isValidHours = isValidHoursSlept(hoursSleptInput.value);
-  if (!isValidHours) {
-    hoursSleptErrorMessage.classList.remove('hidden'); 
-    submitBtn.disabled = true;
-  } else {
+function validateInputs() {
+  if (validateHoursSleptInput() && validateSleepQualityInput() && validateDateInput()) {
+    submitBtn.removeAttribute('disabled')
+  }
+}
+
+function validateDateInput() {
+  const date = dateInput.value;
+  let newDate = new Date(date)
+  if ((newDate.getMonth() + 1 <= 12 && newDate.getMonth() + 1 >=1) && (newDate.getDate() <=31 && newDate.getDate() >= 1) &&
+ (newDate.getFullYear() <= 2024 && newDate.getFullYear() >= 1900)) {
+    return true;
+  }
+  else if (newDate.getFullYear() > 2024) {
+    dateErrorMessage.classList.remove('hidden')
+    return false;
+  }
+}
+
+function validateHoursSleptInput() {
+  const hours = hoursSleptInput.value
+  if((hours >= 0 && hours <= 24) && hours) {
     hoursSleptErrorMessage.classList.add('hidden'); 
-    submitBtn.disabled = false;
+    return true;
+  } else if (hours > 24) {
+    hoursSleptErrorMessage.classList.remove('hidden'); 
+    return false;
   }
 }
 
-function updateSleepQualityValidationStatus() {
-  const isValidQuality = isValidSleepQuality(qualitySleptInput.value)
-  if (!isValidQuality) {
-    qualitySleptErrorMessage.classList.remove('hidden')
-    submitBtn.disabled = true;
-  } else {
+function validateSleepQualityInput() {
+  const quality = qualitySleptInput.value
+  if(quality >= 0 && quality <= 5 && quality) {
     qualitySleptErrorMessage.classList.add('hidden')
-    submitBtn.disabled = false;
+    return true; 
+  
+  } else if (quality > 5) {
+    qualitySleptErrorMessage.classList.remove('hidden')
+    return false; 
   }
-}
-
-function isValidHoursSlept(hours) {
-  return hours >= 0 && hours <= 24
-}
-
-function isValidSleepQuality(quality) {
-  return quality >= 0 && quality <= 5
 }
 
 function updateHydrationData(data, id) {

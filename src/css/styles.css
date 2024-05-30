@@ -267,7 +267,8 @@ input {
 }
 
 .hours-slept-error-message,
-.sleep-quality-error-message {
+.sleep-quality-error-message,
+#date-error-message {
   color: red
 }
 
