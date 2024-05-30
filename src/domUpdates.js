@@ -30,7 +30,6 @@ const form = document.getElementById('detailsModal');
 const dateInput = document.getElementById('date')
 const hoursSleptInput = document.getElementById('hours-slept');
 const qualitySleptInput = document.getElementById('quality-of-sleep')
-const dateErrorMessage = document.querySelector('.date-error-message')
 const hoursSleptErrorMessage = document.querySelector('.hours-slept-error-message')
 const qualitySleptErrorMessage = document.querySelector('.sleep-quality-error-message')
 
@@ -50,7 +49,6 @@ submitBtn.addEventListener('click', function(){
   updateCurrentSleepData()
 })
 
-// dateInput.addEventListener('input', validateDateInput)
 hoursSleptInput.addEventListener('input', validateHoursSleptInput)
 qualitySleptInput.addEventListener('input', validateSleepQualityInput)
 
@@ -74,14 +72,6 @@ function validateSleepQualityInput() {
   } else {
     qualitySleptErrorMessage.classList.remove('hidden')
     submitBtn.disabled = true;
-  }
-}
-
-function disableSubmitButton() {
-  if(hoursSleptInput.value && qualitySleptInput.value) {
-    submitBtn.disabled = false
-  } else {
-    submitBtn.disabled = true
   }
 }
 
