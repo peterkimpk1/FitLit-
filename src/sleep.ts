@@ -1,4 +1,8 @@
-function getUserAverageHoursSlept(data: {userID: number, date: string, hoursSlept: number, sleepQuality: number}[], userId: number) {
+interface Data {
+    userID: number, date: string | Date, hoursSlept: number, sleepQuality: number
+}
+
+function getUserAverageHoursSlept(data: Data[], userId: number) {
    const totalHours = data.reduce((total,sleep) => {
         if (sleep.userID === userId) {
             total += sleep.hoursSlept
@@ -9,7 +13,7 @@ function getUserAverageHoursSlept(data: {userID: number, date: string, hoursSlep
     return (totalHours / dayCount).toFixed(2)
 }
 
-function getUserAverageSleepQuality(data: {userID: number, date: string, hoursSlept: number, sleepQuality: number}[], userId: number) {
+function getUserAverageSleepQuality(data: Data[], userId: number) {
     const totalSleepQuality = data.reduce((total,sleep) => {
         if (sleep.userID === userId) {
             total += sleep.sleepQuality
@@ -20,7 +24,7 @@ function getUserAverageSleepQuality(data: {userID: number, date: string, hoursSl
     return (totalSleepQuality / dayCount).toFixed(2)
 }
 
-function getHoursSleptForCurrentDay(data: {userID: number, date: string | Date, hoursSlept: number, sleepQuality: number}[], userId: number) {
+function getHoursSleptForCurrentDay(data: Data[], userId: number) {
     const sleepDataForSpecificUser = data.filter(userData => {
         return userData.userID === userId;
     });
@@ -45,21 +49,21 @@ function getHoursSleptForCurrentDay(data: {userID: number, date: string | Date, 
     return sortedSleepDataForSpecificUser[0].hoursSlept;
 }
 
-function getSleepHoursAndQualityForAnyWeek(data: {userID: number, date: string | Date, hoursSlept: number, sleepQuality: number}[], userId: number, startingDate: Date) {
+function getSleepHoursAndQualityForAnyWeek(data: Data[], userId: number, startingDate: Date) {
     let singleUserData = data.filter(user => user.userID === userId)
     let startDateIndex = singleUserData.findIndex(user => user.userID === userId && user.date === startingDate)
     return singleUserData.splice(startDateIndex,startDateIndex + 6).map(user => ({
         hoursSlept: user.hoursSlept, sleepQuality: user.sleepQuality}))
     }
     
-function getUserSleepQualityForGivenDay(data: {userID: number, date: string | Date, hoursSlept: number, sleepQuality: number}[], userId: number, date: Date) {
+function getUserSleepQualityForGivenDay(data: Data[], userId: number, date: Date) {
     const givenDay = data.find( userData => {
         return userData.userID === userId && userData.date === date
     })
     return givenDay.sleepQuality
 }
 
-function getSleepQualityForWeek(data: {userID: number, date: string | Date, hoursSlept: number, sleepQuality: number}[], userId: number) {
+function getSleepQualityForWeek(data: Data[], userId: number) {
     let sortedSingleUserData = data.filter(user => user.userID === userId).sort((a,b) => {
         if (new Date(b.date) > new Date(a.date)) {
             return 1;
@@ -72,7 +76,7 @@ function getSleepQualityForWeek(data: {userID: number, date: string | Date, hour
     return sortedSingleUserData.splice(0,7).map(user => user.sleepQuality)
 }
 
-function getSleepHoursForWeek(data: {userID: number, date: string | Date, hoursSlept: number, sleepQuality: number}[], userId: number) {
+function getSleepHoursForWeek(data: Data[], userId: number) {
     let sortedSingleUserData = data.filter(user => user.userID === userId).sort((a,b) => {
         if (new Date(b.date) > new Date(a.date)) {
             return 1;
@@ -85,7 +89,7 @@ function getSleepHoursForWeek(data: {userID: number, date: string | Date, hoursS
     return sortedSingleUserData.splice(0,7).map(user => user.hoursSlept)
 }
 
-function getSleepDates(data: {userID: number, date: string | Date, hoursSlept: number, sleepQuality: number}[], userId: number) {
+function getSleepDates(data: Data[], userId: number) {
     const userEntries = data.filter(user => user.userID === userId);
     if (userEntries.length === 0) {
         return null; 
