@@ -27,7 +27,10 @@ function getCurrentDayWaterConsumption(data:Data[], userId: number) {
         if (dateB.date > dateA.date) {
             return 1; 
         }
-        
+        if (dateB.date < dateA.date) {
+            return -1;
+        }
+        return 0;      
     })
     return sortedhydrationDataForSpecificUser[0].numOunces
 }
