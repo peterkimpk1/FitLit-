@@ -61,23 +61,9 @@ function getConsumedWaterDates(data:Data[], userId: number) {
     return sortedSingleUserData.splice(0,7).map(user => user.date)
 }
 
-function updatedUserHydration(hydration, user){
-    const userHydrationData = hydration.filter(hydrate => hydrate.userID === user);
-
-    if (userHydrationData.length === 0) {
-        return;
-    }
-
-    const totalFluidOunces = userHydrationData.reduce((total:number, hydrate) => total + hydrate.numOunces, 0);
-    const averageFluidOuncesPerDay = totalFluidOunces / userHydrationData.length;
-
-    return averageFluidOuncesPerDay;
-}
-
 export {
     getConsumedWaterForWeek, 
     getConsumedWaterForSpecificDate, 
-    updatedUserHydration,
     getCurrentDayWaterConsumption,
     getConsumedWaterDates
 }
