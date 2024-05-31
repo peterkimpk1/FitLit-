@@ -1,11 +1,10 @@
 const path = require('path');
 module.exports = {
   "mode": "none",
-  "entry": "./src/scripts.ts",
+  "entry": "./src/scripts.js",
   "output": {
     "path": __dirname + '/dist',
     "filename": "bundle.js",
-    sourceMapFilename: "bundle.js.map"
   },
   devServer: {
     static: {
@@ -32,15 +31,7 @@ module.exports = {
             }
           }
         ]
-      },
-      {
-        test: /\.tsx?$/,
-        use: 'ts-loader',
-        exclude: /node_modules/,
       }
     ]
-  },
-  resolve: {
-    extensions: ['.tsx', '.ts', '.js'],
-  },
+  }
 };
