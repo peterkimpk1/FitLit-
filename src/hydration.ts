@@ -24,7 +24,10 @@ function getCurrentDayWaterConsumption(data:Data[], userId: number) {
         specificUserData.date = new Date(specificUserData.date)
     })
     const sortedhydrationDataForSpecificUser = hydrationDataForSpecificUser.sort((dateA, dateB) => {
-        return dateB.date - dateA.date
+        if (dateB.date > dateA.date) {
+            return 1; 
+        }
+        
     })
     return sortedhydrationDataForSpecificUser[0].numOunces
 }
