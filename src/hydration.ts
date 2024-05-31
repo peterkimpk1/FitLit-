@@ -4,7 +4,7 @@ interface Data {
     numOunces: number
 }
 
-function getConsumedWaterForSpecificDate(data:Data[], userId: number, date:number) {
+function getConsumedWaterForSpecificDate(data:Data[], userId: number, date:string) {
     const userDataByUserIdAndDate = data.filter(userData => userData.userID === userId && userData.date === date)
     if(userDataByUserIdAndDate.length === 0){
         return undefined;
@@ -36,9 +36,18 @@ function getCurrentDayWaterConsumption(data:Data[], userId: number) {
 }
 
 function getConsumedWaterForWeek(data:Data[], userId: number) {
-    let sortedSingleUserData = data.filter(user => user.userID === userId).sort((a,b) => new Date(b.date) - new Date(a.date))
+    let sortedSingleUserData = data.filter(user => user.userID === userId).sort((a,b) => {
+       if (new Date(b.date) > new Date(a.date)) {
+            return 1;
+       }
+       if (new Date(b.date) > new Date(a.date)) {
+            return -1; 
+       }
+       return 0
+    })
     return sortedSingleUserData.splice(0,7).map(user => user.numOunces)
 }
+
 function getConsumedWaterDates(data:Data[], userId: number) {
     let sortedSingleUserData = data.filter(user => user.userID === userId).sort((a,b) => new Date(b.date) - new Date(a.date))
     return sortedSingleUserData.splice(0,7).map(user => user.date)
@@ -50,7 +59,7 @@ function updatedUserHydration(hydration, user){
         return;
     }
 
-    const totalFluidOunces = userHydrationData.reduce((total, hydrate) => total + hydrate.numOunces, 0);
+    const totalFluidOunces = userHydrationData.reduce((total:number, hydrate) => total + hydrate.numOunces, 0);
     const averageFluidOuncesPerDay = totalFluidOunces / userHydrationData.length;
 
     return averageFluidOuncesPerDay;
