@@ -1,5 +1,5 @@
 import { expect } from 'chai';
-import sleepData from "../src/data/sample-sleep-test-data.js"
+import sleepData from "../src/data/sample-sleep-test-data"
 const sampleData = sleepData.sleepData
 const {getUserAverageHoursSlept, getUserAverageSleepQuality, getSleepHoursAndQualityForAnyWeek, getHoursSleptForCurrentDay, getSleepQualityForWeek, getSleepHoursForWeek, getUserSleepQualityForGivenDay} = require('../src/sleep')
 
