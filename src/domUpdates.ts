@@ -72,6 +72,7 @@ qualitySleptInput.addEventListener('input', validateInputs)
 dateInput.addEventListener('input', validateInputs)
 
 function validateInputs() {
+  validateDateInput()
   if (validateHoursSleptInput() && validateSleepQualityInput() && validateDateInput()) {
     submitBtn.removeAttribute('disabled')
   }
@@ -79,7 +80,9 @@ function validateInputs() {
 
 function validateDateInput() {
   const date = dateInputValue;
+  console.log(date)
   let newDate = new Date(date)
+  console.log(newDate)
   if ((newDate.getMonth() + 1 <= 12 && newDate.getMonth() + 1 >=1) && (newDate.getDate() <=31 && newDate.getDate() >= 1) &&
  (newDate.getFullYear() <= 2024 && newDate.getFullYear() >= 1900)) {
     return true;
