@@ -1,14 +1,14 @@
 import Chart from 'chart.js/auto';
 
-function createSleepHoursAverageChart(data) {
-  const sleepHoursAverageChart = document.getElementById('sleepHoursAverageChart') as HTMLCanvasElement;
-    const chart = new Chart(sleepHoursAverageChart, {
+function createSleepHoursAverageChart(data: number) {
+  const sleepHoursAverageCanvas = document.getElementById('sleepHoursAverageChart') as HTMLCanvasElement;
+    const chart = new Chart(sleepHoursAverageCanvas, {
         type: 'doughnut',
         data: {
           labels: [`Average Hours Slept: ${data} hours`],
           datasets: [{
             label: 'Sleep Hours',
-            data: [+data, 10/[+data]],
+            data: [data, 10/data],
             backgroundColor: [
               'rgba(213, 184, 255)',
               'rgba(180, 153, 180, 0.3)'
@@ -36,14 +36,15 @@ function createSleepHoursAverageChart(data) {
       return chart;
 }
 
-function createSleepQualityAverageChart(data) {
-    const chart = new Chart(document.getElementById('sleepQualityAverageChart'), {
+function createSleepQualityAverageChart(data: number) {
+  const sleepQualityAverageCanvas = document.getElementById('sleepQualityAverageChart') as HTMLCanvasElement;
+    const chart = new Chart(sleepQualityAverageCanvas, {
         type: 'doughnut',
         data: {
           labels: [`Average Sleep Quality: ${data}/5`],
           datasets: [{
             label: 'Sleep Quality',
-            data: [+data, 5/[+data]],
+            data: [data, 5/data],
             backgroundColor: [
               'rgba(213, 184, 255)',
               'rgba(180, 153, 180, 0.3)'
@@ -70,8 +71,10 @@ function createSleepQualityAverageChart(data) {
       });
       return chart;
 }
-function createSleepQualityDailyChart(data, dates) {
-    const chart = new Chart(document.getElementById('sleepQualityDailyChart'), {
+
+function createSleepQualityDailyChart(data: number[], dates: Date[]) {
+  const sleepQualityDailyCanvas = document.getElementById('sleepQualityDailyChart') as HTMLCanvasElement;
+    const chart = new Chart(sleepQualityDailyCanvas, {
         type: 'doughnut',
         data: {
           labels: [`Day: ${dates[6].getMonth() + 1}/${dates[6].getDate()}, Sleep Quality: ${data[0]}/5`],
@@ -104,8 +107,10 @@ function createSleepQualityDailyChart(data, dates) {
       });
       return chart;
 }
-function createSleepHoursDailyChart(data, dates) {
-    const chart = new Chart(document.getElementById('sleepHoursDailyChart'), {
+
+function createSleepHoursDailyChart(data: number, dates: Date[]) {
+  const sleepHoursDailyCanvas = document.getElementById('sleepHoursDailyChart') as HTMLCanvasElement;
+    const chart = new Chart(sleepHoursDailyCanvas, {
         type: 'doughnut',
         data: {
           labels: [`Day: ${dates[6].getMonth() + 1}/${dates[6].getDate()}, Hours Slept: ${data} hours`],
@@ -138,8 +143,10 @@ function createSleepHoursDailyChart(data, dates) {
       });
       return chart;
 }
-function createSleepHoursAndQualityWeekChart(hoursData, qualityData, dates) {
-    const chart = new Chart(document.getElementById('sleepHoursandQualityWeekChart'), {
+
+function createSleepHoursAndQualityWeekChart(hoursData: number[], qualityData: number[], dates: Date[]) {
+  const sleepHoursandQualityWeekCanvas = document.getElementById('sleepHoursandQualityWeekChart') as HTMLCanvasElement
+    const chart = new Chart(sleepHoursandQualityWeekCanvas, {
         type: 'bar',
         data: {
           labels: dates.map(date => `${date.getMonth() + 1}/${date.getDate()}`),
@@ -199,15 +206,20 @@ function createSleepHoursAndQualityWeekChart(hoursData, qualityData, dates) {
       });
       return chart;
 }   
-
-function createStepCharts(user, friendsSteps) {
-    new Chart(document.getElementById('user-step-goal-chart'), {
+interface User {
+  id: number, name: string, address: string, email: string, strideLength: number, dailyStepGoal: number, friends: number[]
+}
+function createStepCharts(user: User, friendsSteps: number) {
+  const userStepGoal = user.dailyStepGoal;
+  const userStepGoalCanvas = document.getElementById('user-step-goal-chart') as HTMLCanvasElement;
+  const userFriendsAverageGoalCanvas = document.getElementById('user-friends-average-goal-chart') as HTMLCanvasElement;
+    new Chart(userStepGoalCanvas, {
         type: 'doughnut',
         data: {
-          labels: [`Daily Step Goal: ${user.dailyStepGoal}`],
+          labels: [`Daily Step Goal: ${userStepGoal}`],
           datasets: [{
             label: 'Step Goal',
-            data: [`${user.dailyStepGoal}`,10000* (3000/`${user.dailyStepGoal}`)],
+            data: [userStepGoal, 10000 * (3000/userStepGoal)],
             backgroundColor: [
               'rgba(0,204,112, 0.8)',
               'rgba(0, 0, 0, 0.2)'
@@ -232,41 +244,42 @@ function createStepCharts(user, friendsSteps) {
           }
         },
       });
-      new Chart(document.getElementById('user-friends-average-goal-chart'), {
-        type: 'doughnut',
-        data: {
-          labels: [`Average Friend's Step Goal: ${Math.round(friendsSteps)}`],
-          datasets: [{
-            label: 'Step Goal',
-            data: [`${Math.round(friendsSteps)}`,10000* (3000/`${Math.round(friendsSteps)}`)],
-            backgroundColor: [
-              'rgba(0,204,112, 0.8)',
-              'rgba(0, 0, 0, 0.2)'
-            ],
-            borderColor: [
-              'rgba(0, 0, 0, 0.4)',
-              'rgba(0, 0, 0, 0)'
-            ]
-          }]
-        },
-        options: {
-          circumference: 180,
-          rotation: 270,
-          aspectRatio: 1.5,
-          cutout: '80%',
-          plugins: {
-            tooltip: {
-              filter: (tooltipItem) => {
-                return tooltipItem.dataIndex === 0;
-              }
-            },
-          }
-        },
-      });
+    new Chart(userFriendsAverageGoalCanvas, {
+      type: 'doughnut',
+      data: {
+        labels: [`Average Friend's Step Goal: ${Math.round(friendsSteps)}`],
+        datasets: [{
+          label: 'Step Goal',
+          data: [Math.round(friendsSteps), 10000* (3000/ Math.round(friendsSteps))],
+          backgroundColor: [
+            'rgba(0,204,112, 0.8)',
+            'rgba(0, 0, 0, 0.2)'
+          ],
+          borderColor: [
+            'rgba(0, 0, 0, 0.4)',
+            'rgba(0, 0, 0, 0)'
+          ]
+        }]
+      },
+      options: {
+        circumference: 180,
+        rotation: 270,
+        aspectRatio: 1.5,
+        cutout: '80%',
+        plugins: {
+          tooltip: {
+            filter: (tooltipItem) => {
+              return tooltipItem.dataIndex === 0;
+            }
+          },
+        }
+      },
+    });
 }
 
-function createHydrationWeekChart(data, dates) {
-    new Chart(document.getElementById('hydrationWeekChart'), {
+function createHydrationWeekChart(data: number[], dates: Date[]) {
+  const hydrationWeekCanvas = document.getElementById('hydrationWeekChart') as HTMLCanvasElement;
+    new Chart(hydrationWeekCanvas, {
         type: 'bar',
         data: {
           labels: dates.reverse().map(date => `${date.getMonth() + 1}/${date.getDate()}`),
@@ -300,8 +313,10 @@ function createHydrationWeekChart(data, dates) {
         }
       });
 }
-function createHydrationDayChart(data,dates) {
-    new Chart(document.getElementById('hydrationDayChart'), {
+
+function createHydrationDayChart(data: number, dates: Date[]) {
+  const hydrationDayCanvas = document.getElementById('hydrationDayChart') as HTMLCanvasElement;
+    new Chart(hydrationDayCanvas, {
         type: 'doughnut',
         data: {
           labels: [`Day: ${dates[6].getMonth() + 1}/${dates[6].getDate()}, Water Consumption: ${data} fl oz`],
@@ -335,17 +350,15 @@ function createHydrationDayChart(data,dates) {
       });
 }
      
-  
-  
-
-function createFriendChart(id, friendIds, friendSteps, i) {
-    new Chart(document.getElementById(id), {
+function createFriendChart(id: string, friendIds: number[], friendSteps: number[], i: number) {
+  let friendCanvas = document.getElementById(id) as HTMLCanvasElement
+    new Chart(friendCanvas, {
       type: 'doughnut',
       data: {
-        labels: [`${friendIds[i]}`],
+        labels: [friendIds[i]],
         datasets: [{
           label: 'Step Goal',
-          data: [`${friendSteps[i]}`,10000* (3000/`${friendSteps[i]}`)],
+          data: [friendSteps[i],10000* (3000/friendSteps[i])],
           backgroundColor: [
             'rgba(0,204,112, 0.8)',
             'rgba(0, 0, 0, 0.2)'
