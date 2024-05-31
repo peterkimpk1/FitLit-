@@ -1,6 +1,5 @@
 export interface User {
-    id: number;
-    dailyStepGoal: number;
+    id: number, name: string, address: string, email: string, strideLength: number, dailyStepGoal: number, friends: number[]
 }
 
 function getUserData(users: User[], userId: number): User | undefined {
