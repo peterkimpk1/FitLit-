@@ -1,4 +1,4 @@
-import { fetchData } from './apiCalls.js'
+import { fetchData } from './apiCalls'
 import { createFriendChart, createSleepHoursAverageChart,
   createSleepQualityAverageChart,
   createSleepQualityDailyChart,
@@ -7,8 +7,8 @@ import { createFriendChart, createSleepHoursAverageChart,
   createStepCharts,
   createHydrationWeekChart,
   createHydrationDayChart } from './domCharts'
-import { getRandomUser, getUserData} from './userFunctions.js'
-import { getCurrentDayWaterConsumption, getConsumedWaterForWeek, getConsumedWaterDates } from './hydration.js';
+import { getRandomUser, getUserData} from './userFunctions'
+import { getCurrentDayWaterConsumption, getConsumedWaterForWeek, getConsumedWaterDates } from './hydration';
 import { getHoursSleptForCurrentDay, getSleepHoursForWeek, getSleepDates, getSleepQualityForWeek, getUserAverageHoursSlept, getUserAverageSleepQuality } from './sleep';
 import { Chart} from 'chart.js'
 let userId = 0;

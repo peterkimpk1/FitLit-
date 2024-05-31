@@ -1,4 +1,4 @@
-function fetchData(dataType) {
+function fetchData(dataType: string) {
     const root = 'http://localhost:3001/api/v1/'
     const url = `${root}${dataType}`
     const promise = fetch(url)
