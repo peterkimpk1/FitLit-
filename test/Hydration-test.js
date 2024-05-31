@@ -1,5 +1,5 @@
 import { expect } from 'chai';
-import hydrationSampleData from "../src/data/hydration-sample-data.js"
+import hydrationSampleData from "../src/data/hydration-sample-data"
 const sampleData = hydrationSampleData.hydrationSampleData
 const {getConsumedWaterForWeek, getConsumedWaterForSpecificDate, updatedUserHydration, getCurrentDayWaterConsumption} = require('../src/hydration')
 
