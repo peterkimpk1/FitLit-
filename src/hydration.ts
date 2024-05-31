@@ -40,7 +40,7 @@ function getConsumedWaterForWeek(data:Data[], userId: number) {
        if (new Date(b.date) > new Date(a.date)) {
             return 1;
        }
-       if (new Date(b.date) > new Date(a.date)) {
+       if (new Date(b.date) < new Date(a.date)) {
             return -1; 
        }
        return 0
