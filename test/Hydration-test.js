@@ -1,7 +1,7 @@
 import { expect } from 'chai';
 import hydrationSampleData from "../src/data/hydration-sample-data"
 const sampleData = hydrationSampleData.hydrationSampleData
-const {getConsumedWaterForWeek, getConsumedWaterForSpecificDate, updatedUserHydration, getCurrentDayWaterConsumption} = require('../src/hydration')
+const {getConsumedWaterForWeek, getConsumedWaterForSpecificDate, updatedUserHydration, getCurrentDayWaterConsumption} = require('../src/hydration.js')
 
 describe('getConsumedWaterForSpecificDate', () => {
     it('should return the user/s fluid ounces for a specific day', () => {

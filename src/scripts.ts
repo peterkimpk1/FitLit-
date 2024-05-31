@@ -1,7 +1,8 @@
 // This is the JavaScript entry file - your code begins here
 // Do not delete or rename this file ********
-import './userFunctions.js'
+import './userFunctions'
 import './domUpdates'
+
 // An example of how you tell webpack to use a CSS file
 import './css/styles.css';
 
