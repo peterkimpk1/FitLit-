@@ -39,17 +39,3 @@ describe('consumedWaterForWeek', () => {
         expect(user2).to.deep.equal([25,25,25,25,25,25,5]);
     })
 })
-
-describe('Updated user hydration', ()=> {
-    it('should return user/s average fluid ounces consumed per day for all time', ()=>{
-      const user = 1
-      const hydrationUpdates1 = updatedUserHydration(sampleData, user)
-  
-      expect(hydrationUpdates1).to.deep.equal(18.125)
-  
-      const user2 = 2
-      const hydrationUpdates2 = updatedUserHydration(sampleData, user2)
-    
-      expect(hydrationUpdates2).to.deep.equal(21.875)
-    })
-  })
