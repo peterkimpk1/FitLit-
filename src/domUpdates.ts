@@ -6,17 +6,29 @@ import { createFriendChart, createSleepHoursAverageChart,
   createSleepHoursAndQualityWeekChart,
   createStepCharts,
   createHydrationWeekChart,
-  createHydrationDayChart } from './domCharts.js'
-import { getRandomUser, getUserData} from '../src/userFunctions.js'
-import { getCurrentDayWaterConsumption, getConsumedWaterForWeek, getConsumedWaterDates } from '../src/hydration.js';
-import { getHoursSleptForCurrentDay, getSleepHoursForWeek, getSleepDates, getSleepQualityForWeek, getUserAverageHoursSlept, getUserAverageSleepQuality } from './sleep.js';
-
+  createHydrationDayChart } from './domCharts'
+import { getRandomUser, getUserData} from './userFunctions.js'
+import { getCurrentDayWaterConsumption, getConsumedWaterForWeek, getConsumedWaterDates } from './hydration.js';
+import { getHoursSleptForCurrentDay, getSleepHoursForWeek, getSleepDates, getSleepQualityForWeek, getUserAverageHoursSlept, getUserAverageSleepQuality } from './sleep';
+import { Chart} from 'chart.js'
 let userId = 0;
-let sleepHoursChart;
-let sleepQualityChart;
-let sleepQualityDailyChart;
-let sleepHoursDailyChart;
-let sleepHoursAndQualityChart;
+let sleepHoursChart: Chart<"doughnut", number[], string>;
+let sleepQualityChart: Chart<"doughnut", number[], string>;
+let sleepQualityDailyChart: Chart<"doughnut", number[], string>;
+let sleepHoursDailyChart: Chart<"doughnut", number[], string>;
+let sleepHoursAndQualityChart: Chart;
+interface UserData {
+  id: number, name: string, address: string, email: string, strideLength: number, dailyStepGoal: number, friends: number[]
+}
+
+interface HydrationData {
+  userID: number, date: string, numOunces: number
+}
+
+interface SleepData {
+  userID: number, date: string, hoursSlept: number, sleepQuality: number
+}
+
 const welcomeMessage = document.querySelector('.welcome-message');
 const userEmail = document.querySelector('.user-email');
 const userAddress = document.querySelector('.user-address');
@@ -28,11 +40,17 @@ const submitBtn = document.getElementById('submitBtn')
 const form = document.getElementById('detailsModal');
 
 const dateInput = document.getElementById('date')
+const dateInputValue = (<HTMLInputElement>document.getElementById('date')).value
 const hoursSleptInput = document.getElementById('hours-slept');
+const hoursSleptInputValue = (<HTMLInputElement>document.getElementById('hours-slept')).value
 const qualitySleptInput = document.getElementById('quality-of-sleep')
+const qualitySleptInputValue = ((<HTMLInputElement>document.getElementById('quality-of-sleep')).value)
+
 const hoursSleptErrorMessage = document.querySelector('.hours-slept-error-message')
 const qualitySleptErrorMessage = document.querySelector('.sleep-quality-error-message')
 const dateErrorMessage = document.getElementById('date-error-message')
+
+
 
 window.addEventListener('load', () => {
   fetchUserData()
@@ -45,7 +63,7 @@ OpenModalBtn.addEventListener('click', function(){
 submitBtn.addEventListener('click', function(e){
   e.preventDefault();
   form.style.display = 'none'
-  postSleepData(userId,dateInput.value,hoursSleptInput.value,qualitySleptInput.value)
+  postSleepData(userId,dateInputValue,hoursSleptInputValue,qualitySleptInputValue)
   updateCurrentSleepData()
 })
 
@@ -60,7 +78,7 @@ function validateInputs() {
 }
 
 function validateDateInput() {
-  const date = dateInput.value;
+  const date = dateInputValue;
   let newDate = new Date(date)
   if ((newDate.getMonth() + 1 <= 12 && newDate.getMonth() + 1 >=1) && (newDate.getDate() <=31 && newDate.getDate() >= 1) &&
  (newDate.getFullYear() <= 2024 && newDate.getFullYear() >= 1900)) {
@@ -73,8 +91,8 @@ function validateDateInput() {
 }
 
 function validateHoursSleptInput() {
-  const hours = hoursSleptInput.value
-  if((hours >= 0 && hours <= 24) && hours) {
+  const hours = +hoursSleptInputValue;
+  if(hours >= 0 && hours <= 24) {
     hoursSleptErrorMessage.classList.add('hidden'); 
     return true;
   } else if (hours > 24) {
@@ -84,27 +102,26 @@ function validateHoursSleptInput() {
 }
 
 function validateSleepQualityInput() {
-  const quality = qualitySleptInput.value
+  const quality = +qualitySleptInputValue;
   if(quality >= 0 && quality <= 5 && quality) {
     qualitySleptErrorMessage.classList.add('hidden')
     return true; 
-  
   } else if (quality > 5) {
     qualitySleptErrorMessage.classList.remove('hidden')
     return false; 
   }
 }
 
-function updateHydrationData(data, id) {
+function updateHydrationData(data: HydrationData[], id: number) {
   const AllHydrationData = data
   const hydrationWeekWaterData = getConsumedWaterForWeek(AllHydrationData,id)
-  const hydrationWeekDateData = getConsumedWaterDates(AllHydrationData,id).map(data => new Date(data))
+  const hydrationWeekDateData = getConsumedWaterDates(AllHydrationData,id).map((data: string) => new Date(data))
   const hydrationDayData = getCurrentDayWaterConsumption(AllHydrationData,id)
   createHydrationWeekChart(hydrationWeekWaterData,hydrationWeekDateData)
   createHydrationDayChart(hydrationDayData,hydrationWeekDateData)
 }
 
-function updateSleepData(data, id) {
+function updateSleepData(data: SleepData[], id: number) {
   const allSleepData = data
   const sleepWeekDateData = getSleepDates(allSleepData,id)
   const sleepHoursWeekData = getSleepHoursForWeek(allSleepData,id)
@@ -113,14 +130,14 @@ function updateSleepData(data, id) {
   const sleepQualityWeekData = getSleepQualityForWeek(allSleepData, id)
   const sleepHoursAverageData = getUserAverageHoursSlept(allSleepData, id)
   const sleepQualityAverageData = getUserAverageSleepQuality(allSleepData, id)
-  sleepHoursChart = createSleepHoursAverageChart(sleepHoursAverageData)
-  sleepQualityChart = createSleepQualityAverageChart(sleepQualityAverageData)
+  sleepHoursChart = createSleepHoursAverageChart(+sleepHoursAverageData)
+  sleepQualityChart = createSleepQualityAverageChart(+sleepQualityAverageData)
   sleepQualityDailyChart = createSleepQualityDailyChart(sleepQualityWeekData,sleepHoursWeekDataConverted)
-  sleepHoursDailyChart = createSleepHoursDailyChart(sleepHoursDayData,sleepHoursWeekDataConverted)
+  sleepHoursDailyChart = createSleepHoursDailyChart(+sleepHoursDayData,sleepHoursWeekDataConverted)
   sleepHoursAndQualityChart = createSleepHoursAndQualityWeekChart(sleepHoursWeekData,sleepQualityWeekData,sleepHoursWeekDataConverted)
 }
 
-function updateUserData(data, id) {
+function updateUserData(data: UserData[], id: number) {
   const user = getUserData(data, id)
   updateUserCard(user)
   const friendsSteps = updatedUserFriends(user, data)
@@ -136,10 +153,10 @@ function fetchUserData() {
     updateUserData(e[0].users,randomUser.id)
     updateHydrationData(e[1].hydrationData, randomUser.id)
     updateSleepData(e[2].sleepData,randomUser.id)
-  }).catch(err => alert('Could not display user info!!', err))
+  }).catch(err => alert('Could not display user info!!'))
 }
 
-function postSleepData(id, date, hoursSlept, sleepQuality) {
+function postSleepData(id: number, date: string, hoursSlept: number | string, sleepQuality: number | string) {
   let formattedDate = date.split("-").join("/")
   fetch('http://localhost:3001/api/v1/sleep',{
     method:"POST",
@@ -150,7 +167,7 @@ function postSleepData(id, date, hoursSlept, sleepQuality) {
       sleepQuality: sleepQuality
     }),
     headers: {'Content-Type': 'application/json'}
-  }).catch(err => alert('Could not post new sleep data.', err))
+  }).catch(err => alert('Could not post new sleep data.'))
 }
 
 function updateCurrentSleepData() {
@@ -168,16 +185,24 @@ function updateCurrentSleepData() {
     sleepQualityDailyChart.destroy()
     sleepHoursDailyChart.destroy()
     sleepHoursAndQualityChart.destroy()
-    sleepHoursChart = createSleepHoursAverageChart(sleepHoursAverageData)
-    sleepQualityChart = createSleepQualityAverageChart(sleepQualityAverageData)
+    sleepHoursChart = createSleepHoursAverageChart(+sleepHoursAverageData)
+    sleepQualityChart = createSleepQualityAverageChart(+sleepQualityAverageData)
     sleepQualityDailyChart = createSleepQualityDailyChart(sleepQualityWeekData,sleepHoursWeekDataConverted)
-    sleepHoursDailyChart = createSleepHoursDailyChart(sleepHoursDayData,sleepHoursWeekDataConverted)
+    sleepHoursDailyChart = createSleepHoursDailyChart(+sleepHoursDayData,sleepHoursWeekDataConverted)
     sleepHoursAndQualityChart = createSleepHoursAndQualityWeekChart(sleepHoursWeekData,sleepQualityWeekData,sleepHoursWeekDataConverted)
   }),3000)
 }
 
-function updatedUserFriends(user, users) {
-  let sortedFriends = user.friends.sort((a,b)=> a-b)
+function updatedUserFriends(user: UserData, users: UserData[]) {
+  let sortedFriends = user.friends.sort((a,b)=> {
+    if (a >b) {
+      return 1;
+    }
+    if (b > a) {
+      return -1
+    }
+    return 0
+})
   let friendNames = sortedFriends.map(id => users.filter(user => user.id === id)[0].name)
   let friendsStepGoals = sortedFriends.map(friend => {
     const singleUser = users.filter(user => user.id === friend)
@@ -198,18 +223,18 @@ function updatedUserFriends(user, users) {
 
 
 
-function updateUserCard(user) {
+function updateUserCard(user: UserData) {
   userEmail.innerHTML = `<b>Email:</b> ${user.email}`
   userAddress.innerHTML = `<b>Address:</b> ${user.address}`
   userStrideLength.innerHTML = `<b>Stride Length:</b> ${user.strideLength}`
 }
 
-const updateUserMessage = (user) => {  
+const updateUserMessage = (user: UserData) => {  
   let fullName = user.name.split(' ')
   let welcomeEmoji = ['🏅','👟','🎽']
   let randomEmoji = welcomeEmoji[Math.floor(Math.random() * 3)]
-  welcomeMessage.innerText = `Welcome, ${fullName[0]}! ${randomEmoji}`;
-  userInfo.innerText = `${user.name}`
+  welcomeMessage.innerHTML = `Welcome, ${fullName[0]}! ${randomEmoji}`;
+  userInfo.innerHTML = `${user.name}`
 };
 
 export {

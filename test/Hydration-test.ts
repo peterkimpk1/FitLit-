@@ -1,5 +1,5 @@
 import { expect } from 'chai';
-import hydrationSampleData from "../src/data/hydration-sample-data.js"
+import hydrationSampleData from "../src/data/hydration-sample-data.ts"
 const sampleData = hydrationSampleData.hydrationSampleData
 const {getConsumedWaterForWeek, getConsumedWaterForSpecificDate, updatedUserHydration, getCurrentDayWaterConsumption} = require('../src/hydration')
 
@@ -38,7 +38,6 @@ describe('consumedWaterForWeek', () => {
         expect(user1).to.deep.equal([20,20,20,20,20,20,15]);
         expect(user2).to.deep.equal([25,25,25,25,25,25,5]);
     })
-})
 
 describe('Updated user hydration', ()=> {
     it('should return user/s average fluid ounces consumed per day for all time', ()=>{
@@ -53,3 +52,4 @@ describe('Updated user hydration', ()=> {
       expect(hydrationUpdates2).to.deep.equal(21.875)
     })
   })
+
