@@ -45,6 +45,7 @@ const hoursSleptInput = document.getElementById('hours-slept');
 const hoursSleptInputValue = (<HTMLInputElement>document.getElementById('hours-slept')).value
 const qualitySleptInput = document.getElementById('quality-of-sleep')
 const qualitySleptInputValue = ((<HTMLInputElement>document.getElementById('quality-of-sleep')).value)
+
 const hoursSleptErrorMessage = document.querySelector('.hours-slept-error-message')
 const qualitySleptErrorMessage = document.querySelector('.sleep-quality-error-message')
 const dateErrorMessage = document.getElementById('date-error-message')
@@ -90,23 +91,22 @@ function validateDateInput() {
 }
 
 function validateHoursSleptInput() {
-  const hours = hoursSleptInputValue
-  if((+hours >= 0 && +hours <= 24) && hours) {
+  const hours = +hoursSleptInputValue;
+  if(hours >= 0 && hours <= 24) {
     hoursSleptErrorMessage.classList.add('hidden'); 
     return true;
-  } else if (+hours > 24) {
+  } else if (hours > 24) {
     hoursSleptErrorMessage.classList.remove('hidden'); 
     return false;
   }
 }
 
 function validateSleepQualityInput() {
-  const quality = qualitySleptInputValue
-  if(+quality >= 0 && +quality <= 5 && quality) {
+  const quality = +qualitySleptInputValue;
+  if(quality >= 0 && quality <= 5 && quality) {
     qualitySleptErrorMessage.classList.add('hidden')
     return true; 
-  
-  } else if (+quality > 5) {
+  } else if (quality > 5) {
     qualitySleptErrorMessage.classList.remove('hidden')
     return false; 
   }

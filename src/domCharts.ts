@@ -350,7 +350,7 @@ function createHydrationDayChart(data: number, dates: Date[]) {
       });
 }
      
-function createFriendChart(id: string, friendIds: number[], friendSteps: number[], i: number) {
+function createFriendChart(id: string, friendIds: string[], friendSteps: number[], i: number) {
   let friendCanvas = document.getElementById(id) as HTMLCanvasElement
     new Chart(friendCanvas, {
       type: 'doughnut',
