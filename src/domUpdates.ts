@@ -49,6 +49,7 @@ let qualitySleptInputValue: number
 const hoursSleptErrorMessage = document.querySelector('.hours-slept-error-message')
 const qualitySleptErrorMessage = document.querySelector('.sleep-quality-error-message')
 const dateErrorMessage = document.getElementById('date-error-message')
+const formField = document.getElementById('sleep-input-form') as HTMLFormElement;
 
 
 
@@ -63,9 +64,13 @@ OpenModalBtn.addEventListener('click', function(){
 
 submitBtn.addEventListener('click', function(e){
   e.preventDefault();
+  if(validateInputs){
+  formField.reset()
   form.style.display = 'none'
   postSleepData(userId,dateInputValue,hoursSleptInputValue,qualitySleptInputValue)
   updateCurrentSleepData()
+  submitBtn.setAttribute('disabled', '')
+  }
 })
 
 hoursSleptInput.addEventListener('input', validateInputs)
@@ -73,9 +78,17 @@ qualitySleptInput.addEventListener('input', validateInputs)
 dateInput.addEventListener('input', validateInputs)
 
 function validateInputs() {
-  validateDateInput()
-  if (validateHoursSleptInput() && validateSleepQualityInput() && validateDateInput()) {
-    submitBtn.removeAttribute('disabled')
+   const dateInputValue = (<HTMLInputElement>document.getElementById('date')).value;
+   const hoursSleptInputValue = (<HTMLInputElement>document.getElementById('hours-slept')).value;
+  const qualitySleptInputValue = (<HTMLInputElement>document.getElementById('quality-of-sleep')).value;
+  if (!dateInputValue ||!hoursSleptInputValue ||!qualitySleptInputValue) {
+    submitBtn.setAttribute('disabled', ''); 
+    return; 
+  }
+  if (validateDateInput() && validateHoursSleptInput(hoursSleptInputValue) && validateSleepQualityInput()) {
+    submitBtn.removeAttribute('disabled'); 
+  } else {
+    submitBtn.setAttribute('disabled', ''); 
   }
 }
 
@@ -93,13 +106,14 @@ function validateDateInput() {
   }
 }
 
-function validateHoursSleptInput() {
-  hoursSleptInputValue = +(<HTMLInputElement>document.getElementById('hours-slept')).value
-  const hours = hoursSleptInputValue;
+function validateHoursSleptInput(value: string): boolean {
+  // hoursSleptInputValue = +(<HTMLInputElement>document.getElementById('hours-slept')).value
+  // const hours = hoursSleptInputValue;
+  const hours = Number(value)
   if(hours >= 0 && hours <= 24) {
     hoursSleptErrorMessage.classList.add('hidden'); 
     return true;
-  } else if (hours > 24) {
+  } else {
     hoursSleptErrorMessage.classList.remove('hidden'); 
     return false;
   }
@@ -111,7 +125,7 @@ function validateSleepQualityInput() {
   if(quality >= 0 && quality <= 5) {
     qualitySleptErrorMessage.classList.add('hidden')
     return true; 
-  } else if (quality > 5) {
+  } else {
     qualitySleptErrorMessage.classList.remove('hidden')
     return false; 
   }
