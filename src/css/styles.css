@@ -80,6 +80,7 @@ p {
   background-repeat: no-repeat;
   border-radius: var(--section-border-radius);
   border: 1pt solid black;
+  text-align: center;
 }
 
 .display-activities-dashboard {
@@ -107,6 +108,7 @@ p {
   width: 80vw;
   height: fit-content;
   border-radius: var(--section-border-radius);
+  text-align: center;
 }
 
 .sleep-wrapper {
@@ -121,6 +123,7 @@ p {
   align-items: center;
   width: 80vw;
   height: fit-content;
+  text-align: center;
 }
 
 .user-sleep-day, 
@@ -171,7 +174,7 @@ p {
   width: 8rem;
   line-height: 2.5;
   height: fit-content;
-  margin-left: 19px;
+  margin-left: 55px;
   
 }
 
@@ -219,11 +222,15 @@ p {
   align-items: start; 
 }
 
+.sleep-data-wrapper {
+  justify-content: center;
+}
+
 .sleep-input-form-wrapper {
   display: flex;
   flex-direction: column; 
   margin-top: 10px;
-  margin-left: 15px;
+  margin-left: 85px;
   border: 2px solid black;
   border-radius: var(--section-border-radius);
   background-color: var(--sleep-color);
