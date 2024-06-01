@@ -64,13 +64,12 @@ OpenModalBtn.addEventListener('click', function(){
 
 submitBtn.addEventListener('click', function(e){
   e.preventDefault();
-  if(validateInputs){
   formField.reset()
   form.style.display = 'none'
   postSleepData(userId,dateInputValue,hoursSleptInputValue,qualitySleptInputValue)
   updateCurrentSleepData()
   submitBtn.setAttribute('disabled', '')
-  }
+  submitBtn.style.backgroundColor = '';
 })
 
 hoursSleptInput.addEventListener('input', validateInputs)
@@ -83,12 +82,15 @@ function validateInputs() {
   const qualitySleptInputValue = (<HTMLInputElement>document.getElementById('quality-of-sleep')).value;
   if (!dateInputValue ||!hoursSleptInputValue ||!qualitySleptInputValue) {
     submitBtn.setAttribute('disabled', ''); 
+    submitBtn.style.backgroundColor = '';
     return; 
   }
   if (validateDateInput() && validateHoursSleptInput(hoursSleptInputValue) && validateSleepQualityInput()) {
     submitBtn.removeAttribute('disabled'); 
+    submitBtn.style.backgroundColor = 'lightgreen';
   } else {
     submitBtn.setAttribute('disabled', ''); 
+    submitBtn.style.backgroundColor = '';
   }
 }
 
@@ -107,8 +109,6 @@ function validateDateInput() {
 }
 
 function validateHoursSleptInput(value: string): boolean {
-  // hoursSleptInputValue = +(<HTMLInputElement>document.getElementById('hours-slept')).value
-  // const hours = hoursSleptInputValue;
   const hours = Number(value)
   if(hours >= 0 && hours <= 24) {
     hoursSleptErrorMessage.classList.add('hidden'); 
