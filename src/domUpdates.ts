@@ -40,11 +40,11 @@ const submitBtn = document.getElementById('submitBtn')
 const form = document.getElementById('detailsModal');
 
 const dateInput = document.getElementById('date')
-const dateInputValue = (<HTMLInputElement>document.getElementById('date')).value
+let dateInputValue: string
 const hoursSleptInput = document.getElementById('hours-slept');
-const hoursSleptInputValue = (<HTMLInputElement>document.getElementById('hours-slept')).value
+let hoursSleptInputValue: number
 const qualitySleptInput = document.getElementById('quality-of-sleep')
-const qualitySleptInputValue = ((<HTMLInputElement>document.getElementById('quality-of-sleep')).value)
+let qualitySleptInputValue: number
 
 const hoursSleptErrorMessage = document.querySelector('.hours-slept-error-message')
 const qualitySleptErrorMessage = document.querySelector('.sleep-quality-error-message')
@@ -58,6 +58,7 @@ window.addEventListener('load', () => {
 
 OpenModalBtn.addEventListener('click', function(){
   form.style.display = 'block';
+  OpenModalBtn.setAttribute("aria-expanded", 'true');
 })
 
 submitBtn.addEventListener('click', function(e){
@@ -79,10 +80,9 @@ function validateInputs() {
 }
 
 function validateDateInput() {
+  dateInputValue = (<HTMLInputElement>document.getElementById('date')).value
   const date = dateInputValue;
-  console.log(date)
   let newDate = new Date(date)
-  console.log(newDate)
   if ((newDate.getMonth() + 1 <= 12 && newDate.getMonth() + 1 >=1) && (newDate.getDate() <=31 && newDate.getDate() >= 1) &&
  (newDate.getFullYear() <= 2024 && newDate.getFullYear() >= 1900)) {
     return true;
@@ -94,7 +94,8 @@ function validateDateInput() {
 }
 
 function validateHoursSleptInput() {
-  const hours = +hoursSleptInputValue;
+  hoursSleptInputValue = +(<HTMLInputElement>document.getElementById('hours-slept')).value
+  const hours = hoursSleptInputValue;
   if(hours >= 0 && hours <= 24) {
     hoursSleptErrorMessage.classList.add('hidden'); 
     return true;
@@ -105,8 +106,9 @@ function validateHoursSleptInput() {
 }
 
 function validateSleepQualityInput() {
-  const quality = +qualitySleptInputValue;
-  if(quality >= 0 && quality <= 5 && quality) {
+  qualitySleptInputValue = +(<HTMLInputElement>document.getElementById('quality-of-sleep')).value
+  const quality = qualitySleptInputValue;
+  if(quality >= 0 && quality <= 5) {
     qualitySleptErrorMessage.classList.add('hidden')
     return true; 
   } else if (quality > 5) {
@@ -159,7 +161,7 @@ function fetchUserData() {
   }).catch(err => alert('Could not display user info!!'))
 }
 
-function postSleepData(id: number, date: string, hoursSlept: number | string, sleepQuality: number | string) {
+function postSleepData(id: number, date: string, hoursSlept: number, sleepQuality: number) {
   let formattedDate = date.split("-").join("/")
   fetch('http://localhost:3001/api/v1/sleep',{
     method:"POST",
@@ -170,7 +172,7 @@ function postSleepData(id: number, date: string, hoursSlept: number | string, sl
       sleepQuality: sleepQuality
     }),
     headers: {'Content-Type': 'application/json'}
-  }).catch(err => alert('Could not post new sleep data.'))
+  }).catch(err => err.message)
 }
 
 function updateCurrentSleepData() {
@@ -223,8 +225,6 @@ function updatedUserFriends(user: UserData, users: UserData[]) {
   }
   return friendsTotal / friendsStepGoals.length;
 }
-
-
 
 function updateUserCard(user: UserData) {
   userEmail.innerHTML = `<b>Email:</b> ${user.email}`
