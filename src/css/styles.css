@@ -7,6 +7,10 @@
   --friend-color: rgb(215, 187, 230);
   --section-border-radius: 12px;
 }
+* {
+  font-family: "Raleway", sans-serif;
+  font-weight: 300;
+}
 
 body, 
 html {
@@ -20,13 +24,12 @@ html {
 header {
   display: block;
   width: 100vw;
-  margin-right: auto;
-  margin-left: 35px;
 }
 
 .welcome-message {
   font-size: 48px;
   text-align: center;
+  margin-left: 45px;
 }
 
 h3 {
@@ -75,12 +78,32 @@ p {
 
 .activities-dashboard-wrapper {
   background-color: var(--step-goal-color);
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
   border-radius: var(--section-border-radius);
   border: 1pt solid black;
   text-align: center;
+  margin: 20px 0 20px 0;
+  font-size: 25px;
+  .step-goals {
+    line-height: 2;
+    margin: 0 5px 0 5px;
+    border: 0;
+    padding: 0;
+  }
+}
+
+.hydration-dashboard-wrapper {
+  background-color: var(--hydration-color);
+  border-radius: var(--section-border-radius);
+  border: 1pt solid black;
+  text-align: center;
+  font-size: 25px;
+  margin: 20px 0 0px 0;
+  .water-consumption {
+    line-height: 2;
+    margin: 0 5px 0 5px;
+    border: 0;
+    padding: 0;
+  }
 }
 
 .display-activities-dashboard {
@@ -97,33 +120,42 @@ p {
 
 .hydration-wrapper {
   background-color: var(--hydration-color);
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
   border-radius: var(--section-border-radius);
-  border: 1pt solid black;
   display: flex;
   justify-content: space-evenly;
   align-items: center;
   width: 80vw;
+  margin-bottom: 20px;
   height: fit-content;
   border-radius: var(--section-border-radius);
   text-align: center;
 }
 
-.sleep-wrapper {
+.sleep-dashboard-wrapper {
+  background-color: var(--sleep-color);
+  border-radius: var(--section-border-radius);
   border: 1pt solid black;
+  text-align: center;
+  font-size: 25px;
+  margin: 20px 0 0px 0;
+  .sleep-data {
+    line-height: 2;
+    margin: 0 5px 0 5px;
+    border: 0;
+    padding: 0;
+  }
+}
+
+.sleep-wrapper {
   border-radius: var(--section-border-radius);
   background-color: var(--sleep-color);
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
   display: flex;
   justify-content: space-evenly;
   align-items: center;
   width: 80vw;
   height: fit-content;
   text-align: center;
+  margin-bottom: 20px;
 }
 
 .user-sleep-day, 
@@ -171,11 +203,10 @@ p {
   background-color: var(--friend-color);
   border: solid 3pt black;
   border-radius: var(--section-border-radius);
-  width: 8rem;
+  width: 9rem;
   line-height: 2.5;
   height: fit-content;
-  margin-left: 55px;
-  
+  margin-left: 65px;
 }
 
 .friends-section {
@@ -184,7 +215,8 @@ p {
   text-align: center;
   border-radius: var(--section-border-radius);
   background-color: var(--friend-color);
-  height: 800px;
+  height: 865px;
+  margin-top: 141px;
 }
 
 .friends-wrapper {
@@ -192,7 +224,7 @@ p {
   flex-direction: column;
   justify-content: space-evenly;
   height: 580px;
-  width: 175px;
+  width: 275px;
 }
 
 .steps-wrapper {
@@ -202,9 +234,12 @@ p {
   width: 80vw;
   height: fit-content;
   border-radius: var(--section-border-radius);
+  margin-bottom: 20px;
 }
 
 .friends-header {
+  line-height: 3;
+  margin: 0 5px 0 5px;
   font-size: 30px;
 }
 
@@ -229,14 +264,20 @@ p {
 .sleep-input-form-wrapper {
   display: flex;
   flex-direction: column; 
-  margin-top: 10px;
-  margin-left: 85px;
+  margin-top: 25px;
+  margin-left: 25px;
   border: 2px solid black;
   border-radius: var(--section-border-radius);
   background-color: var(--sleep-color);
-  height: fit-content;
-  width: fit-content;
+  height: 355px;
+  width: 265px;
+  justify-content: center;
   align-items: center;
+  .enter-sleep-details {
+    font-size: 28px;
+    line-height: 2;
+    margin: 0 5px 0 5px;
+  }
 }
 
 .enter-sleep-details {
@@ -253,17 +294,23 @@ input {
   display: block;
   width: fit-content;
   margin-top: 5px;
+  border: 5px 0 5px 0;
 }
 
 #openModalBtn {
   display: block;
   width: fit-content;
-  border-radius: 15%;
+  background-color: lightblue;
+  font-size: 20px;
+  border-radius: 5px;
+  padding: 10px 15px;
+  cursor: pointer;
 }
 
 #submitBtn {
   display: block; 
   margin-top: 10px;
+  padding: 3px;
   border-radius: 15%;
   width: fit-content;
   transition: background-color 0.3s ease;
@@ -278,7 +325,8 @@ input {
 .hours-slept-error-message,
 .sleep-quality-error-message,
 #date-error-message {
-  color: red
+  color: red;
+  font-size: 14px;
 }
 
 .hidden {
