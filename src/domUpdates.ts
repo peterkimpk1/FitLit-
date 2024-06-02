@@ -36,9 +36,8 @@ const userStrideLength = document.querySelector('.user-stride-length');
 const friendsWrapper = document.querySelector('.friends-wrapper');
 const userInfo = document.querySelector('.user-info');
 const OpenModalBtn = document.getElementById('openModalBtn');
-const submitBtn = document.getElementById('submitBtn')
+const submitBtn = <HTMLInputElement>document.getElementById("submitBtn")
 const form = document.getElementById('detailsModal');
-
 const dateInput = document.getElementById('date')
 let dateInputValue: string
 const hoursSleptInput = document.getElementById('hours-slept');
@@ -73,9 +72,14 @@ qualitySleptInput.addEventListener('input', validateInputs)
 dateInput.addEventListener('input', validateInputs)
 
 function validateInputs() {
+  validateHoursSleptInput()
+  validateSleepQualityInput()
   validateDateInput()
   if (validateHoursSleptInput() && validateSleepQualityInput() && validateDateInput()) {
-    submitBtn.removeAttribute('disabled')
+    submitBtn.disabled = false;
+  }
+  else if (!dateInputValue || !hoursSleptInputValue || !qualitySleptInputValue){
+    submitBtn.disabled = true;
   }
 }
 
@@ -96,7 +100,7 @@ function validateDateInput() {
 function validateHoursSleptInput() {
   hoursSleptInputValue = +(<HTMLInputElement>document.getElementById('hours-slept')).value
   const hours = hoursSleptInputValue;
-  if(hours >= 0 && hours <= 24) {
+  if(hours >= 0 && hours <= 24 && hours) {
     hoursSleptErrorMessage.classList.add('hidden'); 
     return true;
   } else if (hours > 24) {
@@ -108,11 +112,11 @@ function validateHoursSleptInput() {
 function validateSleepQualityInput() {
   qualitySleptInputValue = +(<HTMLInputElement>document.getElementById('quality-of-sleep')).value
   const quality = qualitySleptInputValue;
-  if(quality >= 0 && quality <= 5) {
-    qualitySleptErrorMessage.classList.add('hidden')
+  if(quality >= 0 && quality <= 5 && quality) {
+    qualitySleptErrorMessage.classList.add('hidden');
     return true; 
   } else if (quality > 5) {
-    qualitySleptErrorMessage.classList.remove('hidden')
+    qualitySleptErrorMessage.classList.remove('hidden');
     return false; 
   }
 }
