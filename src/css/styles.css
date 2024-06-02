@@ -269,7 +269,7 @@ p {
   border: 2px solid black;
   border-radius: var(--section-border-radius);
   background-color: var(--sleep-color);
-  height: 325px;
+  height: 355px;
   width: 265px;
   justify-content: center;
   align-items: center;
@@ -283,9 +283,7 @@ p {
 .enter-sleep-details {
   text-align: center;
 }
-#detailsModal {
-  transform: translate(-40%)
-}
+
 label {
   display: block;
   margin-top: 15px;
@@ -296,6 +294,7 @@ input {
   display: block;
   width: fit-content;
   margin-top: 5px;
+  border: 5px 0 5px 0;
 }
 
 #openModalBtn {
@@ -326,7 +325,8 @@ input {
 .hours-slept-error-message,
 .sleep-quality-error-message,
 #date-error-message {
-  color: red
+  color: red;
+  font-size: 14px;
 }
 
 .hidden {
