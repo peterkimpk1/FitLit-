@@ -67,6 +67,8 @@ submitBtn.addEventListener('click', function(e){
   form.style.display = 'none'
   postSleepData(userId,dateInputValue,hoursSleptInputValue,qualitySleptInputValue)
   updateCurrentSleepData()
+  submitBtn.disabled = true;
+  submitBtn.style.backgroundColor = '';
 })
 
 hoursSleptInput.addEventListener('input', validateInputs)
@@ -100,7 +102,6 @@ function validateDateInput() {
     return false;
   }
 }
-
 
 
 function validateHoursSleptInput() {
@@ -149,6 +150,9 @@ function updateSleepData(data: SleepData[], id: number) {
   sleepQualityChart = createSleepQualityAverageChart(+sleepQualityAverageData)
   sleepQualityDailyChart = createSleepQualityDailyChart(sleepQualityWeekData,sleepHoursWeekDataConverted)
   sleepHoursDailyChart = createSleepHoursDailyChart(+sleepHoursDayData,sleepHoursWeekDataConverted)
+  console.log(sleepHoursWeekData)
+  console.log(sleepQualityWeekData)
+  console.log(sleepHoursWeekDataConverted)
   sleepHoursAndQualityChart = createSleepHoursAndQualityWeekChart(sleepHoursWeekData,sleepQualityWeekData,sleepHoursWeekDataConverted)
 }
 
@@ -204,7 +208,7 @@ function updateCurrentSleepData() {
     sleepQualityChart = createSleepQualityAverageChart(+sleepQualityAverageData)
     sleepQualityDailyChart = createSleepQualityDailyChart(sleepQualityWeekData,sleepHoursWeekDataConverted)
     sleepHoursDailyChart = createSleepHoursDailyChart(+sleepHoursDayData,sleepHoursWeekDataConverted)
-    sleepHoursAndQualityChart = createSleepHoursAndQualityWeekChart(sleepHoursWeekData,sleepQualityWeekData,sleepHoursWeekDataConverted)
+    sleepHoursAndQualityChart = createSleepHoursAndQualityWeekChart(sleepHoursWeekData.reverse(),sleepQualityWeekData.reverse(),sleepHoursWeekDataConverted)
   }),3000)
 }
 
