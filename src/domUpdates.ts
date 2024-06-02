@@ -64,13 +64,12 @@ OpenModalBtn.addEventListener('click', function(){
 
 submitBtn.addEventListener('click', function(e){
   e.preventDefault();
-  if(validateInputs){
   formField.reset()
   form.style.display = 'none'
   postSleepData(userId,dateInputValue,hoursSleptInputValue,qualitySleptInputValue)
   updateCurrentSleepData()
   submitBtn.setAttribute('disabled', '')
-  }
+  submitBtn.style.backgroundColor = '';
 })
 
 hoursSleptInput.addEventListener('input', validateInputs)
@@ -103,6 +102,8 @@ function validateDateInput() {
     return false;
   }
 }
+
+
 
 function validateHoursSleptInput() {
   hoursSleptInputValue = +(<HTMLInputElement>document.getElementById('hours-slept')).value
