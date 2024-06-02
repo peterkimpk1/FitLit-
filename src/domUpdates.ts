@@ -67,8 +67,6 @@ submitBtn.addEventListener('click', function(e){
   form.style.display = 'none'
   postSleepData(userId,dateInputValue,hoursSleptInputValue,qualitySleptInputValue)
   updateCurrentSleepData()
-  submitBtn.setAttribute('disabled', '')
-  submitBtn.style.backgroundColor = '';
 })
 
 hoursSleptInput.addEventListener('input', validateInputs)
@@ -81,6 +79,7 @@ function validateInputs() {
   validateDateInput()
   if (validateHoursSleptInput() && validateSleepQualityInput() && validateDateInput()) {
     submitBtn.disabled = false;
+    submitBtn.style.backgroundColor = 'lightgreen';
   }
   else if (!dateInputValue || !hoursSleptInputValue || !qualitySleptInputValue){
     submitBtn.disabled = true;
@@ -110,7 +109,7 @@ function validateHoursSleptInput() {
   if(hours >= 0 && hours <= 24 && hours) {
     hoursSleptErrorMessage.classList.add('hidden'); 
     return true;
-  } else {
+  } else if (hours > 24) {
     hoursSleptErrorMessage.classList.remove('hidden'); 
     return false;
   }
