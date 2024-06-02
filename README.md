@@ -37,7 +37,8 @@ Javascript, TypeScript, Mocha, Chai, Webpack, HTML, CSS, Chart.js
 2. Error handling for the separate input fields and button click. 
    
 ### Working app
-[Screenshot 2024-06-02 at 3 44 09 PM](https://github.com/kiewi16/fitlit/assets/127267694/fceaebb4-05a7-41a4-861d-351768df4e56)
+![Screenshot 2024-06-02 at 3 44 09 PM](https://github.com/kiewi16/fitlit/assets/127267694/7960b8a3-3f21-41b1-ba4d-1aed3b7a39c2)
+
 
 
 ### List of contributors
