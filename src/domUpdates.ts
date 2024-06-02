@@ -36,7 +36,7 @@ const userStrideLength = document.querySelector('.user-stride-length');
 const friendsWrapper = document.querySelector('.friends-wrapper');
 const userInfo = document.querySelector('.user-info');
 const OpenModalBtn = document.getElementById('openModalBtn');
-const submitBtn = document.getElementById('submitBtn')
+const submitBtn = <HTMLInputElement>document.getElementById("submitBtn")
 const form = document.getElementById('detailsModal');
 
 const dateInput = document.getElementById('date')
@@ -49,6 +49,7 @@ let qualitySleptInputValue: number
 const hoursSleptErrorMessage = document.querySelector('.hours-slept-error-message')
 const qualitySleptErrorMessage = document.querySelector('.sleep-quality-error-message')
 const dateErrorMessage = document.getElementById('date-error-message')
+const formField = document.getElementById('sleep-input-form') as HTMLFormElement;
 
 
 
@@ -63,9 +64,13 @@ OpenModalBtn.addEventListener('click', function(){
 
 submitBtn.addEventListener('click', function(e){
   e.preventDefault();
+  if(validateInputs){
+  formField.reset()
   form.style.display = 'none'
   postSleepData(userId,dateInputValue,hoursSleptInputValue,qualitySleptInputValue)
   updateCurrentSleepData()
+  submitBtn.setAttribute('disabled', '')
+  }
 })
 
 hoursSleptInput.addEventListener('input', validateInputs)
@@ -73,9 +78,14 @@ qualitySleptInput.addEventListener('input', validateInputs)
 dateInput.addEventListener('input', validateInputs)
 
 function validateInputs() {
+  validateHoursSleptInput()
+  validateSleepQualityInput()
   validateDateInput()
   if (validateHoursSleptInput() && validateSleepQualityInput() && validateDateInput()) {
-    submitBtn.removeAttribute('disabled')
+    submitBtn.disabled = false;
+  }
+  else if (!dateInputValue || !hoursSleptInputValue || !qualitySleptInputValue){
+    submitBtn.disabled = true;
   }
 }
 
@@ -85,6 +95,7 @@ function validateDateInput() {
   let newDate = new Date(date)
   if ((newDate.getMonth() + 1 <= 12 && newDate.getMonth() + 1 >=1) && (newDate.getDate() <=31 && newDate.getDate() >= 1) &&
  (newDate.getFullYear() <= 2024 && newDate.getFullYear() >= 1900)) {
+    dateErrorMessage.classList.add('hidden'); 
     return true;
   }
   else if (newDate.getFullYear() > 2024) {
@@ -96,10 +107,10 @@ function validateDateInput() {
 function validateHoursSleptInput() {
   hoursSleptInputValue = +(<HTMLInputElement>document.getElementById('hours-slept')).value
   const hours = hoursSleptInputValue;
-  if(hours >= 0 && hours <= 24) {
+  if(hours >= 0 && hours <= 24 && hours) {
     hoursSleptErrorMessage.classList.add('hidden'); 
     return true;
-  } else if (hours > 24) {
+  } else {
     hoursSleptErrorMessage.classList.remove('hidden'); 
     return false;
   }
@@ -108,10 +119,10 @@ function validateHoursSleptInput() {
 function validateSleepQualityInput() {
   qualitySleptInputValue = +(<HTMLInputElement>document.getElementById('quality-of-sleep')).value
   const quality = qualitySleptInputValue;
-  if(quality >= 0 && quality <= 5) {
+  if(quality >= 0 && quality <= 5 && quality) {
     qualitySleptErrorMessage.classList.add('hidden')
     return true; 
-  } else if (quality > 5) {
+  } else {
     qualitySleptErrorMessage.classList.remove('hidden')
     return false; 
   }
