@@ -38,7 +38,6 @@ const userInfo = document.querySelector('.user-info');
 const OpenModalBtn = document.getElementById('openModalBtn');
 const submitBtn = <HTMLInputElement>document.getElementById("submitBtn")
 const form = document.getElementById('detailsModal');
-
 const dateInput = document.getElementById('date')
 let dateInputValue: string
 const hoursSleptInput = document.getElementById('hours-slept');
@@ -121,10 +120,10 @@ function validateSleepQualityInput() {
   qualitySleptInputValue = +(<HTMLInputElement>document.getElementById('quality-of-sleep')).value
   const quality = qualitySleptInputValue;
   if(quality >= 0 && quality <= 5 && quality) {
-    qualitySleptErrorMessage.classList.add('hidden')
+    qualitySleptErrorMessage.classList.add('hidden');
     return true; 
-  } else {
-    qualitySleptErrorMessage.classList.remove('hidden')
+  } else if (quality > 5) {
+    qualitySleptErrorMessage.classList.remove('hidden');
     return false; 
   }
 }
