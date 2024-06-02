@@ -9,14 +9,15 @@
   </title>
 </head>
 <header>
-  <h1 class="welcome-message">
-    Welcome, current user! 🏅
-  </h1>
+
 </header>
 
 <body>
   <section class=body-wrapper>
     <main class="main-wrapper">
+      <h1 class="welcome-message">
+        Welcome, current user! 🏅
+      </h1>
       <section class="display-user-info">
         <h2 class="user-info">
           User's Info
@@ -44,10 +45,9 @@
           </div>
         </section>
       </section>
-      <section class="hydration-wrapper">
-        <div class="water-consumed-text">
-          <h2 class="water-consumption">Water Consumption</h2>
-        </div>
+      <section class="hydration-dashboard-wrapper">
+        <h2 class="water-consumption">Water Consumption</h2>
+      <div class="hydration-wrapper">
         <div class="user-hydration-day">
           <canvas id="hydrationDayChart" width="400" height="400">
           </canvas>
@@ -56,11 +56,11 @@
           <canvas id="hydrationWeekChart" width="1000" height="500">
           </canvas>
         </div>
+      </div>
       </section>
-      <section class="sleep-wrapper">
-        <div class="sleep-data-wrapper"> 
-          <h2 class="sleep-data">Sleep Data</h2>
-        </div>
+      <section class="sleep-dashboard-wrapper">
+        <h2 class="sleep-data">Sleep Data</h2>
+      <div class="sleep-wrapper"> 
         <div class="user-sleep-day">
           <div class="hours-slept">
             <canvas id="sleepHoursDailyChart" width="300" height="300">
@@ -85,10 +85,11 @@
             </canvas>
           </div>
         </div>
+      </div>
       </section>
     </main>
-    <div class="friends-and-sleep-input-container">
-    <section class="friends-section">
+<div class="friends-and-sleep-input-container">
+  <section class="friends-section">
       <h3 class="friends-header">
         Friends Step Goals
       </h3>
