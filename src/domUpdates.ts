@@ -36,7 +36,7 @@ const userStrideLength = document.querySelector('.user-stride-length');
 const friendsWrapper = document.querySelector('.friends-wrapper');
 const userInfo = document.querySelector('.user-info');
 const OpenModalBtn = document.getElementById('openModalBtn');
-const submitBtn = document.getElementById('submitBtn')
+const submitBtn = <HTMLInputElement>document.getElementById("submitBtn")
 const form = document.getElementById('detailsModal');
 
 const dateInput = document.getElementById('date')
