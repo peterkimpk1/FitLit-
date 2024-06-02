@@ -31,9 +31,6 @@
           stride length
         </p>
       </section>
-      <!-- <h4 class="display-activities-dashboard">
-        Activities Dashboard
-      </h4> -->
       <section class="activities-dashboard-wrapper">
           <h2 class="step-goals">Step Goals</h2>
         <section class="steps-wrapper">
@@ -47,13 +44,10 @@
           </div>
         </section>
       </section>
-      <!-- <h4 class="display-hydration-dashboard">
-        Hydration Dashboard
-      </h4> -->
       <section class="hydration-wrapper">
-        <!-- <div class="water-consumption-wrapper"> -->
+        <div class="water-consumed-text">
           <h2 class="water-consumption">Water Consumption</h2>
-        <!-- </div> -->
+        </div>
         <div class="user-hydration-day">
           <canvas id="hydrationDayChart" width="400" height="400">
           </canvas>
@@ -63,12 +57,8 @@
           </canvas>
         </div>
       </section>
-      <!-- <h4 class="display-sleep-dashboard">
-        Sleep Dashboard
-      </h4> -->
       <section class="sleep-wrapper">
         <div class="sleep-data-wrapper"> 
-
           <h2 class="sleep-data">Sleep Data</h2>
         </div>
         <div class="user-sleep-day">
@@ -109,7 +99,7 @@
       <h4 class="enter-sleep-details">Update Sleep Data</h4>
       <button id="openModalBtn" aria-label="Open Sleep Input Form" aria-expanded="false">Input Sleep Data</button>
       <div id="detailsModal" style="display: none">   
-          <form>
+          <form id="sleep-input-form" alt="sleep-form">
             <label for="date">Date:</label>
             <input type="date" id="date" name="date" min="1900-01-01" max="2024-05-30" aria-required="Enter a valid date">
             <p id="date-error-message" class="date-error-message hidden">Please enter a valid date.</p>
