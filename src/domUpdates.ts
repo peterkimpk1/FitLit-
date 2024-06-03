@@ -39,10 +39,10 @@ const OpenModalBtn = document.getElementById('openModalBtn');
 const submitBtn = <HTMLInputElement>document.getElementById("submitBtn")
 const form = document.getElementById('detailsModal');
 const dateInput = document.getElementById('date')
-let dateInputValue: string
 const hoursSleptInput = document.getElementById('hours-slept');
-let hoursSleptInputValue: number
 const qualitySleptInput = document.getElementById('quality-of-sleep')
+let dateInputValue: string
+let hoursSleptInputValue: number
 let qualitySleptInputValue: number
 
 const hoursSleptErrorMessage = document.querySelector('.hours-slept-error-message')
@@ -85,6 +85,7 @@ function validateInputs() {
   }
   else if (!dateInputValue || !hoursSleptInputValue || !qualitySleptInputValue){
     submitBtn.disabled = true;
+    submitBtn.style.backgroundColor = '';
   }
 }
 
@@ -92,8 +93,9 @@ function validateDateInput() {
   dateInputValue = (<HTMLInputElement>document.getElementById('date')).value
   const date = dateInputValue;
   let newDate = new Date(date)
-  if ((newDate.getMonth() + 1 <= 12 && newDate.getMonth() + 1 >=1) && (newDate.getDate() <=31 && newDate.getDate() >= 1) &&
- (newDate.getFullYear() <= 2024 && newDate.getFullYear() >= 1900)) {
+  if ((newDate.getMonth() + 1 <= 12 && newDate.getMonth() + 1 >=1) && 
+  (newDate.getDate() <=31 && newDate.getDate() >= 1) &&
+  (newDate.getFullYear() <= 2024 && newDate.getFullYear() >= 1900)) {
     dateErrorMessage.classList.add('hidden'); 
     return true;
   }
@@ -103,11 +105,10 @@ function validateDateInput() {
   }
 }
 
-
 function validateHoursSleptInput() {
   hoursSleptInputValue = +(<HTMLInputElement>document.getElementById('hours-slept')).value
   const hours = hoursSleptInputValue;
-  if(hours >= 0 && hours <= 24 && hours) {
+  if (hours >= 0 && hours <= 24 && hours) {
     hoursSleptErrorMessage.classList.add('hidden'); 
     return true;
   } else if (hours > 24) {
@@ -119,7 +120,7 @@ function validateHoursSleptInput() {
 function validateSleepQualityInput() {
   qualitySleptInputValue = +(<HTMLInputElement>document.getElementById('quality-of-sleep')).value
   const quality = qualitySleptInputValue;
-  if(quality >= 0 && quality <= 5 && quality) {
+  if (quality >= 0 && quality <= 5 && quality) {
     qualitySleptErrorMessage.classList.add('hidden');
     return true; 
   } else if (quality > 5) {
@@ -150,9 +151,6 @@ function updateSleepData(data: SleepData[], id: number) {
   sleepQualityChart = createSleepQualityAverageChart(+sleepQualityAverageData)
   sleepQualityDailyChart = createSleepQualityDailyChart(sleepQualityWeekData,sleepHoursWeekDataConverted)
   sleepHoursDailyChart = createSleepHoursDailyChart(+sleepHoursDayData,sleepHoursWeekDataConverted)
-  console.log(sleepHoursWeekData)
-  console.log(sleepQualityWeekData)
-  console.log(sleepHoursWeekDataConverted)
   sleepHoursAndQualityChart = createSleepHoursAndQualityWeekChart(sleepHoursWeekData,sleepQualityWeekData,sleepHoursWeekDataConverted)
 }
 
@@ -190,7 +188,7 @@ function postSleepData(id: number, date: string, hoursSlept: number, sleepQualit
 }
 
 function updateCurrentSleepData() {
-  setTimeout(() => fetchData('sleep').then(e => {
+  setTimeout(() => {fetchData('sleep').then(e => {
     const allSleepData = e.sleepData
     const sleepWeekDateData = getSleepDates(allSleepData,userId)
     const sleepHoursWeekData = getSleepHoursForWeek(allSleepData,userId)
@@ -209,7 +207,8 @@ function updateCurrentSleepData() {
     sleepQualityDailyChart = createSleepQualityDailyChart(sleepQualityWeekData,sleepHoursWeekDataConverted)
     sleepHoursDailyChart = createSleepHoursDailyChart(+sleepHoursDayData,sleepHoursWeekDataConverted)
     sleepHoursAndQualityChart = createSleepHoursAndQualityWeekChart(sleepHoursWeekData.reverse(),sleepQualityWeekData.reverse(),sleepHoursWeekDataConverted)
-  }),3000)
+  })
+},1000)
 }
 
 function updatedUserFriends(user: UserData, users: UserData[]) {
@@ -221,7 +220,7 @@ function updatedUserFriends(user: UserData, users: UserData[]) {
       return -1
     }
     return 0
-})
+  })
   let friendNames = sortedFriends.map(id => users.filter(user => user.id === id)[0].name)
   let friendsStepGoals = sortedFriends.map(friend => {
     const singleUser = users.filter(user => user.id === friend)
@@ -232,7 +231,9 @@ function updatedUserFriends(user: UserData, users: UserData[]) {
     return total;
   },0)
   for (var i = 0; i < user.friends.length; i++) {
-    friendsWrapper.innerHTML += `<div class=user-friend> <canvas id="friendChart${i}" width="400" height="400"></canvas></div>`;
+    friendsWrapper.innerHTML += `<div class=user-friend> 
+    <canvas id="friendChart${i}" width="400" height="400"></canvas>
+    </div>`;
     let id = "friendChart" + i;
     let index = i;
     setTimeout(() => {createFriendChart(id, friendNames,friendsStepGoals, index);}, 100)
