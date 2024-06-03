@@ -40,6 +40,9 @@ Javascript, TypeScript, Mocha, Chai, Webpack, HTML, CSS, Chart.js
 ![Screenshot 2024-06-02 at 3 44 09 PM](https://github.com/kiewi16/fitlit/assets/127267694/7960b8a3-3f21-41b1-ba4d-1aed3b7a39c2)
 
 
+### Link to Project Boards
+[Part1](https://github.com/users/peterkimpk1/projects/4)
+[Part2](https://github.com/users/kiewi16/projects/3)
 
 ### List of contributors
 * Kim Ewing: https://github.com/kiewi16
