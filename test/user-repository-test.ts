@@ -1,5 +1,5 @@
 import { expect } from 'chai';
-import sampleUserDataset from '../src/data/sample-users-test-data.js';
+import sampleUserDataset from '../src/data/sample-users-test-data';
 const { getUserData, getAverageStepGoalAllUsers} = require('../src/userFunctions');
 const allSampleUsers = sampleUserDataset.sampleUserDataset
 
